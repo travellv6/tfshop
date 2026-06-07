@@ -9,8 +9,6 @@ import {
 } from "react"
 import { sdk } from "@/lib/medusa"
 
-type FetchResult = Record<string, any>
-
 interface CartItem {
   variant_id: string
   quantity: number
@@ -47,10 +45,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const refreshCart = useCallback(async () => {
     if (!cartId) return
     try {
-      const result = await sdk.client.fetch<FetchResult>(
-        `/store/carts/${cartId}`
-      )
-      setCart(result.cart || result)
+      const { cart: retrievedCart } = await sdk.store.cart.retrieve(cartId)
+      setCart(retrievedCart)
     } catch {
       localStorage.removeItem(CART_ID_KEY)
       setCartId(null)
@@ -64,11 +60,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const ensureCart = useCallback(async () => {
     if (cartId) return cartId
-    const result = await sdk.client.fetch<FetchResult>("/store/carts", {
-      method: "POST",
-      body: { currency_code: "usd" },
+    const { cart: newCart } = await sdk.store.cart.create({
+      currency_code: "usd",
     })
-    const newCart = result.cart || result
     setCartId(newCart.id)
     setCart(newCart)
     localStorage.setItem(CART_ID_KEY, newCart.id)
@@ -80,10 +74,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       setIsLoading(true)
       try {
         const id = await ensureCart()
-        await sdk.client.fetch(`/store/carts/${id}/line-items`, {
-          method: "POST",
-          body: item,
-        })
+        await sdk.store.cart.createLineItem(id, item as any)
         await refreshCart()
       } finally {
         setIsLoading(false)
@@ -97,13 +88,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       if (!cartId) return
       setIsLoading(true)
       try {
-        await sdk.client.fetch(
-          `/store/carts/${cartId}/line-items/${lineItemId}`,
-          {
-            method: "POST",
-            body: { quantity },
-          }
-        )
+        await sdk.store.cart.updateLineItem(cartId, lineItemId, {
+          quantity,
+        } as any)
         await refreshCart()
       } finally {
         setIsLoading(false)
@@ -117,12 +104,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       if (!cartId) return
       setIsLoading(true)
       try {
-        await sdk.client.fetch(
-          `/store/carts/${cartId}/line-items/${lineItemId}`,
-          {
-            method: "DELETE",
-          }
-        )
+        await sdk.store.cart.deleteLineItem(cartId, lineItemId)
         await refreshCart()
       } finally {
         setIsLoading(false)

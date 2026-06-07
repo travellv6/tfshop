@@ -8,9 +8,5 @@ export const sdk = new Medusa({
   auth: {
     type: "session",
   },
-  ...(PUBLISHABLE_KEY && {
-    headers: {
-      "x-publishable-api-key": PUBLISHABLE_KEY,
-    },
-  }),
+  publishableKey: PUBLISHABLE_KEY || undefined,
 })

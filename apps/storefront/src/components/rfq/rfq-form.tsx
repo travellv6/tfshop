@@ -37,7 +37,8 @@ export function RFQForm({
       customer_email: customerEmail,
       quantity: Number(quantity),
       target_price: targetPrice,
-      requirements,
+      notes: requirements,
+      requirements: {},
     })
     setSubmitted(true)
   }

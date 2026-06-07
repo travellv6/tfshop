@@ -48,6 +48,13 @@ export function useRegister() {
       first_name: string
       last_name: string
     }) => {
+      // Step 0: Clear any stale session before registering
+      try {
+        await fetch("/auth/session", { method: "DELETE", credentials: "include" })
+      } catch {
+        // Ignore errors - may not have an active session
+      }
+
       // Step 1: Register auth identity → get token
       const token = (await sdk.auth.register("customer", "emailpass", {
         email,

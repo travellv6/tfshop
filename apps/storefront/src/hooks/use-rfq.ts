@@ -1,5 +1,10 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
-import { sdk } from "@/lib/medusa"
+import { sdk, PUBLISHABLE_KEY } from "@/lib/medusa"
+
+const authHeaders: Record<string, string> = {}
+if (PUBLISHABLE_KEY) {
+  authHeaders["x-publishable-api-key"] = PUBLISHABLE_KEY
+}
 
 export interface RFQItem {
   id: string
@@ -41,7 +46,9 @@ export function useRFQs() {
   return useQuery({
     queryKey: ["rfqs"],
     queryFn: async () => {
-      const result = await sdk.client.fetch<Record<string, any>>("/store/rfq")
+      const result = await sdk.client.fetch<Record<string, any>>("/store/rfq", {
+        headers: authHeaders,
+      })
       return (result.rfqs || []) as RFQItem[]
     },
   })
@@ -52,7 +59,8 @@ export function useRFQ(id: string) {
     queryKey: ["rfq", id],
     queryFn: async () => {
       const result = await sdk.client.fetch<Record<string, any>>(
-        `/store/rfq/${id}`
+        `/store/rfq/${id}`,
+        { headers: authHeaders }
       )
       return (result.rfq || result) as RFQDetail
     },
@@ -64,7 +72,11 @@ export function useCreateRFQ() {
   const qc = useQueryClient()
   return useMutation({
     mutationFn: async (data: Record<string, any>) =>
-      sdk.client.fetch("/store/rfq", { method: "POST", body: data }),
+      sdk.client.fetch("/store/rfq", {
+        method: "POST",
+        body: data,
+        headers: authHeaders,
+      }),
     onSuccess: () => qc.invalidateQueries({ queryKey: ["rfqs"] }),
   })
 }
@@ -82,6 +94,7 @@ export function useAddRFQMessage() {
       sdk.client.fetch(`/store/rfq/${rfq_id}/messages`, {
         method: "POST",
         body: { sender_type: "buyer", content },
+        headers: authHeaders,
       }),
     onSuccess: (_, vars) =>
       qc.invalidateQueries({ queryKey: ["rfq", vars.rfq_id] }),

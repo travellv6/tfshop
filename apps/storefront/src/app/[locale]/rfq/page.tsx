@@ -6,6 +6,7 @@ import Link from "next/link"
 import { useParams, useSearchParams } from "next/navigation"
 import { useRFQs } from "@/hooks/use-rfq"
 import { RFQForm } from "@/components/rfq/rfq-form"
+import { useCustomer } from "@/hooks/use-customer"
 
 function statusColor(status: string): string {
   switch (status) {
@@ -32,6 +33,7 @@ export default function RFQListPage() {
   const { locale } = useParams()
   const searchParams = useSearchParams()
   const { data: rfqs, isLoading } = useRFQs()
+  const { data: customer } = useCustomer()
 
   const [showForm, setShowForm] = useState(false)
 
@@ -64,6 +66,7 @@ export default function RFQListPage() {
             productTitle={prefilledProductTitle}
             variantId={prefilledVariantId}
             factoryId={prefilledFactoryId}
+            customerEmail={customer?.email}
           />
         </div>
       )}
