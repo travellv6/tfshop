@@ -1,6 +1,7 @@
 import {
   BuildingStorefront,
   Buildings,
+  ChatBubbleLeftRight,
   ChevronDownMini,
   CogSixTooth,
   CurrencyDollar,
@@ -224,6 +225,11 @@ const useCoreRoutes = (): Omit<INavItem, "pathname">[] => {
       icon: <CurrencyDollar />,
       label: t("tieredPricing.domain"),
       to: "/tiered-pricing",
+    },
+    {
+      icon: <ChatBubbleLeftRight />,
+      label: t("rfq.domain"),
+      to: "/rfq",
     },
     {
       icon: <Buildings />,

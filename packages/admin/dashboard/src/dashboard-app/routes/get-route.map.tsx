@@ -1009,6 +1009,39 @@ export function getRouteMap({
                 },
               ],
             },
+            {
+              path: "/rfq",
+              errorElement: <ErrorBoundary />,
+              handle: {
+                breadcrumb: () => t("rfq.domain"),
+              },
+              children: [
+                {
+                  path: "",
+                  lazy: () => import("../../routes/rfq/rfq-list"),
+                },
+                {
+                  path: ":id",
+                  lazy: async () => {
+                    const { Component, loader } = await import(
+                      "../../routes/rfq/rfq-detail"
+                    )
+
+                    return {
+                      Component,
+                      loader,
+                      handle: {
+                        breadcrumb: (match: any) => (
+                          <span>
+                            {match.data?.rfq?.product_title || "..."}
+                          </span>
+                        ),
+                      },
+                    }
+                  },
+                },
+              ],
+            },
             ...coreRoutes,
           ],
         },
