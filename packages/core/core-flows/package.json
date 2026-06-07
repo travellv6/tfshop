@@ -27,6 +27,7 @@
   "license": "MIT",
   "devDependencies": {
     "@medusajs/factory": "workspace:*",
+    "@medusajs/tiered-pricing": "workspace:*",
     "@medusajs/framework": "2.15.5"
   },
   "dependencies": {
