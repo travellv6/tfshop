@@ -3643,6 +3643,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@medusajs/factory@workspace:packages/modules/factory":
+  version: 0.0.0-use.local
+  resolution: "@medusajs/factory@workspace:packages/modules/factory"
+  dependencies:
+    "@medusajs/framework": "workspace:*"
+    "@medusajs/test-utils": "workspace:*"
+  peerDependencies:
+    "@medusajs/framework": ^2.0.0
+  languageName: unknown
+  linkType: soft
+
 "@medusajs/file-local@2.15.5, @medusajs/file-local@workspace:packages/modules/providers/file-local":
   version: 0.0.0-use.local
   resolution: "@medusajs/file-local@workspace:packages/modules/providers/file-local"
