@@ -1,0 +1,62 @@
+{
+  "common": {
+    "search": "Buscar productos, categorías, fábricas...",
+    "login": "Iniciar sesión",
+    "register": "Registrarse",
+    "viewAll": "Ver todo",
+    "loading": "Cargando...",
+    "noResults": "No se encontraron resultados"
+  },
+  "nav": {
+    "home": "Inicio",
+    "products": "Productos",
+    "factories": "Fábricas",
+    "about": "Acerca de"
+  },
+  "home": {
+    "heroTitle": "Plataforma de suministro directo de fábricas de juguetes de China",
+    "heroSubtitle": "Precios de fábrica · MOQ bajo · Envío global",
+    "featuredCategories": "Categorías destacadas",
+    "lowMoqZone": "Zona de MOQ bajo",
+    "lowMoqSubtitle": "Pedido mínimo desde 20 piezas",
+    "recommendedFactories": "Fábricas recomendadas"
+  },
+  "product": {
+    "title": "Productos",
+    "moq": "MOQ: {count} uds",
+    "priceRange": "{min} - {max}",
+    "perPiece": "/ud",
+    "inStock": "En stock",
+    "preOrder": "Bajo pedido",
+    "sampleAvailable": "Muestra disponible",
+    "addToCart": "Añadir al carrito",
+    "requestQuote": "Solicitar cotización",
+    "certifications": "Certificaciones",
+    "factory": "Fábrica",
+    "viewFactory": "Ver fábrica",
+    "filters": {
+      "category": "Categoría",
+      "moq": "MOQ",
+      "certification": "Certificación",
+      "priceRange": "Rango de precios",
+      "origin": "Origen",
+      "inStock": "Solo en stock"
+    }
+  },
+  "factory": {
+    "title": "Fábricas",
+    "viewProducts": "Ver productos",
+    "requestQuote": "Solicitar cotización",
+    "established": "Fund. {year}",
+    "capacity": "Capacidad: {capacity}/mes",
+    "certifications": "Certificaciones",
+    "location": "Ubicación",
+    "products": "Productos"
+  },
+  "tieredPricing": {
+    "title": "Precios escalonados",
+    "tier": "Nivel {n}",
+    "pieces": "{min} - {max} uds",
+    "piecesAndAbove": "{min}+ uds"
+  }
+}

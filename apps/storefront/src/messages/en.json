@@ -1,0 +1,62 @@
+{
+  "common": {
+    "search": "Search products, categories, factories...",
+    "login": "Login",
+    "register": "Register",
+    "viewAll": "View All",
+    "loading": "Loading...",
+    "noResults": "No results found"
+  },
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "factories": "Factories",
+    "about": "About"
+  },
+  "home": {
+    "heroTitle": "China Toy Factory Direct Supply Platform",
+    "heroSubtitle": "Factory Prices · Low MOQ · Global Shipping",
+    "featuredCategories": "Featured Categories",
+    "lowMoqZone": "Low MOQ Zone",
+    "lowMoqSubtitle": "Minimum order as low as 20 pieces",
+    "recommendedFactories": "Recommended Factories"
+  },
+  "product": {
+    "title": "Products",
+    "moq": "MOQ: {count} pcs",
+    "priceRange": "{min} - {max}",
+    "perPiece": "/pc",
+    "inStock": "In Stock",
+    "preOrder": "Pre-order",
+    "sampleAvailable": "Sample Available",
+    "addToCart": "Add to Cart",
+    "requestQuote": "Request Quote",
+    "certifications": "Certifications",
+    "factory": "Factory",
+    "viewFactory": "View Factory",
+    "filters": {
+      "category": "Category",
+      "moq": "MOQ",
+      "certification": "Certification",
+      "priceRange": "Price Range",
+      "origin": "Origin",
+      "inStock": "In Stock Only"
+    }
+  },
+  "factory": {
+    "title": "Factories",
+    "viewProducts": "View Products",
+    "requestQuote": "Request Quote",
+    "established": "Est. {year}",
+    "capacity": "Capacity: {capacity}/month",
+    "certifications": "Certifications",
+    "location": "Location",
+    "products": "Products"
+  },
+  "tieredPricing": {
+    "title": "Tiered Pricing",
+    "tier": "Tier {n}",
+    "pieces": "{min} - {max} pcs",
+    "piecesAndAbove": "{min}+ pcs"
+  }
+}

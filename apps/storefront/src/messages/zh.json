@@ -1,0 +1,62 @@
+{
+  "common": {
+    "search": "搜索产品、品类、工厂...",
+    "login": "登录",
+    "register": "注册",
+    "viewAll": "查看全部",
+    "loading": "加载中...",
+    "noResults": "未找到结果"
+  },
+  "nav": {
+    "home": "首页",
+    "products": "产品",
+    "factories": "工厂",
+    "about": "关于"
+  },
+  "home": {
+    "heroTitle": "中国玩具工厂直供平台",
+    "heroSubtitle": "源头价格 · 低起订量 · 全球发货",
+    "featuredCategories": "热门品类",
+    "lowMoqZone": "低 MOQ 专区",
+    "lowMoqSubtitle": "起订量低至 20 件",
+    "recommendedFactories": "推荐工厂"
+  },
+  "product": {
+    "title": "产品",
+    "moq": "起订量: {count} 件",
+    "priceRange": "{min} - {max}",
+    "perPiece": "/件",
+    "inStock": "现货",
+    "preOrder": "需预订",
+    "sampleAvailable": "可寄样",
+    "addToCart": "加入购物车",
+    "requestQuote": "询价",
+    "certifications": "认证",
+    "factory": "工厂",
+    "viewFactory": "查看工厂",
+    "filters": {
+      "category": "分类",
+      "moq": "起订量",
+      "certification": "认证",
+      "priceRange": "价格区间",
+      "origin": "产地",
+      "inStock": "仅看现货"
+    }
+  },
+  "factory": {
+    "title": "工厂",
+    "viewProducts": "查看产品",
+    "requestQuote": "询价",
+    "established": "成立 {year} 年",
+    "capacity": "月产能: {capacity}",
+    "certifications": "认证资质",
+    "location": "地址",
+    "products": "产品"
+  },
+  "tieredPricing": {
+    "title": "阶梯价格",
+    "tier": "第 {n} 阶",
+    "pieces": "{min} - {max} 件",
+    "piecesAndAbove": "{min} 件以上"
+  }
+}

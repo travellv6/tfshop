@@ -1,0 +1,62 @@
+{
+  "common": {
+    "search": "البحث عن المنتجات والفئات والمصانع...",
+    "login": "تسجيل الدخول",
+    "register": "تسجيل",
+    "viewAll": "عرض الكل",
+    "loading": "جاري التحميل...",
+    "noResults": "لم يتم العثور على نتائج"
+  },
+  "nav": {
+    "home": "الرئيسية",
+    "products": "المنتجات",
+    "factories": "المصانع",
+    "about": "حول"
+  },
+  "home": {
+    "heroTitle": "منصة التوريد المباشر من مصانع الألعاب الصينية",
+    "heroSubtitle": "أسعار المصنع · حد أدنى منخفض · شحن عالمي",
+    "featuredCategories": "الفئات المميزة",
+    "lowMoqZone": "منطقة الحد الأدنى المنخفض",
+    "lowMoqSubtitle": "الحد الأدنى للطلب من 20 قطعة",
+    "recommendedFactories": "المصانع الموصى بها"
+  },
+  "product": {
+    "title": "المنتجات",
+    "moq": "الحد الأدنى: {count} قطعة",
+    "priceRange": "{min} - {max}",
+    "perPiece": "/قطعة",
+    "inStock": "متوفر",
+    "preOrder": "طلب مسبق",
+    "sampleAvailable": "عينة متاحة",
+    "addToCart": "أضف إلى السلة",
+    "requestQuote": "طلب عرض سعر",
+    "certifications": "الشهادات",
+    "factory": "المصنع",
+    "viewFactory": "عرض المصنع",
+    "filters": {
+      "category": "الفئة",
+      "moq": "الحد الأدنى",
+      "certification": "الشهادة",
+      "priceRange": "نطاق السعر",
+      "origin": "المنشأ",
+      "inStock": "المتوفر فقط"
+    }
+  },
+  "factory": {
+    "title": "المصانع",
+    "viewProducts": "عرض المنتجات",
+    "requestQuote": "طلب عرض سعر",
+    "established": "تأسس {year}",
+    "capacity": "السعة: {capacity}/شهر",
+    "certifications": "الشهادات",
+    "location": "الموقع",
+    "products": "المنتجات"
+  },
+  "tieredPricing": {
+    "title": "تسعير متدرج",
+    "tier": "المستوى {n}",
+    "pieces": "{min} - {max} قطعة",
+    "piecesAndAbove": "{min}+ قطعة"
+  }
+}
