@@ -1,95 +1,124 @@
 "use client"
 
-import Link from "next/link"
-import { useParams } from "next/navigation"
+import { useState } from "react"
 import { useTranslations } from "next-intl"
+import Link from "next/link"
+import { useParams, useSearchParams } from "next/navigation"
 import { useRFQs } from "@/hooks/use-rfq"
+import { RFQForm } from "@/components/rfq/rfq-form"
 
-const statusColor = (status: string) => {
+function statusColor(status: string): string {
   switch (status) {
     case "submitted":
-      return "bg-blue-100 text-blue-800"
+      return "bg-blue-50 text-blue-700"
     case "reviewing":
-      return "bg-yellow-100 text-yellow-800"
+      return "bg-yellow-50 text-yellow-700"
     case "quoted":
-      return "bg-purple-100 text-purple-800"
+      return "bg-green-50 text-green-700"
     case "negotiating":
-      return "bg-orange-100 text-orange-800"
+      return "bg-orange-50 text-orange-700"
     case "accepted":
-      return "bg-green-100 text-green-800"
+      return "bg-emerald-50 text-emerald-700"
     case "rejected":
-      return "bg-red-100 text-red-800"
+      return "bg-red-50 text-red-700"
     default:
-      return "bg-gray-100 text-gray-800"
+      return "bg-gray-50 text-gray-700"
   }
 }
 
 export default function RFQListPage() {
   const t = useTranslations("rfq")
-  const locale = useParams().locale as string
+  const ct = useTranslations("common")
+  const { locale } = useParams()
+  const searchParams = useSearchParams()
   const { data: rfqs, isLoading } = useRFQs()
 
+  const [showForm, setShowForm] = useState(false)
+
+  // 从 URL 参数预填
+  const prefilledProductId = searchParams.get("product_id") || undefined
+  const prefilledProductTitle = searchParams.get("product_title") || undefined
+  const prefilledVariantId = searchParams.get("variant_id") || undefined
+  const prefilledFactoryId = searchParams.get("factory_id") || undefined
+
+  // 如果有 URL 参数且表单未显示，自动打开表单
+  const hasPrefill = prefilledProductId || prefilledFactoryId
+
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8">
-      <h1 className="mb-6 text-2xl font-bold text-gray-900">
-        {t("myInquiries")}
-      </h1>
+    <div className="mx-auto max-w-4xl space-y-6">
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl font-bold">{t("myInquiries")}</h1>
+        <button
+          onClick={() => setShowForm(!showForm)}
+          className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700"
+        >
+          {showForm ? t("cancel") : t("submit")}
+        </button>
+      </div>
 
-      {isLoading && (
-        <p className="text-gray-500">{t("loading")}</p>
+      {/* RFQ 创建表单 */}
+      {showForm && (
+        <div className="rounded-lg border border-gray-200 p-6">
+          <RFQForm
+            productId={prefilledProductId}
+            productTitle={prefilledProductTitle}
+            variantId={prefilledVariantId}
+            factoryId={prefilledFactoryId}
+          />
+        </div>
       )}
 
-      {rfqs && rfqs.length === 0 && (
-        <p className="text-gray-500">{t("noInquiries")}</p>
+      {/* 自动预填提示 */}
+      {hasPrefill && !showForm && (
+        <div className="rounded-lg border border-brand-200 bg-brand-50 p-4">
+          <p className="text-sm text-brand-700">
+            {t("prefillHint")}
+          </p>
+          <button
+            onClick={() => setShowForm(true)}
+            className="mt-2 rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700"
+          >
+            {t("openForm")}
+          </button>
+        </div>
       )}
 
-      {rfqs && rfqs.length > 0 && (
-        <div className="overflow-hidden rounded-lg border border-gray-200">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
+      {/* RFQ 列表 */}
+      {isLoading ? (
+        <p className="text-center text-gray-500">{ct("loading")}</p>
+      ) : rfqs && rfqs.length > 0 ? (
+        <div className="overflow-x-auto">
+          <table className="w-full text-left text-sm">
+            <thead className="border-b border-gray-200">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
-                  {t("product")}
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
-                  {t("quantity")}
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
-                  {t("statusLabel")}
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
-                  {t("quotedPrice")}
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
-                  {t("createdAt")}
-                </th>
+                <th className="px-4 py-3 font-medium">{t("product")}</th>
+                <th className="px-4 py-3 font-medium">{t("quantity")}</th>
+                <th className="px-4 py-3 font-medium">{t("statusLabel")}</th>
+                <th className="px-4 py-3 font-medium">{t("quotedPrice")}</th>
+                <th className="px-4 py-3 font-medium">{t("createdAt")}</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-200 bg-white">
-              {rfqs.map((rfq) => (
-                <tr key={rfq.id} className="hover:bg-gray-50">
-                  <td className="whitespace-nowrap px-6 py-4 text-sm">
+            <tbody>
+              {rfqs.map((rfq: any) => (
+                <tr key={rfq.id} className="border-b border-gray-100 hover:bg-gray-50">
+                  <td className="px-4 py-3">
                     <Link
                       href={`/${locale}/rfq/${rfq.id}`}
-                      className="text-brand-600 hover:text-brand-800"
+                      className="text-brand-600 hover:underline"
                     >
-                      {rfq.product_title || "-"}
+                      {rfq.product_title || t("product")}
                     </Link>
                   </td>
-                  <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
-                    {rfq.quantity ?? "-"}
-                  </td>
-                  <td className="whitespace-nowrap px-6 py-4 text-sm">
-                    <span
-                      className={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${statusColor(rfq.status)}`}
-                    >
+                  <td className="px-4 py-3">{rfq.quantity}</td>
+                  <td className="px-4 py-3">
+                    <span className={`inline-block rounded px-2 py-0.5 text-xs ${statusColor(rfq.status)}`}>
                       {t(`status.${rfq.status}`)}
                     </span>
                   </td>
-                  <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
-                    {rfq.quoted_price || "-"}
+                  <td className="px-4 py-3">
+                    {rfq.quoted_price ? `$${rfq.quoted_price}` : "—"}
                   </td>
-                  <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
+                  <td className="px-4 py-3 text-gray-500">
                     {new Date(rfq.created_at).toLocaleDateString()}
                   </td>
                 </tr>
@@ -97,6 +126,8 @@ export default function RFQListPage() {
             </tbody>
           </table>
         </div>
+      ) : (
+        <p className="text-center text-gray-500">{t("noInquiries")}</p>
       )}
     </div>
   )

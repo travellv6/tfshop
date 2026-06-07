@@ -90,6 +90,8 @@
     "you": "You",
     "seller": "Seller",
     "system": "System",
+    "prefillHint": "You have product info ready for a quote request.",
+    "openForm": "Create Inquiry",
     "status": {
       "submitted": "Submitted",
       "reviewing": "Reviewing",

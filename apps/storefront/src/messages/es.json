@@ -90,6 +90,8 @@
     "you": "Usted",
     "seller": "Vendedor",
     "system": "Sistema",
+    "prefillHint": "Tiene información del producto lista para una solicitud de cotización.",
+    "openForm": "Crear consulta",
     "status": {
       "submitted": "Enviada",
       "reviewing": "En revisión",

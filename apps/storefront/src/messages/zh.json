@@ -90,6 +90,8 @@
     "you": "我",
     "seller": "卖家",
     "system": "系统",
+    "prefillHint": "已准备好产品信息，可直接创建询价单。",
+    "openForm": "创建询价",
     "status": {
       "submitted": "已提交",
       "reviewing": "审核中",
