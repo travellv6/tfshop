@@ -1,1 +1,4 @@
-export { default as TieredPricingModuleService } from "./tiered-pricing-module-service"
+import TieredPricingModuleService from "./tiered-pricing-module-service"
+
+export { TieredPricingModuleService }
+export default TieredPricingModuleService

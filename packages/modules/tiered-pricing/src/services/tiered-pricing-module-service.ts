@@ -8,7 +8,6 @@ import { MedusaService } from "@medusajs/framework/utils"
 import { TieredPrice } from "@models"
 import type {
   TieredPriceDTO,
-  ITieredPricingModuleService,
   InjectedDependencies,
 } from "@types"
 
@@ -16,7 +15,6 @@ class TieredPricingModuleService
   extends MedusaService<{
     TieredPrice: { dto: TieredPriceDTO; model: typeof TieredPrice }
   }>({ TieredPrice })
-  implements ITieredPricingModuleService
 {
   protected baseRepository_: DAL.RepositoryService
   protected tieredPriceService_: ModulesSdkTypes.IMedusaInternalService<
