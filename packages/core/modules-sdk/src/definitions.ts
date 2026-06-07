@@ -313,6 +313,39 @@ export const ModulesDefinition: {
       scope: MODULE_SCOPE.INTERNAL,
     },
   },
+  [Modules.FACTORY]: {
+    key: Modules.FACTORY,
+    defaultPackage: MODULE_PACKAGE_NAMES[Modules.FACTORY],
+    label: upperCaseFirst(Modules.FACTORY),
+    isRequired: false,
+    isQueryable: true,
+    dependencies: [ContainerRegistrationKeys.LOGGER],
+    defaultModuleDeclaration: {
+      scope: MODULE_SCOPE.INTERNAL,
+    },
+  },
+  [Modules.RFQ]: {
+    key: Modules.RFQ,
+    defaultPackage: MODULE_PACKAGE_NAMES[Modules.RFQ],
+    label: upperCaseFirst(Modules.RFQ),
+    isRequired: false,
+    isQueryable: true,
+    dependencies: [ContainerRegistrationKeys.LOGGER],
+    defaultModuleDeclaration: {
+      scope: MODULE_SCOPE.INTERNAL,
+    },
+  },
+  [Modules.TIERED_PRICING]: {
+    key: Modules.TIERED_PRICING,
+    defaultPackage: MODULE_PACKAGE_NAMES[Modules.TIERED_PRICING],
+    label: upperCaseFirst(Modules.TIERED_PRICING),
+    isRequired: false,
+    isQueryable: true,
+    dependencies: [ContainerRegistrationKeys.LOGGER],
+    defaultModuleDeclaration: {
+      scope: MODULE_SCOPE.INTERNAL,
+    },
+  },
 }
 
 export const MODULE_DEFINITIONS: ModuleDefinition[] =

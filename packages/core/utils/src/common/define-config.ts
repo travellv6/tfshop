@@ -280,6 +280,10 @@ function resolveModules(
       disable: !FeatureFlag.isFeatureEnabled("rbac"),
     },
 
+    { resolve: MODULE_PACKAGE_NAMES[Modules.FACTORY] },
+    { resolve: MODULE_PACKAGE_NAMES[Modules.RFQ] },
+    { resolve: MODULE_PACKAGE_NAMES[Modules.TIERED_PRICING] },
+
     {
       resolve: MODULE_PACKAGE_NAMES[Modules.AUTH],
       options: authModuleOptions,

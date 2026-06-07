@@ -26,12 +26,12 @@
   "author": "Medusa",
   "license": "MIT",
   "devDependencies": {
-    "@medusajs/factory": "workspace:*",
-    "@medusajs/rfq": "workspace:*",
-    "@medusajs/framework": "2.15.5",
-    "@medusajs/tiered-pricing": "workspace:*"
+    "@medusajs/framework": "2.15.5"
   },
   "dependencies": {
+    "@medusajs/factory": "workspace:*",
+    "@medusajs/rfq": "workspace:*",
+    "@medusajs/tiered-pricing": "workspace:*",
     "csv-parse": "^5.6.0",
     "json-2-csv": "^5.5.4"
   },
