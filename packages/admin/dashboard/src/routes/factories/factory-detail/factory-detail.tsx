@@ -38,10 +38,10 @@ export const FactoryDetail = () => {
   return (
     <TwoColumnPage
       widgets={{
-        after: getWidgets("factory.details.after"),
-        before: getWidgets("factory.details.before"),
-        sideAfter: getWidgets("factory.details.side.after"),
-        sideBefore: getWidgets("factory.details.side.before"),
+        after: getWidgets("factory.details.after" as any),
+        before: getWidgets("factory.details.before" as any),
+        sideAfter: getWidgets("factory.details.side.after" as any),
+        sideBefore: getWidgets("factory.details.side.before" as any),
       }}
       hasOutlet
       data={factory}

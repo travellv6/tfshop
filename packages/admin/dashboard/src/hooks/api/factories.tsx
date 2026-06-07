@@ -66,7 +66,7 @@ export interface FactoryCreatePayload {
 // Hook: List factories
 export const useFactories = (
   query?: Record<string, any>,
-  options?: { enabled?: boolean }
+  options?: Record<string, any>
 ) => {
   const { data, ...rest } = useQuery({
     queryKey: factoriesQueryKeys.list(query),
@@ -83,7 +83,7 @@ export const useFactories = (
 export const useFactory = (
   id: string,
   query?: Record<string, any>,
-  options?: { enabled?: boolean }
+  options?: Record<string, any>
 ) => {
   const { data, ...rest } = useQuery({
     queryKey: factoriesQueryKeys.detail(id, query),

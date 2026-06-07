@@ -20,10 +20,7 @@ const CreateFactorySchema = zod.object({
   location_province: zod.string().optional(),
   location_city: zod.string().optional(),
   location_address: zod.string().optional(),
-  established_year: zod
-    .string()
-    .optional()
-    .transform((val) => (val ? Number(val) : undefined)),
+  established_year: zod.string().optional(),
   employee_scale: zod.string().optional(),
   monthly_capacity: zod.string().optional(),
   main_categories: zod.string().optional(),
@@ -61,7 +58,9 @@ export const FactoryCreate = () => {
         location_province: data.location_province || undefined,
         location_city: data.location_city || undefined,
         location_address: data.location_address || undefined,
-        established_year: data.established_year,
+        established_year: data.established_year
+          ? Number(data.established_year)
+          : undefined,
         employee_scale: data.employee_scale || undefined,
         monthly_capacity: data.monthly_capacity || undefined,
         main_categories: data.main_categories || undefined,

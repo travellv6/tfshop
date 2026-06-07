@@ -46,13 +46,19 @@ export const useFactoryTableColumns = () => {
       }),
       columnHelper.accessor("location_city", {
         header: () => <TextHeader text={t("factories.fields.location_city")} />,
-        cell: ({ getValue }) => <TextCell text={getValue()} />,
+        cell: ({ getValue }) => {
+          const value = getValue()
+          return <TextCell text={value ?? undefined} />
+        },
       }),
       columnHelper.accessor("main_categories", {
         header: () => (
           <TextHeader text={t("factories.fields.main_categories")} />
         ),
-        cell: ({ getValue }) => <TextCell text={getValue()} />,
+        cell: ({ getValue }) => {
+          const value = getValue()
+          return <TextCell text={value ?? undefined} />
+        },
       }),
       columnHelper.accessor("established_year", {
         header: () => (

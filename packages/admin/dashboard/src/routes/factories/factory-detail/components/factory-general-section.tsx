@@ -9,8 +9,8 @@ import {
 } from "@medusajs/ui"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
-import { ActionMenu } from "../../../../../components/common/action-menu"
-import { FactoryDTO, useDeleteFactory } from "../../../../../hooks/api/factories"
+import { ActionMenu } from "../../../../components/common/action-menu"
+import { FactoryDTO, useDeleteFactory } from "../../../../hooks/api/factories"
 
 type FactoryGeneralSectionProps = {
   factory: FactoryDTO
@@ -69,7 +69,9 @@ export const FactoryGeneralSection = ({
 
         <div className="flex items-center gap-x-4">
           <Badge size="2xsmall" rounded="full" color={statusColor(factory.status)}>
-            {t(`factories.status.${factory.status}`)}
+            {factory.status === "active" && t("factories.status.active")}
+            {factory.status === "inactive" && t("factories.status.inactive")}
+            {factory.status === "suspended" && t("factories.status.suspended")}
           </Badge>
 
           <ActionMenu
