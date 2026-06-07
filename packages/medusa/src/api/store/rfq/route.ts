@@ -46,6 +46,7 @@ export const POST = async (
         {
           ...req.validatedBody,
           customer_id: customerId,
+          metadata: req.validatedBody.metadata ?? undefined,
         },
       ],
     },
