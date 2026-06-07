@@ -217,6 +217,11 @@ const useCoreRoutes = (): Omit<INavItem, "pathname">[] => {
     },
     {
       icon: <Buildings />,
+      label: t("factories.domain"),
+      to: "/factories",
+    },
+    {
+      icon: <Buildings />,
       label: t("inventory.domain"),
       to: "/inventory",
       items: [
