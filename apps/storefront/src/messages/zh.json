@@ -110,5 +110,26 @@
     "myAddressesDesc": "管理收货地址",
     "accountSettings": "账户设置",
     "accountSettingsDesc": "修改姓名、邮箱和密码"
+  },
+  "address": {
+    "title": "我的地址",
+    "addNew": "新增地址",
+    "edit": "编辑",
+    "delete": "删除",
+    "save": "保存",
+    "update": "更新",
+    "cancel": "取消",
+    "default": "默认",
+    "confirmDelete": "确定要删除此地址吗？",
+    "noAddresses": "暂无保存的地址。",
+    "firstName": "名",
+    "lastName": "姓",
+    "phone": "电话",
+    "address1": "地址行 1",
+    "address2": "地址行 2",
+    "city": "城市",
+    "province": "省份 / 州",
+    "postalCode": "邮编",
+    "country": "国家"
   }
 }

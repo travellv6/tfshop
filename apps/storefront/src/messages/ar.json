@@ -110,5 +110,26 @@
     "myAddressesDesc": "إدارة عناوين الشحن",
     "accountSettings": "إعدادات الحساب",
     "accountSettingsDesc": "تحديث الاسم والبريد الإلكتروني وكلمة المرور"
+  },
+  "address": {
+    "title": "عناويني",
+    "addNew": "إضافة عنوان جديد",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "save": "حفظ",
+    "update": "تحديث",
+    "cancel": "إلغاء",
+    "default": "افتراضي",
+    "confirmDelete": "هل أنت متأكد من حذف هذا العنوان؟",
+    "noAddresses": "لا توجد عناوين محفوظة.",
+    "firstName": "الاسم الأول",
+    "lastName": "اسم العائلة",
+    "phone": "الهاتف",
+    "address1": "العنوان - السطر 1",
+    "address2": "العنوان - السطر 2",
+    "city": "المدينة",
+    "province": "المنطقة / المحافظة",
+    "postalCode": "الرمز البريدي",
+    "country": "البلد"
   }
 }
