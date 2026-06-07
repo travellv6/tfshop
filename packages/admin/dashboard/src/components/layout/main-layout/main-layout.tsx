@@ -221,6 +221,11 @@ const useCoreRoutes = (): Omit<INavItem, "pathname">[] => {
       to: "/factories",
     },
     {
+      icon: <CurrencyDollar />,
+      label: t("tieredPricing.domain"),
+      to: "/tiered-pricing",
+    },
+    {
       icon: <Buildings />,
       label: t("inventory.domain"),
       to: "/inventory",

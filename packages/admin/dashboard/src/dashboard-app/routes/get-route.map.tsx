@@ -993,6 +993,22 @@ export function getRouteMap({
                 },
               ],
             },
+            {
+              path: "/tiered-pricing",
+              errorElement: <ErrorBoundary />,
+              handle: {
+                breadcrumb: () => t("tieredPricing.domain"),
+              },
+              children: [
+                {
+                  path: "",
+                  lazy: () =>
+                    import(
+                      "../../routes/tiered-pricing/tiered-price-list"
+                    ),
+                },
+              ],
+            },
             ...coreRoutes,
           ],
         },
