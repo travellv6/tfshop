@@ -222,6 +222,13 @@ export const RFQGeneralSection = ({ rfq }: RFQGeneralSectionProps) => {
           >
             {t("rfq.status.rejected")}
           </Button>
+          <Button
+            size="small"
+            variant="danger"
+            onClick={handleDelete}
+          >
+            {t("actions.delete")}
+          </Button>
         </div>
       </Container>
 

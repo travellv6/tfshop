@@ -938,6 +938,55 @@
       "deleted": "价格阶梯已删除"
     }
   },
+  "rfq": {
+    "domain": "询价管理",
+    "title": "询价单",
+    "create": "创建询价",
+    "submitQuote": "提交报价",
+    "quotedPrice": "报价金额",
+    "leadTime": "交货周期",
+    "messages": "沟通记录",
+    "reply": "回复",
+    "internalNote": "内部备注",
+    "fields": {
+      "customer_email": "客户邮箱",
+      "product_title": "产品名称",
+      "quantity": "数量",
+      "target_price": "目标价格",
+      "status": "状态",
+      "quoted_price": "报价",
+      "quoted_lead_time": "交期",
+      "requirements": "需求说明",
+      "factory_id": "工厂"
+    },
+    "status": {
+      "submitted": "已提交",
+      "reviewing": "审核中",
+      "quoted": "已报价",
+      "negotiating": "协商中",
+      "accepted": "已接受",
+      "rejected": "已拒绝"
+    },
+    "toast": {
+      "created": "询价单创建成功",
+      "updated": "询价单更新成功",
+      "quoteSubmitted": "报价已提交",
+      "deleted": "询价单已删除"
+    }
+  },
+  "buyerTier": {
+    "domain": "买家等级",
+    "bronze": "铜牌",
+    "silver": "银牌",
+    "gold": "金牌",
+    "platinum": "铂金"
+  },
+  "logistics": {
+    "domain": "物流追踪",
+    "trackingNumber": "物流单号",
+    "carrier": "承运商",
+    "status": "状态"
+  },
   "wireTransfer": {
     "title": "银行电汇",
     "confirmPayment": "确认到账",

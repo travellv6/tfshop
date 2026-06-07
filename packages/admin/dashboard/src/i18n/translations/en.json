@@ -983,6 +983,55 @@
       "deleted": "Price tier deleted"
     }
   },
+  "rfq": {
+    "domain": "RFQ Management",
+    "title": "Inquiries",
+    "create": "Create Inquiry",
+    "submitQuote": "Submit Quote",
+    "quotedPrice": "Quoted Price",
+    "leadTime": "Lead Time",
+    "messages": "Messages",
+    "reply": "Reply",
+    "internalNote": "Internal Note",
+    "fields": {
+      "customer_email": "Customer Email",
+      "product_title": "Product",
+      "quantity": "Quantity",
+      "target_price": "Target Price",
+      "status": "Status",
+      "quoted_price": "Quoted Price",
+      "quoted_lead_time": "Lead Time",
+      "requirements": "Requirements",
+      "factory_id": "Factory"
+    },
+    "status": {
+      "submitted": "Submitted",
+      "reviewing": "Reviewing",
+      "quoted": "Quoted",
+      "negotiating": "Negotiating",
+      "accepted": "Accepted",
+      "rejected": "Rejected"
+    },
+    "toast": {
+      "created": "Inquiry created",
+      "updated": "Inquiry updated",
+      "quoteSubmitted": "Quote submitted",
+      "deleted": "Inquiry deleted"
+    }
+  },
+  "buyerTier": {
+    "domain": "Buyer Tiers",
+    "bronze": "Bronze",
+    "silver": "Silver",
+    "gold": "Gold",
+    "platinum": "Platinum"
+  },
+  "logistics": {
+    "domain": "Logistics",
+    "trackingNumber": "Tracking Number",
+    "carrier": "Carrier",
+    "status": "Status"
+  },
   "wireTransfer": {
     "title": "Wire Transfer",
     "confirmPayment": "Confirm Payment",
