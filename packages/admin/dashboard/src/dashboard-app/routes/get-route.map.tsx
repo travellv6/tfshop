@@ -953,6 +953,46 @@ export function getRouteMap({
                 },
               ],
             },
+            {
+              path: "/factories",
+              errorElement: <ErrorBoundary />,
+              handle: {
+                breadcrumb: () => t("factories.domain"),
+              },
+              children: [
+                {
+                  path: "",
+                  lazy: () => import("../../routes/factories/factory-list"),
+                  children: [
+                    {
+                      path: "create",
+                      lazy: () =>
+                        import("../../routes/factories/factory-create"),
+                    },
+                  ],
+                },
+                {
+                  path: ":id",
+                  lazy: async () => {
+                    const { Component, loader } = await import(
+                      "../../routes/factories/factory-detail"
+                    )
+
+                    return {
+                      Component,
+                      loader,
+                      handle: {
+                        breadcrumb: (match: any) => (
+                          <span>
+                            {match.data?.factory?.name || "..."}
+                          </span>
+                        ),
+                      },
+                    }
+                  },
+                },
+              ],
+            },
             ...coreRoutes,
           ],
         },
