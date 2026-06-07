@@ -3174,6 +3174,107 @@
     "draft": "Borrador",
     "values": "Valores"
   },
+  "factories": {
+    "domain": "Fábricas",
+    "title": "Fábrica",
+    "create": "Crear fábrica",
+    "edit": "Editar fábrica",
+    "delete": "Eliminar fábrica",
+    "confirmDelete": "¿Está seguro de que desea eliminar esta fábrica?",
+    "fields": {
+      "name": "Nombre",
+      "slug": "URL Slug",
+      "description": "Descripción",
+      "cover_image": "Imagen de portada",
+      "location_province": "Provincia",
+      "location_city": "Ciudad",
+      "location_address": "Dirección",
+      "established_year": "Año de fundación",
+      "employee_scale": "Escala de empleados",
+      "monthly_capacity": "Capacidad mensual",
+      "main_categories": "Categorías principales",
+      "certifications": "Certificaciones",
+      "photos": "Fotos",
+      "status": "Estado",
+      "metadata": "Metadatos"
+    },
+    "status": {
+      "active": "Activo",
+      "inactive": "Inactivo",
+      "suspended": "Suspendido"
+    },
+    "sections": {
+      "general": "General",
+      "media": "Multimedia",
+      "location": "Ubicación",
+      "certifications": "Certificaciones"
+    },
+    "toast": {
+      "created": "Fábrica creada",
+      "updated": "Fábrica actualizada",
+      "deleted": "Fábrica eliminada"
+    }
+  },
+  "tieredPricing": {
+    "domain": "Precios escalonados",
+    "title": "Niveles de precio",
+    "create": "Crear nivel de precio",
+    "delete": "¿Está seguro de que desea eliminar este nivel de precio?",
+    "fields": {
+      "variant_id": "ID de variante",
+      "min_quantity": "Cantidad mínima",
+      "max_quantity": "Cantidad máxima",
+      "amount": "Precio unitario",
+      "currency_code": "Moneda",
+      "status": "Estado",
+      "rules": "Reglas"
+    },
+    "status": {
+      "active": "Activo",
+      "inactive": "Inactivo"
+    },
+    "toast": {
+      "created": "Nivel de precio creado",
+      "updated": "Nivel de precio actualizado",
+      "deleted": "Nivel de precio eliminado"
+    }
+  },
+  "rfq": {
+    "domain": "Gestión de consultas",
+    "title": "Consultas",
+    "create": "Crear consulta",
+    "submitQuote": "Enviar cotización",
+    "quotedPrice": "Precio cotizado",
+    "leadTime": "Plazo de entrega",
+    "messages": "Mensajes",
+    "reply": "Responder",
+    "internalNote": "Nota interna",
+    "fields": {
+      "customer_email": "Correo del cliente",
+      "product_title": "Producto",
+      "quantity": "Cantidad",
+      "target_price": "Precio objetivo",
+      "status": "Estado",
+      "quoted_price": "Precio cotizado",
+      "quoted_lead_time": "Plazo de entrega",
+      "requirements": "Requisitos",
+      "factory_id": "Fábrica"
+    },
+    "status": {
+      "submitted": "Enviada",
+      "reviewing": "En revisión",
+      "quoted": "Cotizada",
+      "negotiating": "En negociación",
+      "accepted": "Aceptada",
+      "rejected": "Rechazada"
+    },
+    "toast": {
+      "created": "Consulta creada",
+      "updated": "Consulta actualizada",
+      "quoteSubmitted": "Cotización enviada",
+      "deleted": "Consulta eliminada"
+    }
+  },
   "dateTime": {
     "years_one": "Año",
     "years_other": "Años",

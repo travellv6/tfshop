@@ -2937,6 +2937,107 @@
     "draft": "مسودة",
     "values": "القيم"
   },
+  "factories": {
+    "domain": "المصانع",
+    "title": "مصنع",
+    "create": "إنشاء مصنع",
+    "edit": "تعديل مصنع",
+    "delete": "حذف مصنع",
+    "confirmDelete": "هل أنت متأكد من حذف هذا المصنع؟",
+    "fields": {
+      "name": "الاسم",
+      "slug": "الرابط",
+      "description": "الوصف",
+      "cover_image": "صورة الغلاف",
+      "location_province": "المقاطعة",
+      "location_city": "المدينة",
+      "location_address": "العنوان",
+      "established_year": "سنة التأسيس",
+      "employee_scale": "حجم الموظفين",
+      "monthly_capacity": "الطاقة الشهرية",
+      "main_categories": "الفئات الرئيسية",
+      "certifications": "الشهادات",
+      "photos": "الصور",
+      "status": "الحالة",
+      "metadata": "البيانات الوصفية"
+    },
+    "status": {
+      "active": "نشط",
+      "inactive": "غير نشط",
+      "suspended": "معلق"
+    },
+    "sections": {
+      "general": "عام",
+      "media": "الوسائط",
+      "location": "الموقع",
+      "certifications": "الشهادات"
+    },
+    "toast": {
+      "created": "تم إنشاء المصنع",
+      "updated": "تم تحديث المصنع",
+      "deleted": "تم حذف المصنع"
+    }
+  },
+  "tieredPricing": {
+    "domain": "التسعير المتدرج",
+    "title": "مستويات الأسعار",
+    "create": "إنشاء مستوى سعر",
+    "delete": "هل أنت متأكد من حذف مستوى السعر هذا؟",
+    "fields": {
+      "variant_id": "معرف المتغير",
+      "min_quantity": "الحد الأدنى للكمية",
+      "max_quantity": "الحد الأقصى للكمية",
+      "amount": "سعر الوحدة",
+      "currency_code": "العملة",
+      "status": "الحالة",
+      "rules": "القواعد"
+    },
+    "status": {
+      "active": "نشط",
+      "inactive": "غير نشط"
+    },
+    "toast": {
+      "created": "تم إنشاء مستوى السعر",
+      "updated": "تم تحديث مستوى السعر",
+      "deleted": "تم حذف مستوى السعر"
+    }
+  },
+  "rfq": {
+    "domain": "إدارة الاستفسارات",
+    "title": "الاستفسارات",
+    "create": "إنشاء استفسار",
+    "submitQuote": "تقديم عرض سعر",
+    "quotedPrice": "السعر المقتبس",
+    "leadTime": "مدة التسليم",
+    "messages": "الرسائل",
+    "reply": "رد",
+    "internalNote": "ملاحظة داخلية",
+    "fields": {
+      "customer_email": "بريد العميل",
+      "product_title": "المنتج",
+      "quantity": "الكمية",
+      "target_price": "السعر المستهدف",
+      "status": "الحالة",
+      "quoted_price": "السعر المقتبس",
+      "quoted_lead_time": "مدة التسليم",
+      "requirements": "المتطلبات",
+      "factory_id": "المصنع"
+    },
+    "status": {
+      "submitted": "تم الإرسال",
+      "reviewing": "قيد المراجعة",
+      "quoted": "تم التسعير",
+      "negotiating": "قيد التفاوض",
+      "accepted": "مقبول",
+      "rejected": "مرفوض"
+    },
+    "toast": {
+      "created": "تم إنشاء الاستفسار",
+      "updated": "تم تحديث الاستفسار",
+      "quoteSubmitted": "تم تقديم عرض السعر",
+      "deleted": "تم حذف الاستفسار"
+    }
+  },
   "dateTime": {
     "years_one": "سنة",
     "years_other": "سنوات",
