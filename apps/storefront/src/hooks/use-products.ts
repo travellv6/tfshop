@@ -25,3 +25,17 @@ export function useProduct(handle: string) {
     enabled: !!handle,
   })
 }
+
+export function useProductsByFactory(factoryId: string) {
+  return useQuery({
+    queryKey: ["products", "factory", factoryId],
+    queryFn: async () => {
+      const { products, count } = await sdk.store.product.list({
+        limit: 12,
+        "metadata[factory_id]": factoryId,
+      } as any)
+      return { products, count }
+    },
+    enabled: !!factoryId,
+  })
+}
