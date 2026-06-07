@@ -1,8 +1,7 @@
 "use client"
 
-import { usePathname, useRouter } from "next/navigation"
 import { useLocale } from "next-intl"
-import { routing, type Locale } from "@/i18n/routing"
+import { usePathname, useRouter, routing, type Locale } from "@/i18n/routing"
 
 const localeLabels: Record<Locale, string> = {
   en: "English",
@@ -17,9 +16,8 @@ export function LanguageSwitcher() {
   const router = useRouter()
 
   const handleChange = (newLocale: string) => {
-    const segments = pathname.split("/")
-    segments[1] = newLocale
-    router.push(segments.join("/"))
+    // 使用 next-intl 的 replaceLocale 替换路径中的 locale
+    router.replace(pathname, { locale: newLocale as Locale })
   }
 
   return (

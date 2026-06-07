@@ -39,7 +39,7 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} dir={isRTL ? "rtl" : "ltr"}>
       <body className="min-h-screen bg-white antialiased">
-        <NextIntlClientProvider messages={messages}>
+        <NextIntlClientProvider locale={locale} messages={messages}>
           <QueryProvider>
             <CartProvider>
               <Header />
