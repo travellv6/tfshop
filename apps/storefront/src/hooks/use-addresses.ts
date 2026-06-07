@@ -35,7 +35,7 @@ export function useAddresses() {
     queryKey: ["addresses"],
     queryFn: async () => {
       try {
-        const result = await sdk.store.customer.listAddresses()
+        const result = await sdk.store.customer.listAddress()
         return (result as any).addresses || []
       } catch {
         return []
@@ -48,7 +48,7 @@ export function useCreateAddress() {
   const queryClient = useQueryClient()
   return useMutation({
     mutationFn: async (data: AddressInput) => {
-      const result = await sdk.store.customer.addAddress({ address: data } as any)
+      const result = await sdk.store.customer.createAddress(data as any)
       return result
     },
     onSuccess: () => {
@@ -61,7 +61,7 @@ export function useUpdateAddress() {
   const queryClient = useQueryClient()
   return useMutation({
     mutationFn: async ({ id, data }: { id: string; data: Partial<AddressInput> }) => {
-      const result = await sdk.store.customer.updateAddress(id, { address: data } as any)
+      const result = await sdk.store.customer.updateAddress(id, data as any)
       return result
     },
     onSuccess: () => {

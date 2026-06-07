@@ -5,8 +5,8 @@ import { useTranslations } from "next-intl"
 import { useCreateRFQ } from "@/hooks/use-rfq"
 
 interface RFQFormProps {
-  productId: string
-  productTitle: string
+  productId?: string
+  productTitle?: string
   variantId?: string
   factoryId?: string
   customerEmail?: string
