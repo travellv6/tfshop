@@ -873,6 +873,47 @@
       "successToast": "库存数量更新成功。"
     }
   },
+  "factories": {
+    "domain": "工厂管理",
+    "title": "工厂",
+    "create": "创建工厂",
+    "edit": "编辑工厂",
+    "delete": "删除工厂",
+    "confirmDelete": "确定要删除这个工厂吗？",
+    "fields": {
+      "name": "工厂名称",
+      "slug": "URL 标识",
+      "description": "工厂简介",
+      "cover_image": "封面图片",
+      "location_province": "省份",
+      "location_city": "城市",
+      "location_address": "详细地址",
+      "established_year": "成立年份",
+      "employee_scale": "员工规模",
+      "monthly_capacity": "月产能",
+      "main_categories": "主营品类",
+      "certifications": "认证资质",
+      "photos": "工厂照片",
+      "status": "状态",
+      "metadata": "元数据"
+    },
+    "status": {
+      "active": "启用",
+      "inactive": "停用",
+      "suspended": "暂停"
+    },
+    "sections": {
+      "general": "基本信息",
+      "media": "图片和照片",
+      "location": "地址信息",
+      "certifications": "认证资质"
+    },
+    "toast": {
+      "created": "工厂创建成功",
+      "updated": "工厂更新成功",
+      "deleted": "工厂已删除"
+    }
+  },
   "giftCards": {
     "domain": "礼品卡",
     "editGiftCard": "编辑礼品卡",

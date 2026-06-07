@@ -918,6 +918,47 @@
       "successToast": "Inventory levels updated successfully."
     }
   },
+  "factories": {
+    "domain": "Factories",
+    "title": "Factory",
+    "create": "Create Factory",
+    "edit": "Edit Factory",
+    "delete": "Delete Factory",
+    "confirmDelete": "Are you sure you want to delete this factory?",
+    "fields": {
+      "name": "Name",
+      "slug": "URL Slug",
+      "description": "Description",
+      "cover_image": "Cover Image",
+      "location_province": "Province",
+      "location_city": "City",
+      "location_address": "Address",
+      "established_year": "Established Year",
+      "employee_scale": "Employee Scale",
+      "monthly_capacity": "Monthly Capacity",
+      "main_categories": "Main Categories",
+      "certifications": "Certifications",
+      "photos": "Photos",
+      "status": "Status",
+      "metadata": "Metadata"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive",
+      "suspended": "Suspended"
+    },
+    "sections": {
+      "general": "General",
+      "media": "Media",
+      "location": "Location",
+      "certifications": "Certifications"
+    },
+    "toast": {
+      "created": "Factory created",
+      "updated": "Factory updated",
+      "deleted": "Factory deleted"
+    }
+  },
   "giftCards": {
     "domain": "Gift Cards",
     "editGiftCard": "Edit Gift Card",
