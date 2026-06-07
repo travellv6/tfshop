@@ -98,5 +98,17 @@
       "accepted": "Accepted",
       "rejected": "Rejected"
     }
+  },
+  "account": {
+    "title": "My Account",
+    "loginPrompt": "Please log in to manage your account",
+    "myOrders": "My Orders",
+    "myOrdersDesc": "View order history and tracking",
+    "myInquiries": "My Inquiries",
+    "myInquiriesDesc": "Manage your quote requests",
+    "myAddresses": "My Addresses",
+    "myAddressesDesc": "Manage shipping addresses",
+    "accountSettings": "Account Settings",
+    "accountSettingsDesc": "Update name, email and password"
   }
 }

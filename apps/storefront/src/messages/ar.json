@@ -98,5 +98,17 @@
       "accepted": "مقبول",
       "rejected": "مرفوض"
     }
+  },
+  "account": {
+    "title": "حسابي",
+    "loginPrompt": "يرجى تسجيل الدخول لإدارة حسابك",
+    "myOrders": "طلباتي",
+    "myOrdersDesc": "عرض سجل الطلبات والتتبع",
+    "myInquiries": "استفساراتي",
+    "myInquiriesDesc": "إدارة طلبات عروض الأسعار",
+    "myAddresses": "عناويني",
+    "myAddressesDesc": "إدارة عناوين الشحن",
+    "accountSettings": "إعدادات الحساب",
+    "accountSettingsDesc": "تحديث الاسم والبريد الإلكتروني وكلمة المرور"
   }
 }

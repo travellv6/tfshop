@@ -98,5 +98,17 @@
       "accepted": "已接受",
       "rejected": "已拒绝"
     }
+  },
+  "account": {
+    "title": "我的账户",
+    "loginPrompt": "请登录以管理您的账户",
+    "myOrders": "我的订单",
+    "myOrdersDesc": "查看订单历史和物流追踪",
+    "myInquiries": "我的询价",
+    "myInquiriesDesc": "管理询价单",
+    "myAddresses": "我的地址",
+    "myAddressesDesc": "管理收货地址",
+    "accountSettings": "账户设置",
+    "accountSettingsDesc": "修改姓名、邮箱和密码"
   }
 }

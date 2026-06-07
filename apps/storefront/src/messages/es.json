@@ -98,5 +98,17 @@
       "accepted": "Aceptada",
       "rejected": "Rechazada"
     }
+  },
+  "account": {
+    "title": "Mi cuenta",
+    "loginPrompt": "Inicie sesión para gestionar su cuenta",
+    "myOrders": "Mis pedidos",
+    "myOrdersDesc": "Ver historial de pedidos y seguimiento",
+    "myInquiries": "Mis consultas",
+    "myInquiriesDesc": "Gestionar solicitudes de cotización",
+    "myAddresses": "Mis direcciones",
+    "myAddressesDesc": "Gestionar direcciones de envío",
+    "accountSettings": "Configuración",
+    "accountSettingsDesc": "Actualizar nombre, correo y contraseña"
   }
 }
