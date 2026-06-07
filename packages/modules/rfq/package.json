@@ -1,0 +1,26 @@
+{
+  "name": "@medusajs/rfq",
+  "version": "1.0.0",
+  "description": "RFQ (Request for Quote) module for TFShop B2B toy platform",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "resolve:aliases": "yarn run -T tsc --showConfig -p tsconfig.json > tsconfig.resolved.json && yarn run -T tsc-alias -p tsconfig.resolved.json && yarn run -T rimraf tsconfig.resolved.json",
+    "build": "yarn run -T rimraf dist && yarn run -T tsc --build && npm run resolve:aliases",
+    "watch": "yarn run -T tsc --build --watch",
+    "test": "../../../node_modules/.bin/jest --bail --forceExit --testPathPattern=src"
+  },
+  "devDependencies": {
+    "@medusajs/framework": "workspace:*",
+    "@medusajs/test-utils": "workspace:*"
+  },
+  "peerDependencies": {
+    "@medusajs/framework": "^2.0.0"
+  }
+}
