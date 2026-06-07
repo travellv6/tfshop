@@ -9,6 +9,8 @@ import {
 } from "react"
 import { sdk } from "@/lib/medusa"
 
+type FetchResult = Record<string, any>
+
 interface CartItem {
   variant_id: string
   quantity: number
@@ -45,7 +47,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const refreshCart = useCallback(async () => {
     if (!cartId) return
     try {
-      const result = await sdk.client.fetch(`/store/carts/${cartId}`)
+      const result = await sdk.client.fetch<FetchResult>(
+        `/store/carts/${cartId}`
+      )
       setCart(result.cart || result)
     } catch {
       localStorage.removeItem(CART_ID_KEY)
@@ -60,7 +64,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const ensureCart = useCallback(async () => {
     if (cartId) return cartId
-    const result = await sdk.client.fetch("/store/carts", {
+    const result = await sdk.client.fetch<FetchResult>("/store/carts", {
       method: "POST",
       body: { currency_code: "usd" },
     })

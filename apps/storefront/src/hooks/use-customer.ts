@@ -1,12 +1,16 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
 import { sdk } from "@/lib/medusa"
 
+type FetchResult = Record<string, any>
+
 export function useCustomer() {
   return useQuery({
     queryKey: ["customer"],
     queryFn: async () => {
       try {
-        const result = await sdk.client.fetch("/store/customers/me")
+        const result = await sdk.client.fetch<FetchResult>(
+          "/store/customers/me"
+        )
         return result.customer || result
       } catch {
         return null
@@ -26,7 +30,7 @@ export function useLogin() {
       email: string
       password: string
     }) => {
-      return sdk.client.fetch("/auth/customer/emailpass", {
+      return sdk.client.fetch<FetchResult>("/auth/customer/emailpass", {
         method: "POST",
         body: { email, password },
       })
@@ -52,7 +56,7 @@ export function useRegister() {
       last_name: string
     }) => {
       // Step 1: Register auth identity
-      const authResult = await sdk.client.fetch(
+      const authResult = await sdk.client.fetch<FetchResult>(
         "/auth/customer/emailpass/register",
         {
           method: "POST",
@@ -60,10 +64,13 @@ export function useRegister() {
         }
       )
       // Step 2: Create customer record (uses JWT from registration)
-      const customerResult = await sdk.client.fetch("/store/customers", {
-        method: "POST",
-        body: { email, first_name, last_name },
-      })
+      const customerResult = await sdk.client.fetch<FetchResult>(
+        "/store/customers",
+        {
+          method: "POST",
+          body: { email, first_name, last_name },
+        }
+      )
       return {
         auth: authResult,
         customer: customerResult.customer || customerResult,
