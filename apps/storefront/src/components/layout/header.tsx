@@ -4,11 +4,15 @@ import Link from "next/link"
 import { useLocale, useTranslations } from "next-intl"
 import { LanguageSwitcher } from "@/components/ui/language-switcher"
 import { useCart } from "@/lib/cart-context"
+import { useCustomer } from "@/hooks/use-customer"
 
 export function Header() {
   const t = useTranslations("nav")
+  const ct = useTranslations("common")
+  const at = useTranslations("account")
   const locale = useLocale()
   const { itemCount } = useCart()
+  const { data: customer } = useCustomer()
 
   return (
     <header className="border-b border-gray-200 bg-white">
@@ -48,7 +52,15 @@ export function Header() {
               </span>
             )}
           </Link>
-          <span className="text-sm text-gray-600">{t("login")}</span>
+          {customer ? (
+            <Link href={`/${locale}/account`} className="text-sm text-gray-600 hover:text-gray-900">
+              {at("title")}
+            </Link>
+          ) : (
+            <Link href={`/${locale}/auth/login`} className="text-sm text-gray-600 hover:text-gray-900">
+              {ct("login")}
+            </Link>
+          )}
         </div>
       </div>
     </header>

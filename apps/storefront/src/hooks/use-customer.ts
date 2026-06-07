@@ -1,17 +1,13 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
-import { sdk } from "@/lib/medusa"
-
-type FetchResult = Record<string, any>
+import { sdk, PUBLISHABLE_KEY } from "@/lib/medusa"
 
 export function useCustomer() {
   return useQuery({
     queryKey: ["customer"],
     queryFn: async () => {
       try {
-        const result = await sdk.client.fetch<FetchResult>(
-          "/store/customers/me"
-        )
-        return result.customer || result
+        const { customer } = await sdk.store.customer.retrieve()
+        return customer
       } catch {
         return null
       }
@@ -30,10 +26,7 @@ export function useLogin() {
       email: string
       password: string
     }) => {
-      return sdk.client.fetch<FetchResult>("/auth/customer/emailpass", {
-        method: "POST",
-        body: { email, password },
-      })
+      return sdk.auth.login("customer", "emailpass", { email, password })
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["customer"] })
@@ -55,26 +48,26 @@ export function useRegister() {
       first_name: string
       last_name: string
     }) => {
-      // Step 1: Register auth identity
-      const authResult = await sdk.client.fetch<FetchResult>(
-        "/auth/customer/emailpass/register",
+      // Step 1: Register auth identity → get token
+      const token = (await sdk.auth.register("customer", "emailpass", {
+        email,
+        password,
+      })) as unknown as string
+
+      // Step 2: Create customer record using the token
+      const { customer } = await sdk.store.customer.create(
+        { email, first_name, last_name },
+        {},
         {
-          method: "POST",
-          body: { email, password },
+          Authorization: `Bearer ${token}`,
+          ...(PUBLISHABLE_KEY && { "x-publishable-api-key": PUBLISHABLE_KEY }),
         }
       )
-      // Step 2: Create customer record (uses JWT from registration)
-      const customerResult = await sdk.client.fetch<FetchResult>(
-        "/store/customers",
-        {
-          method: "POST",
-          body: { email, first_name, last_name },
-        }
-      )
-      return {
-        auth: authResult,
-        customer: customerResult.customer || customerResult,
-      }
+
+      // Step 3: Login to establish session
+      await sdk.auth.login("customer", "emailpass", { email, password })
+
+      return { auth: { token }, customer }
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["customer"] })
