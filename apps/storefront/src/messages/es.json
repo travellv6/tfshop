@@ -11,6 +11,7 @@
     "home": "Inicio",
     "products": "Productos",
     "factories": "Fábricas",
+    "rfq": "Consultas",
     "about": "Acerca de"
   },
   "home": {
@@ -58,5 +59,39 @@
     "tier": "Nivel {n}",
     "pieces": "{min} - {max} uds",
     "piecesAndAbove": "{min}+ uds"
+  },
+  "rfq": {
+    "title": "Solicitud de cotización",
+    "submit": "Enviar consulta",
+    "submitting": "Enviando...",
+    "myInquiries": "Mis consultas",
+    "quantity": "Cantidad",
+    "targetPrice": "Precio objetivo",
+    "requirements": "Requisitos",
+    "requirementsPlaceholder": "Describa sus requisitos, necesidades de personalización, plazo de entrega, etc.",
+    "product": "Producto",
+    "statusLabel": "Estado",
+    "quotedPrice": "Precio cotizado",
+    "leadTime": "Plazo de entrega",
+    "createdAt": "Fecha",
+    "messages": "Mensajes",
+    "reply": "Responder",
+    "replyPlaceholder": "Escriba su mensaje...",
+    "success": "¡Consulta enviada exitosamente!",
+    "loading": "Cargando...",
+    "noInquiries": "No hay consultas aún.",
+    "notFound": "Consulta no encontrada.",
+    "noMessages": "No hay mensajes aún.",
+    "you": "Usted",
+    "seller": "Vendedor",
+    "system": "Sistema",
+    "status": {
+      "submitted": "Enviada",
+      "reviewing": "En revisión",
+      "quoted": "Cotizada",
+      "negotiating": "En negociación",
+      "accepted": "Aceptada",
+      "rejected": "Rechazada"
+    }
   }
 }

@@ -11,6 +11,7 @@
     "home": "الرئيسية",
     "products": "المنتجات",
     "factories": "المصانع",
+    "rfq": "استفساراتي",
     "about": "حول"
   },
   "home": {
@@ -58,5 +59,39 @@
     "tier": "المستوى {n}",
     "pieces": "{min} - {max} قطعة",
     "piecesAndAbove": "{min}+ قطعة"
+  },
+  "rfq": {
+    "title": "طلب عرض سعر",
+    "submit": "إرسال الاستفسار",
+    "submitting": "جاري الإرسال...",
+    "myInquiries": "استفساراتي",
+    "quantity": "الكمية",
+    "targetPrice": "السعر المستهدف",
+    "requirements": "المتطلبات",
+    "requirementsPlaceholder": "صف متطلباتك، احتياجات التخصيص، الجدول الزمني للتسليم، إلخ.",
+    "product": "المنتج",
+    "statusLabel": "الحالة",
+    "quotedPrice": "السعر المقتبس",
+    "leadTime": "مدة التسليم",
+    "createdAt": "التاريخ",
+    "messages": "الرسائل",
+    "reply": "رد",
+    "replyPlaceholder": "اكتب رسالتك...",
+    "success": "تم إرسال الاستفسار بنجاح!",
+    "loading": "جاري التحميل...",
+    "noInquiries": "لا توجد استفسارات بعد.",
+    "notFound": "الاستفسار غير موجود.",
+    "noMessages": "لا توجد رسائل بعد.",
+    "you": "أنت",
+    "seller": "البائع",
+    "system": "النظام",
+    "status": {
+      "submitted": "تم الإرسال",
+      "reviewing": "قيد المراجعة",
+      "quoted": "تم التسعير",
+      "negotiating": "قيد التفاوض",
+      "accepted": "مقبول",
+      "rejected": "مرفوض"
+    }
   }
 }

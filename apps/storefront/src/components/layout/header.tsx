@@ -30,6 +30,12 @@ export function Header() {
             >
               {t("factories")}
             </Link>
+            <Link
+              href={`/${locale}/rfq`}
+              className="text-sm text-gray-600 hover:text-gray-900"
+            >
+              {t("rfq")}
+            </Link>
           </nav>
         </div>
         <div className="flex items-center gap-4">

@@ -11,6 +11,7 @@
     "home": "首页",
     "products": "产品",
     "factories": "工厂",
+    "rfq": "询价",
     "about": "关于"
   },
   "home": {
@@ -58,5 +59,39 @@
     "tier": "第 {n} 阶",
     "pieces": "{min} - {max} 件",
     "piecesAndAbove": "{min} 件以上"
+  },
+  "rfq": {
+    "title": "询价",
+    "submit": "提交询价",
+    "submitting": "提交中...",
+    "myInquiries": "我的询价",
+    "quantity": "数量",
+    "targetPrice": "目标价格",
+    "requirements": "需求说明",
+    "requirementsPlaceholder": "描述您的需求、定制要求、交货时间等",
+    "product": "产品",
+    "statusLabel": "状态",
+    "quotedPrice": "报价",
+    "leadTime": "交货周期",
+    "createdAt": "日期",
+    "messages": "沟通记录",
+    "reply": "回复",
+    "replyPlaceholder": "输入消息内容...",
+    "success": "询价提交成功！",
+    "loading": "加载中...",
+    "noInquiries": "暂无询价记录。",
+    "notFound": "询价单未找到。",
+    "noMessages": "暂无消息。",
+    "you": "我",
+    "seller": "卖家",
+    "system": "系统",
+    "status": {
+      "submitted": "已提交",
+      "reviewing": "审核中",
+      "quoted": "已报价",
+      "negotiating": "协商中",
+      "accepted": "已接受",
+      "rejected": "已拒绝"
+    }
   }
 }

@@ -11,6 +11,7 @@
     "home": "Home",
     "products": "Products",
     "factories": "Factories",
+    "rfq": "Inquiries",
     "about": "About"
   },
   "home": {
@@ -58,5 +59,39 @@
     "tier": "Tier {n}",
     "pieces": "{min} - {max} pcs",
     "piecesAndAbove": "{min}+ pcs"
+  },
+  "rfq": {
+    "title": "Request Quote",
+    "submit": "Submit Inquiry",
+    "submitting": "Submitting...",
+    "myInquiries": "My Inquiries",
+    "quantity": "Quantity",
+    "targetPrice": "Target Price",
+    "requirements": "Requirements",
+    "requirementsPlaceholder": "Describe your requirements, customization needs, delivery timeline, etc.",
+    "product": "Product",
+    "statusLabel": "Status",
+    "quotedPrice": "Quoted Price",
+    "leadTime": "Lead Time",
+    "createdAt": "Date",
+    "messages": "Messages",
+    "reply": "Reply",
+    "replyPlaceholder": "Type your message...",
+    "success": "Inquiry submitted successfully!",
+    "loading": "Loading...",
+    "noInquiries": "No inquiries yet.",
+    "notFound": "Inquiry not found.",
+    "noMessages": "No messages yet.",
+    "you": "You",
+    "seller": "Seller",
+    "system": "System",
+    "status": {
+      "submitted": "Submitted",
+      "reviewing": "Reviewing",
+      "quoted": "Quoted",
+      "negotiating": "Negotiating",
+      "accepted": "Accepted",
+      "rejected": "Rejected"
+    }
   }
 }
