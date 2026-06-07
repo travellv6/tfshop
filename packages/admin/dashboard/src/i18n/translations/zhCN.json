@@ -914,6 +914,42 @@
       "deleted": "工厂已删除"
     }
   },
+  "tieredPricing": {
+    "domain": "阶梯定价",
+    "title": "价格阶梯",
+    "create": "创建价格阶梯",
+    "delete": "确定要删除这个价格阶梯吗？",
+    "fields": {
+      "variant_id": "变体 ID",
+      "min_quantity": "最小数量",
+      "max_quantity": "最大数量",
+      "amount": "单价",
+      "currency_code": "币种",
+      "status": "状态",
+      "rules": "规则"
+    },
+    "status": {
+      "active": "启用",
+      "inactive": "停用"
+    },
+    "toast": {
+      "created": "价格阶梯创建成功",
+      "updated": "价格阶梯更新成功",
+      "deleted": "价格阶梯已删除"
+    }
+  },
+  "wireTransfer": {
+    "title": "银行电汇",
+    "confirmPayment": "确认到账",
+    "rejectPayment": "拒绝",
+    "bankInfo": "银行信息",
+    "accountName": "账户名",
+    "accountNumber": "账号",
+    "bankName": "银行名称",
+    "swiftCode": "SWIFT 代码",
+    "uploadProof": "上传付款凭证",
+    "pendingConfirmation": "待确认"
+  },
   "giftCards": {
     "domain": "礼品卡",
     "editGiftCard": "编辑礼品卡",

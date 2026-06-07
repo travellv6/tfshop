@@ -61,7 +61,6 @@ export const useTieredPriceTableColumns = () => {
         ),
         cell: ({ row }) => {
           const amount = row.original.amount
-          const currency = row.original.currency_code
           const formatted = `$${parseFloat(amount).toFixed(2)}`
           return <TextCell text={formatted} />
         },

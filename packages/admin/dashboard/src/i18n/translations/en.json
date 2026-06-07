@@ -959,6 +959,42 @@
       "deleted": "Factory deleted"
     }
   },
+  "tieredPricing": {
+    "domain": "Tiered Pricing",
+    "title": "Price Tiers",
+    "create": "Create Price Tier",
+    "delete": "Are you sure you want to delete this price tier?",
+    "fields": {
+      "variant_id": "Variant ID",
+      "min_quantity": "Min Quantity",
+      "max_quantity": "Max Quantity",
+      "amount": "Unit Price",
+      "currency_code": "Currency",
+      "status": "Status",
+      "rules": "Rules"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "toast": {
+      "created": "Price tier created",
+      "updated": "Price tier updated",
+      "deleted": "Price tier deleted"
+    }
+  },
+  "wireTransfer": {
+    "title": "Wire Transfer",
+    "confirmPayment": "Confirm Payment",
+    "rejectPayment": "Reject",
+    "bankInfo": "Bank Information",
+    "accountName": "Account Name",
+    "accountNumber": "Account Number",
+    "bankName": "Bank Name",
+    "swiftCode": "SWIFT Code",
+    "uploadProof": "Upload Payment Proof",
+    "pendingConfirmation": "Pending Confirmation"
+  },
   "giftCards": {
     "domain": "Gift Cards",
     "editGiftCard": "Edit Gift Card",
