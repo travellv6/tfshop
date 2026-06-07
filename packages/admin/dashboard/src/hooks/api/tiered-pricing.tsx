@@ -105,6 +105,34 @@ export const useCreateTieredPrice = (
   })
 }
 
+// Hook: Update tiered price
+export const useUpdateTieredPrice = (
+  id: string,
+  options?: UseMutationOptions<
+    TieredPriceResponse,
+    FetchError,
+    Partial<TieredPriceCreatePayload>
+  >
+) => {
+  return useMutation({
+    mutationFn: (payload) =>
+      sdk.client.fetch<TieredPriceResponse>(`/admin/tiered-pricing/${id}`, {
+        method: "POST",
+        body: payload,
+      }),
+    onSuccess: (data, variables, context) => {
+      queryClient.invalidateQueries({
+        queryKey: tieredPricingQueryKeys.lists(),
+      })
+      queryClient.invalidateQueries({
+        queryKey: tieredPricingQueryKeys.details(),
+      })
+      options?.onSuccess?.(data, variables, context)
+    },
+    ...options,
+  })
+}
+
 // Hook: Delete tiered price
 export const useDeleteTieredPrice = (
   options?: UseMutationOptions<

@@ -1007,6 +1007,33 @@ export function getRouteMap({
                       "../../routes/tiered-pricing/tiered-price-list"
                     ),
                 },
+                {
+                  path: "create",
+                  lazy: () =>
+                    import(
+                      "../../routes/tiered-pricing/tiered-price-create"
+                    ),
+                },
+                {
+                  path: ":id",
+                  lazy: async () => {
+                    const { Component, loader } = await import(
+                      "../../routes/tiered-pricing/tiered-price-detail"
+                    )
+
+                    return {
+                      Component,
+                      loader,
+                      handle: {
+                        breadcrumb: (match: any) => (
+                          <span>
+                            {match.data?.tiered_price?.id?.slice(0, 8) || "..."}
+                          </span>
+                        ),
+                      },
+                    }
+                  },
+                },
               ],
             },
             {

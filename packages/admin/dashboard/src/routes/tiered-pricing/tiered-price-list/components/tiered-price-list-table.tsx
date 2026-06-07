@@ -1,9 +1,10 @@
-import { Trash } from "@medusajs/icons"
-import { Container, Heading, toast, usePrompt } from "@medusajs/ui"
+import { PencilSquare, Plus, Trash } from "@medusajs/icons"
+import { Button, Container, Heading, toast, usePrompt } from "@medusajs/ui"
 import { keepPreviousData } from "@tanstack/react-query"
 import { createColumnHelper } from "@tanstack/react-table"
 import { useMemo } from "react"
 import { useTranslation } from "react-i18next"
+import { Link } from "react-router-dom"
 import { ActionMenu } from "../../../../components/common/action-menu"
 import { _DataTable } from "../../../../components/table/data-table"
 import {
@@ -52,6 +53,12 @@ export const TieredPriceListTable = () => {
     <Container className="divide-y p-0">
       <div className="flex items-center justify-between px-6 py-4">
         <Heading level="h1">{t("tieredPricing.domain")}</Heading>
+        <Button variant="secondary" size="small" asChild>
+          <Link to="/tiered-pricing/create">
+            <Plus />
+            {t("actions.create")}
+          </Link>
+        </Button>
       </div>
 
       <_DataTable
@@ -109,6 +116,15 @@ const TieredPriceActions = ({
   return (
     <ActionMenu
       groups={[
+        {
+          actions: [
+            {
+              icon: <PencilSquare />,
+              label: t("actions.edit"),
+              to: `/tiered-pricing/${tieredPrice.id}`,
+            },
+          ],
+        },
         {
           actions: [
             {
