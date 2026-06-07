@@ -35,6 +35,11 @@
     "certifications": "认证",
     "factory": "工厂",
     "viewFactory": "查看工厂",
+    "selectVariant": "选择规格",
+    "pleaseSelect": "请选择",
+    "quantity": "数量",
+    "addedToCart": "已添加！",
+    "selectVariantHint": "请先选择规格再加入购物车",
     "filters": {
       "category": "分类",
       "moq": "起订量",

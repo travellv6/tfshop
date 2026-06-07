@@ -35,6 +35,11 @@
     "certifications": "الشهادات",
     "factory": "المصنع",
     "viewFactory": "عرض المصنع",
+    "selectVariant": "اختر المتغير",
+    "pleaseSelect": "يرجى الاختيار",
+    "quantity": "الكمية",
+    "addedToCart": "تمت الإضافة!",
+    "selectVariantHint": "يرجى اختيار متغير قبل الإضافة إلى السلة",
     "filters": {
       "category": "الفئة",
       "moq": "الحد الأدنى",

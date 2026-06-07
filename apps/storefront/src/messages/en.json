@@ -35,6 +35,11 @@
     "certifications": "Certifications",
     "factory": "Factory",
     "viewFactory": "View Factory",
+    "selectVariant": "Select Variant",
+    "pleaseSelect": "Please select",
+    "quantity": "Quantity",
+    "addedToCart": "Added!",
+    "selectVariantHint": "Please select a variant before adding to cart",
     "filters": {
       "category": "Category",
       "moq": "MOQ",
