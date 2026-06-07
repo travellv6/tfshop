@@ -32,7 +32,7 @@ export const Modules = {
   RBAC: "rbac",
   FACTORY: "factory",
   RFQ: "rfq",
-  TIERED_PRICING: "tiered-pricing",
+  TIERED_PRICING: "tiered_pricing",
 } as const
 
 export const MODULE_PACKAGE_NAMES = {

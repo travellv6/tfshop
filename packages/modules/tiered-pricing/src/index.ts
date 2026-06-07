@@ -1,7 +1,7 @@
 import TieredPricingModuleService from "./services"
 import { Module } from "@medusajs/framework/utils"
 
-const TIERED_PRICING_MODULE = "tiered-pricing"
+const TIERED_PRICING_MODULE = "tiered_pricing"
 
 const service = TieredPricingModuleService
 
