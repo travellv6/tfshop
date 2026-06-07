@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply text-gray-900;
+  }
+}
+
+/* RTL adjustments */
+[dir="rtl"] .flip-rtl {
+  transform: scaleX(-1);
+}
