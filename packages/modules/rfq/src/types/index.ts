@@ -2,7 +2,7 @@ import {
   DAL,
   ModulesSdkTypes,
 } from "@medusajs/framework/types"
-import { RFQ, RFQMessage } from "@models"
+import { Rfq, RfqMessage } from "@models"
 
 export type RFQStatus =
   | "draft"
@@ -112,67 +112,67 @@ export interface FilterableRFQMessageDTO {
 }
 
 export interface IRFQModuleService {
-  retrieveRFQ(
+  retrieveRfq(
     id: string,
     config?: any,
     sharedContext?: any
   ): Promise<RFQDTO>
-  listRFQs(
+  listRfqs(
     filters?: FilterableRFQDTO,
     config?: any,
     sharedContext?: any
   ): Promise<RFQDTO[]>
-  listAndCountRFQs(
+  listAndCountRfqs(
     filters?: FilterableRFQDTO,
     config?: any,
     sharedContext?: any
   ): Promise<[RFQDTO[], number]>
-  createRFQs(
+  createRfqs(
     data: CreateRFQDTO[],
     sharedContext?: any
   ): Promise<RFQDTO[]>
-  createRFQs(
+  createRfqs(
     data: CreateRFQDTO,
     sharedContext?: any
   ): Promise<RFQDTO>
-  updateRFQs(
+  updateRfqs(
     data: UpdateRFQDTO[],
     sharedContext?: any
   ): Promise<RFQDTO[]>
-  updateRFQs(
+  updateRfqs(
     data: UpdateRFQDTO,
     sharedContext?: any
   ): Promise<RFQDTO>
-  deleteRFQs(ids: string[], sharedContext?: any): Promise<void>
+  deleteRfqs(ids: string[], sharedContext?: any): Promise<void>
 
-  retrieveRFQMessage(
+  retrieveRfqMessage(
     id: string,
     config?: any,
     sharedContext?: any
   ): Promise<RFQMessageDTO>
-  listRFQMessages(
+  listRfqMessages(
     filters?: FilterableRFQMessageDTO,
     config?: any,
     sharedContext?: any
   ): Promise<RFQMessageDTO[]>
-  listAndCountRFQMessages(
+  listAndCountRfqMessages(
     filters?: FilterableRFQMessageDTO,
     config?: any,
     sharedContext?: any
   ): Promise<[RFQMessageDTO[], number]>
-  createRFQMessages(
+  createRfqMessages(
     data: CreateRFQMessageDTO[],
     sharedContext?: any
   ): Promise<RFQMessageDTO[]>
-  createRFQMessages(
+  createRfqMessages(
     data: CreateRFQMessageDTO,
     sharedContext?: any
   ): Promise<RFQMessageDTO>
-  deleteRFQMessages(ids: string[], sharedContext?: any): Promise<void>
+  deleteRfqMessages(ids: string[], sharedContext?: any): Promise<void>
 }
 
 export type InjectedDependencies = {
   baseRepository: DAL.RepositoryService
-  rfqService: ModulesSdkTypes.IMedusaInternalService<typeof RFQ>
-  rfqMessageService: ModulesSdkTypes.IMedusaInternalService<typeof RFQMessage>
+  rfqService: ModulesSdkTypes.IMedusaInternalService<typeof Rfq>
+  rfqMessageService: ModulesSdkTypes.IMedusaInternalService<typeof RfqMessage>
 }

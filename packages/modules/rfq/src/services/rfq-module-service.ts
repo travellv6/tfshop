@@ -5,7 +5,7 @@ import {
 } from "@medusajs/framework/types"
 import { MedusaService } from "@medusajs/framework/utils"
 
-import { RFQ, RFQMessage } from "@models"
+import { Rfq, RfqMessage } from "@models"
 import type {
   RFQDTO,
   RFQMessageDTO,
@@ -13,13 +13,13 @@ import type {
 } from "@types"
 
 class RFQModuleService extends MedusaService<{
-  RFQ: { dto: RFQDTO; model: typeof RFQ }
-  RFQMessage: { dto: RFQMessageDTO; model: typeof RFQMessage }
-}>({ RFQ, RFQMessage }) {
+  Rfq: { dto: RFQDTO; model: typeof Rfq }
+  RfqMessage: { dto: RFQMessageDTO; model: typeof RfqMessage }
+}>({ Rfq, RfqMessage }) {
   protected baseRepository_: DAL.RepositoryService
-  protected rfqService_: ModulesSdkTypes.IMedusaInternalService<typeof RFQ>
+  protected rfqService_: ModulesSdkTypes.IMedusaInternalService<typeof Rfq>
   protected rfqMessageService_: ModulesSdkTypes.IMedusaInternalService<
-    typeof RFQMessage
+    typeof RfqMessage
   >
 
   constructor(

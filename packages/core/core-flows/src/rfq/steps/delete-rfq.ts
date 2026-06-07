@@ -10,7 +10,7 @@ export const deleteRFQStep = createStep(
     const service =
       container.resolve<IRFQModuleService>(RFQ_MODULE_NAME)
 
-    await service.deleteRFQs(ids)
+    await service.deleteRfqs(ids)
     return new StepResponse(void 0, ids)
   },
   async (prevIds, { container }) => {

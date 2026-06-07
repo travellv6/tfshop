@@ -1,5 +1,4 @@
 import { NextIntlClientProvider } from "next-intl"
-import { getMessages } from "next-intl/server"
 import { notFound } from "next/navigation"
 import { routing, type Locale } from "@/i18n/routing"
 import { QueryProvider } from "@/providers/query-provider"
@@ -14,6 +13,15 @@ export function generateStaticParams() {
 
 const RTL_LOCALES: Locale[] = ["ar"]
 
+// 直接根据 locale 加载翻译文件，不依赖 getMessages() 的 requestLocale（SSG 期间不可靠）
+async function loadMessages(locale: string) {
+  try {
+    return (await import(`../../messages/${locale}.json`)).default
+  } catch {
+    return (await import("../../messages/en.json")).default
+  }
+}
+
 export default async function LocaleLayout({
   children,
   params: { locale },
@@ -25,7 +33,7 @@ export default async function LocaleLayout({
     notFound()
   }
 
-  const messages = await getMessages()
+  const messages = await loadMessages(locale)
   const isRTL = RTL_LOCALES.includes(locale as Locale)
 
   return (

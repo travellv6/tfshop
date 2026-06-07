@@ -26,7 +26,7 @@ export const updateRFQStep = createStep(
     const { selects, relations } = getSelectsAndRelationsFromObjectArray([
       input.update,
     ])
-    const dataBeforeUpdate = await service.listRFQs(input.selector, {
+    const dataBeforeUpdate = await service.listRfqs(input.selector, {
       relations,
       select: selects,
     })
@@ -39,7 +39,7 @@ export const updateRFQStep = createStep(
       })
     }
 
-    const updated = await service.updateRFQs(
+    const updated = await service.updateRfqs(
       dataBeforeUpdate.map((f: RFQDTO) => ({
         ...input.update,
         id: f.id,
@@ -66,7 +66,7 @@ export const updateRFQStep = createStep(
     const service =
       container.resolve<IRFQModuleService>(RFQ_MODULE_NAME)
 
-    await service.updateRFQs(
+    await service.updateRfqs(
       dataBeforeUpdate.map((data: RFQDTO) =>
         convertItemResponseToUpdateRequest(data, selects, relations)
       ) as UpdateRFQDTO[]

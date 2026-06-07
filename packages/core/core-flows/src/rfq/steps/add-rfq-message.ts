@@ -13,7 +13,7 @@ export const addRFQMessageStep = createStep(
     const service =
       container.resolve<IRFQModuleService>(RFQ_MODULE_NAME)
 
-    const created = await service.createRFQMessages(data)
+    const created = await service.createRfqMessages(data)
     return new StepResponse(
       created,
       created.map((c: any) => c.id)
@@ -26,6 +26,6 @@ export const addRFQMessageStep = createStep(
 
     const service =
       container.resolve<IRFQModuleService>(RFQ_MODULE_NAME)
-    await service.deleteRFQMessages(createdIds)
+    await service.deleteRfqMessages(createdIds)
   }
 )

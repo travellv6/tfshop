@@ -72,6 +72,11 @@ import { adminIndexRoutesMiddlewares } from "./admin/index/middlewares"
 import { setSecretApiKeyContext } from "@medusajs/framework"
 import { adminLocalesRoutesMiddlewares } from "./admin/locales/middlewares"
 import { adminTranslationsRoutesMiddlewares } from "./admin/translations/middlewares"
+import { adminFactoryRoutesMiddlewares } from "./admin/factories/middlewares"
+import { adminRFQRoutesMiddlewares } from "./admin/rfq/middlewares"
+import { adminTieredPricingRoutesMiddlewares } from "./admin/tiered-pricing/middlewares"
+import { storeRFQRoutesMiddlewares } from "./store/rfq/middlewares"
+import { storeFactoryRoutesMiddlewares } from "./store/factories/middlewares"
 
 export default defineMiddlewares([
   ...storeRoutesMiddlewares,
@@ -152,4 +157,9 @@ export default defineMiddlewares([
   ...columnRoutesMiddlewares,
   ...adminIndexRoutesMiddlewares,
   ...cloudRoutesMiddlewares,
+  ...adminFactoryRoutesMiddlewares,
+  ...adminRFQRoutesMiddlewares,
+  ...adminTieredPricingRoutesMiddlewares,
+  ...storeRFQRoutesMiddlewares,
+  ...storeFactoryRoutesMiddlewares,
 ])

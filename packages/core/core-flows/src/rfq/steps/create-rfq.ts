@@ -13,7 +13,7 @@ export const createRFQStep = createStep(
     const service =
       container.resolve<IRFQModuleService>(RFQ_MODULE_NAME)
 
-    const created = await service.createRFQs(data)
+    const created = await service.createRfqs(data)
     return new StepResponse(
       created,
       created.map((f) => f.id)
@@ -26,6 +26,6 @@ export const createRFQStep = createStep(
 
     const service =
       container.resolve<IRFQModuleService>(RFQ_MODULE_NAME)
-    await service.deleteRFQs(createdIds)
+    await service.deleteRfqs(createdIds)
   }
 )
