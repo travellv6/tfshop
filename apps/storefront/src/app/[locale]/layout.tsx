@@ -3,6 +3,7 @@ import { getMessages } from "next-intl/server"
 import { notFound } from "next/navigation"
 import { routing, type Locale } from "@/i18n/routing"
 import { QueryProvider } from "@/providers/query-provider"
+import { CartProvider } from "@/lib/cart-context"
 import { Header } from "@/components/layout/header"
 import { Footer } from "@/components/layout/footer"
 import "./globals.css"
@@ -32,11 +33,13 @@ export default async function LocaleLayout({
       <body className="min-h-screen bg-white antialiased">
         <NextIntlClientProvider messages={messages}>
           <QueryProvider>
-            <Header />
-            <main className="mx-auto max-w-7xl px-4 py-8">
-              {children}
-            </main>
-            <Footer />
+            <CartProvider>
+              <Header />
+              <main className="mx-auto max-w-7xl px-4 py-8">
+                {children}
+              </main>
+              <Footer />
+            </CartProvider>
           </QueryProvider>
         </NextIntlClientProvider>
       </body>

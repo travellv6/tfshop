@@ -3,10 +3,12 @@
 import Link from "next/link"
 import { useLocale, useTranslations } from "next-intl"
 import { LanguageSwitcher } from "@/components/ui/language-switcher"
+import { useCart } from "@/lib/cart-context"
 
 export function Header() {
   const t = useTranslations("nav")
   const locale = useLocale()
+  const { itemCount } = useCart()
 
   return (
     <header className="border-b border-gray-200 bg-white">
@@ -32,6 +34,14 @@ export function Header() {
         </div>
         <div className="flex items-center gap-4">
           <LanguageSwitcher />
+          <Link href={`/${locale}/cart`} className="relative text-sm text-gray-600">
+            🛒
+            {itemCount > 0 && (
+              <span className="absolute -top-2 -right-3 rounded-full bg-brand-600 px-1 text-[10px] text-white">
+                {itemCount}
+              </span>
+            )}
+          </Link>
           <span className="text-sm text-gray-600">{t("login")}</span>
         </div>
       </div>
