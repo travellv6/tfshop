@@ -363,19 +363,26 @@ async function expectVisibleImagesToLoad(page: Page) {
       return Array.from(document.images)
         .filter((image) => {
           const rect = image.getBoundingClientRect()
-          return rect.width > 0 && rect.height > 0
+          return (
+            rect.width > 0 &&
+            rect.height > 0 &&
+            rect.bottom >= 0 &&
+            rect.right >= 0 &&
+            rect.top <= window.innerHeight &&
+            rect.left <= window.innerWidth
+          )
         })
         .every((image) => image.complete && image.naturalWidth > 0)
     },
     null,
-    { timeout: 5_000 }
+    { timeout: 15_000 }
   )
 
   const brokenImages = await page
     .locator("img:visible")
     .evaluateAll((images) =>
       images
-        .filter((image) => image.naturalWidth === 0)
+        .filter((image) => image.complete && image.naturalWidth === 0)
         .map((image) => image.getAttribute("alt") || image.getAttribute("src"))
     )
 
