@@ -2,12 +2,20 @@
 
 import { Link } from "@/i18n/routing"
 import { useTranslations } from "next-intl"
+import {
+  ArrowRight,
+  MapPinned,
+  MessageSquareText,
+  PackageCheck,
+  Settings,
+  ShieldCheck,
+  UserRound,
+} from "lucide-react"
 import { useCustomer } from "@/hooks/use-customer"
 
-// 功能入口配置
 interface AccountEntry {
   href: string
-  icon: string
+  Icon: typeof PackageCheck
   labelKey: string
   descKey: string
 }
@@ -20,25 +28,25 @@ export default function AccountPage() {
   const entries: AccountEntry[] = [
     {
       href: "/account/orders",
-      icon: "📦",
+      Icon: PackageCheck,
       labelKey: "myOrders",
       descKey: "myOrdersDesc",
     },
     {
       href: "/rfq",
-      icon: "💬",
+      Icon: MessageSquareText,
       labelKey: "myInquiries",
       descKey: "myInquiriesDesc",
     },
     {
       href: "/account/addresses",
-      icon: "📍",
+      Icon: MapPinned,
       labelKey: "myAddresses",
       descKey: "myAddressesDesc",
     },
     {
-      href: "/account/settings",
-      icon: "⚙️",
+      href: "/account",
+      Icon: Settings,
       labelKey: "accountSettings",
       descKey: "accountSettingsDesc",
     },
@@ -46,63 +54,90 @@ export default function AccountPage() {
 
   if (isLoading) {
     return (
-      <div className="mx-auto max-w-3xl">
-        <p className="text-center text-gray-500">{ct("loading")}</p>
+      <div className="page-shell">
+        <p className="text-ink-500 text-center">{ct("loading")}</p>
       </div>
     )
   }
 
-  // 未登录
   if (!customer) {
     return (
-      <div className="mx-auto max-w-md text-center">
-        <h1 className="mb-4 text-2xl font-bold">{t("title")}</h1>
-        <p className="mb-6 text-gray-500">{t("loginPrompt")}</p>
-        <Link
-          href="/auth/login"
-          className="rounded-lg bg-brand-600 px-6 py-2 text-sm font-medium text-white hover:bg-brand-700"
-        >
-          {ct("login")}
-        </Link>
-      </div>
-    )
-  }
-
-  // 已登录
-  const firstName = customer.first_name || ""
-  const lastName = customer.last_name || ""
-  const displayName = [firstName, lastName].filter(Boolean).join(" ") || customer.email
-
-  return (
-    <div className="mx-auto max-w-3xl space-y-8">
-      {/* 用户信息卡 */}
-      <div className="rounded-lg border border-gray-200 p-6">
-        <div className="flex items-center gap-4">
-          <div className="flex h-14 w-14 items-center justify-center rounded-full bg-brand-100 text-xl font-bold text-brand-600">
-            {displayName.charAt(0).toUpperCase()}
-          </div>
-          <div>
-            <h1 className="text-xl font-bold">{displayName}</h1>
-            <p className="text-sm text-gray-500">{customer.email}</p>
+      <div className="bg-surface-50">
+        <div className="mx-auto max-w-md px-4 py-16 text-center">
+          <div className="panel p-8">
+            <UserRound className="text-brand-700 mx-auto mb-4 h-10 w-10" />
+            <h1 className="font-display text-ink-900 text-3xl font-bold">
+              {t("title")}
+            </h1>
+            <p className="text-ink-500 mt-3">{t("loginPrompt")}</p>
+            <Link href="/auth/login" className="btn-primary mt-6">
+              {ct("login")}
+            </Link>
           </div>
         </div>
       </div>
+    )
+  }
 
-      {/* 功能入口网格 */}
-      <div className="grid grid-cols-2 gap-4">
-        {entries.map((entry) => (
-          <Link
-            key={entry.href}
-            href={entry.href}
-            className="group rounded-lg border border-gray-200 p-5 transition-shadow hover:shadow-md"
-          >
-            <div className="mb-2 text-2xl">{entry.icon}</div>
-            <h3 className="font-medium text-gray-900 group-hover:text-brand-600">
-              {t(entry.labelKey)}
-            </h3>
-            <p className="mt-1 text-xs text-gray-500">{t(entry.descKey)}</p>
-          </Link>
-        ))}
+  const firstName = customer.first_name || ""
+  const lastName = customer.last_name || ""
+  const displayName =
+    [firstName, lastName].filter(Boolean).join(" ") || customer.email
+
+  return (
+    <div className="bg-surface-50">
+      <div className="mx-auto max-w-[1180px] px-4 py-6 sm:px-6 lg:px-8">
+        <section className="panel mb-6 overflow-hidden">
+          <div className="grid gap-6 bg-white p-6 lg:grid-cols-[1fr_300px] lg:items-center">
+            <div className="flex items-center gap-4">
+              <div className="bg-brand-50 text-brand-700 flex h-16 w-16 items-center justify-center rounded-full text-2xl font-extrabold">
+                {displayName.charAt(0).toUpperCase()}
+              </div>
+              <div>
+                <p className="text-brand-700 text-xs font-bold uppercase tracking-wide">
+                  Verified Buyer
+                </p>
+                <h1 className="font-display text-ink-900 mt-1 text-3xl font-bold">
+                  {displayName}
+                </h1>
+                <p className="text-ink-500 text-sm">{customer.email}</p>
+              </div>
+            </div>
+            <div className="bg-brand-50 rounded-lg p-5">
+              <ShieldCheck className="text-brand-700 mb-3 h-7 w-7" />
+              <p className="text-ink-900 text-sm font-extrabold">
+                Buyer protection active
+              </p>
+              <p className="text-ink-500 mt-1 text-xs">
+                Orders, RFQs, and addresses are connected to your TFShop buyer
+                profile.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <div className="grid gap-4 sm:grid-cols-2">
+          {entries.map(({ href, Icon, labelKey, descKey }) => (
+            <Link
+              key={href + labelKey}
+              href={href}
+              className="panel hover:border-brand-200 hover:bg-brand-50 group flex items-start gap-4 p-5 transition"
+            >
+              <span className="bg-brand-50 text-brand-700 ring-brand-100 flex h-11 w-11 shrink-0 items-center justify-center rounded-lg ring-1">
+                <Icon className="h-5 w-5" />
+              </span>
+              <span className="min-w-0 flex-1">
+                <span className="text-ink-900 group-hover:text-brand-700 block font-extrabold">
+                  {t(labelKey)}
+                </span>
+                <span className="text-ink-500 mt-1 block text-sm">
+                  {t(descKey)}
+                </span>
+              </span>
+              <ArrowRight className="text-ink-300 group-hover:text-brand-700 h-4 w-4" />
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   )

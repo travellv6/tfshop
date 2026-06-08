@@ -6,6 +6,21 @@ import { LanguageSwitcher } from "@/components/ui/language-switcher"
 import { useCart } from "@/lib/cart-context"
 import { useCustomer } from "@/hooks/use-customer"
 import { useState } from "react"
+import {
+  Bell,
+  Camera,
+  ChevronDown,
+  Factory,
+  Globe2,
+  Heart,
+  HelpCircle,
+  Menu,
+  Search,
+  ShieldCheck,
+  ShoppingCart,
+  UserRound,
+  WalletCards,
+} from "lucide-react"
 
 export function Header() {
   const t = useTranslations("nav")
@@ -16,116 +31,155 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
 
   const navItems = [
+    { href: "/", label: "Home" },
     { href: "/products", label: t("products") },
     { href: "/factories", label: t("factories") },
+    { href: "/products", label: "New Arrivals" },
+    { href: "/products", label: "Low MOQ" },
+    { href: "/products", label: "Ready to Ship" },
     { href: "/rfq", label: t("rfq") },
   ]
 
   return (
-    <header className="sticky top-0 z-50 border-b border-surface-200 bg-white/80 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
-        {/* Logo */}
-        <Link
-          href="/"
-          className="flex items-center gap-2 transition-opacity hover:opacity-80"
-        >
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand-600 text-lg text-white shadow-soft">
-            🧸
-          </span>
-          <span className="font-display text-xl font-bold tracking-tight text-ink-900">
+    <header className="border-surface-200 sticky top-0 z-50 border-b bg-white/95 backdrop-blur-xl">
+      <div className="border-surface-100 text-ink-700 hidden border-b bg-white text-xs font-medium lg:block">
+        <div className="mx-auto flex max-w-[1440px] items-center justify-between px-6 py-2">
+          <div className="flex items-center gap-8">
+            <span className="inline-flex items-center gap-2">
+              <Globe2 className="h-3.5 w-3.5" /> Ships worldwide
+            </span>
+            <span className="inline-flex items-center gap-2">
+              <PackageIcon /> Low MOQ from 50 pcs
+            </span>
+            <span className="inline-flex items-center gap-2">
+              <Factory className="h-3.5 w-3.5" /> Factory-direct pricing
+            </span>
+            <span className="inline-flex items-center gap-2">
+              <ShieldCheck className="h-3.5 w-3.5" /> Secure payments
+            </span>
+          </div>
+          <div className="flex items-center gap-5">
+            <Link href="/factories" className="hover:text-brand-700">
+              For Suppliers
+            </Link>
+            <span className="inline-flex items-center gap-1">
+              <HelpCircle className="h-3.5 w-3.5" /> Help Center
+            </span>
+            <LanguageSwitcher />
+          </div>
+        </div>
+      </div>
+
+      <div className="mx-auto flex max-w-[1440px] items-center gap-4 px-4 py-3 sm:px-6 lg:px-8">
+        <Link href="/" className="shrink-0 transition-opacity hover:opacity-80">
+          <span className="text-brand-700 block text-2xl font-extrabold leading-none tracking-tight sm:text-3xl">
             TFShop
+          </span>
+          <span className="text-brand-700 hidden text-[11px] font-semibold sm:block">
+            China Toy Factory Direct
           </span>
         </Link>
 
-        {/* Desktop Nav */}
-        <nav className="hidden items-center gap-1 md:flex">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="rounded-lg px-4 py-2 font-body text-sm font-medium text-ink-600 transition-colors hover:bg-surface-100 hover:text-ink-900"
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
+        <button className="btn-ghost bg-surface-100 hidden gap-2 px-4 lg:inline-flex">
+          <Menu className="h-4 w-4" />
+          Categories
+        </button>
 
-        {/* Right Section */}
-        <div className="flex items-center gap-3">
-          <LanguageSwitcher />
+        <div className="relative hidden flex-1 lg:block">
+          <input
+            className="border-surface-300 focus:border-brand-600 focus:ring-brand-100 h-12 w-full rounded-lg border bg-white pl-5 pr-24 text-sm outline-none transition focus:ring-2"
+            placeholder="Search toys, SKU, material, or factory..."
+          />
+          <button className="bg-brand-700 hover:bg-brand-800 absolute right-0 top-0 flex h-12 w-14 items-center justify-center rounded-r-lg text-white">
+            <Search className="h-5 w-5" aria-hidden="true" />
+          </button>
+          <button className="border-surface-200 text-ink-400 absolute right-14 top-0 hidden h-12 w-12 items-center justify-center border-l xl:flex">
+            <Camera className="h-5 w-5" aria-hidden="true" />
+          </button>
+        </div>
 
-          {/* Cart */}
-          <Link
-            href="/cart"
-            className="relative flex h-9 w-9 items-center justify-center rounded-xl transition-colors hover:bg-surface-100"
-          >
-            <svg
-              className="h-5 w-5 text-ink-700"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
-              />
-            </svg>
+        <div className="ml-auto flex items-center gap-2">
+          <Link href="/rfq" className="btn-ghost hidden gap-2 lg:inline-flex">
+            <WalletCards className="h-4 w-4" />
+            RFQ
+          </Link>
+          <button className="btn-ghost relative hidden h-10 w-10 p-0 lg:inline-flex">
+            <Bell className="h-5 w-5" />
+            <span className="bg-coral-500 absolute -right-1 -top-1 rounded-full px-1.5 text-[10px] font-bold text-white">
+              3
+            </span>
+          </button>
+          <button className="btn-ghost hidden h-10 w-10 p-0 lg:inline-flex">
+            <Heart className="h-5 w-5" />
+          </button>
+          <Link href="/cart" className="btn-ghost relative h-10 w-10 p-0">
+            <ShoppingCart className="h-5 w-5" />
             {itemCount > 0 && (
-              <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-coral-500 text-[10px] font-bold text-white shadow-coral">
+              <span className="bg-coral-500 shadow-coral absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full px-1 text-[10px] font-bold text-white">
                 {itemCount}
               </span>
             )}
           </Link>
-
-          {/* Auth */}
           {customer ? (
             <Link
               href="/account"
-              className="hidden items-center gap-2 rounded-xl border border-surface-200 px-4 py-2 font-body text-sm font-medium text-ink-700 transition-all hover:border-brand-300 hover:bg-brand-50 sm:flex"
+              className="border-surface-200 text-ink-800 hover:border-brand-200 hover:bg-brand-50 hidden items-center gap-2 rounded-lg border bg-white px-3 py-2 text-sm font-semibold transition sm:flex"
             >
-              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-brand-100 text-xs font-bold text-brand-700">
+              <span className="bg-surface-100 text-brand-700 flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold">
                 {(customer.first_name || customer.email)[0].toUpperCase()}
               </span>
-              {at("title")}
+              <span className="hidden xl:inline">{at("title")}</span>
+              <ChevronDown className="hidden h-4 w-4 xl:block" />
             </Link>
           ) : (
             <Link
               href="/auth/login"
-              className="hidden rounded-xl bg-ink-900 px-4 py-2 font-body text-sm font-semibold text-white transition-all hover:bg-ink-800 sm:block"
+              className="bg-ink-900 hover:bg-ink-800 hidden rounded-lg px-4 py-2 text-sm font-semibold text-white transition sm:block"
             >
               {ct("login")}
             </Link>
           )}
-
-          {/* Mobile Menu Toggle */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:bg-surface-100 md:hidden"
+            className="hover:bg-surface-100 flex h-10 w-10 items-center justify-center rounded-lg transition-colors lg:hidden"
             aria-label="Menu"
           >
-            <svg className="h-5 w-5 text-ink-700" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-              {mobileOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />
-              )}
-            </svg>
+            <Menu className="text-ink-700 h-5 w-5" />
           </button>
         </div>
       </div>
 
+      <nav className="border-surface-100 hidden border-t bg-white lg:block">
+        <div className="mx-auto flex max-w-[1440px] items-center gap-1 px-6 py-2">
+          {navItems.map((item, i) => (
+            <Link
+              key={`${item.href}-${item.label}-${i}`}
+              href={item.href}
+              className="text-ink-700 hover:bg-surface-100 hover:text-brand-700 rounded-lg px-4 py-2 text-sm font-semibold transition"
+            >
+              {item.label}
+            </Link>
+          ))}
+        </div>
+      </nav>
+
       {/* Mobile Nav */}
       {mobileOpen && (
-        <div className="border-t border-surface-200 bg-white px-4 py-3 md:hidden animate-slide-up">
+        <div className="animate-slide-up border-surface-200 border-t bg-white px-4 py-3 lg:hidden">
+          <div className="relative mb-3">
+            <input
+              className="border-surface-300 focus:border-brand-600 h-11 w-full rounded-lg border bg-white pl-4 pr-11 text-sm outline-none"
+              placeholder="Search toys or factories..."
+            />
+            <Search className="text-ink-400 absolute right-3 top-3 h-5 w-5" />
+          </div>
           <nav className="flex flex-col gap-1">
             {navItems.map((item) => (
               <Link
-                key={item.href}
+                key={`${item.href}-${item.label}`}
                 href={item.href}
                 onClick={() => setMobileOpen(false)}
-                className="rounded-lg px-4 py-3 font-body text-sm font-medium text-ink-600 transition-colors hover:bg-surface-100"
+                className="font-body text-ink-600 hover:bg-surface-100 rounded-lg px-4 py-3 text-sm font-medium transition-colors"
               >
                 {item.label}
               </Link>
@@ -134,7 +188,7 @@ export function Header() {
               <Link
                 href="/account"
                 onClick={() => setMobileOpen(false)}
-                className="rounded-lg px-4 py-3 font-body text-sm font-medium text-ink-600 transition-colors hover:bg-surface-100"
+                className="font-body text-ink-600 hover:bg-surface-100 rounded-lg px-4 py-3 text-sm font-medium transition-colors"
               >
                 {at("title")}
               </Link>
@@ -142,7 +196,7 @@ export function Header() {
               <Link
                 href="/auth/login"
                 onClick={() => setMobileOpen(false)}
-                className="rounded-lg px-4 py-3 font-body text-sm font-medium text-ink-600 transition-colors hover:bg-surface-100"
+                className="font-body text-ink-600 hover:bg-surface-100 rounded-lg px-4 py-3 text-sm font-medium transition-colors"
               >
                 {ct("login")}
               </Link>
@@ -152,4 +206,8 @@ export function Header() {
       )}
     </header>
   )
+}
+
+function PackageIcon() {
+  return <ShoppingCart className="h-3.5 w-3.5" />
 }

@@ -1,14 +1,14 @@
 "use client"
 
 import { Link } from "@/i18n/routing"
-import { useLocale } from "next-intl"
+import { PackageCheck, ShoppingCart, Truck } from "lucide-react"
 import { useCart } from "@/lib/cart-context"
 import { CartItemRow } from "@/components/cart/cart-item"
+import { EmptyState } from "@/components/ui/storefront"
 
 export default function CartPage() {
   const { cart, isLoading, updateItemQuantity, removeItem, itemCount } =
     useCart()
-  const locale = useLocale()
 
   const subtotal = cart?.subtotal || 0
   const shipping = cart?.shipping_total || 0
@@ -16,64 +16,119 @@ export default function CartPage() {
 
   if (!cart || itemCount === 0) {
     return (
-      <div className="flex flex-col items-center justify-center py-20">
-        <p className="text-lg text-gray-500">Your cart is empty</p>
-        <Link
-          href="/products"
-          className="mt-4 text-brand-600 hover:underline"
-        >
-          Browse products &rarr;
-        </Link>
+      <div className="page-shell">
+        <EmptyState
+          title="Your cart is empty"
+          description="Add products to your cart or build an RFQ basket from the product workbench."
+          action={
+            <Link href="/products" className="btn-primary">
+              Browse products
+            </Link>
+          }
+        />
       </div>
     )
   }
 
   return (
-    <div>
-      <h1 className="mb-6 text-2xl font-bold">Shopping Cart</h1>
-      <div className="grid gap-8 lg:grid-cols-3">
-        {/* Items */}
-        <div className="lg:col-span-2">
-          {cart.items?.map((item: any) => (
-            <CartItemRow
-              key={item.id}
-              item={item}
-              onUpdateQuantity={updateItemQuantity}
-              onRemove={removeItem}
-              isUpdating={isLoading}
-            />
-          ))}
+    <div className="bg-surface-50">
+      <div className="mx-auto max-w-[1180px] px-4 py-6 sm:px-6 lg:px-8">
+        <div className="mb-6">
+          <p className="text-brand-700 text-xs font-bold uppercase tracking-wide">
+            Buyer Cart
+          </p>
+          <h1 className="font-display text-ink-900 mt-2 text-3xl font-bold">
+            Shopping Cart
+          </h1>
         </div>
 
-        {/* Summary */}
-        <div className="rounded-lg border p-6">
-          <h2 className="mb-4 text-lg font-semibold">Order Summary</h2>
-          <div className="space-y-2 text-sm">
-            <div className="flex justify-between">
-              <span>Subtotal</span>
-              <span>${(subtotal / 100).toFixed(2)}</span>
+        <div className="grid gap-6 lg:grid-cols-[1fr_360px]">
+          <section className="panel p-5">
+            {cart.items?.map((item: any) => (
+              <CartItemRow
+                key={item.id}
+                item={item}
+                onUpdateQuantity={updateItemQuantity}
+                onRemove={removeItem}
+                isUpdating={isLoading}
+              />
+            ))}
+          </section>
+
+          <aside className="space-y-4">
+            <div className="panel p-5">
+              <ShoppingCart className="text-brand-700 mb-3 h-6 w-6" />
+              <h2 className="text-ink-900 text-lg font-extrabold">
+                Order Summary
+              </h2>
+              <div className="mt-5 space-y-3 text-sm">
+                <SummaryLine
+                  label="Subtotal"
+                  value={`$${(subtotal / 100).toFixed(2)}`}
+                />
+                <SummaryLine
+                  label="Shipping"
+                  value={
+                    shipping > 0
+                      ? `$${(shipping / 100).toFixed(2)}`
+                      : "Calculated at checkout"
+                  }
+                />
+                <div className="border-surface-200 border-t pt-3">
+                  <SummaryLine
+                    label="Total"
+                    value={`$${(total / 100).toFixed(2)}`}
+                    strong
+                  />
+                </div>
+              </div>
+              <Link href="/checkout" className="btn-primary mt-5 w-full">
+                Proceed to Checkout
+              </Link>
             </div>
-            <div className="flex justify-between">
-              <span>Shipping</span>
-              <span>
-                {shipping > 0
-                  ? `$${(shipping / 100).toFixed(2)}`
-                  : "Calculated at checkout"}
-              </span>
+            <div className="border-brand-100 bg-brand-50 rounded-lg border p-5">
+              <div className="flex items-center gap-3">
+                <PackageCheck className="text-brand-700 h-5 w-5" />
+                <p className="text-ink-900 text-sm font-extrabold">
+                  Trade Assurance available
+                </p>
+              </div>
+              <div className="mt-3 flex items-center gap-3">
+                <Truck className="text-brand-700 h-5 w-5" />
+                <p className="text-ink-600 text-sm">
+                  Freight and taxes are calculated after address and shipping
+                  method are selected.
+                </p>
+              </div>
             </div>
-            <div className="flex justify-between border-t pt-2 font-semibold">
-              <span>Total</span>
-              <span>${(total / 100).toFixed(2)}</span>
-            </div>
-          </div>
-          <Link
-            href="/checkout"
-            className="mt-4 block rounded-lg bg-brand-600 py-2 text-center text-sm font-medium text-white hover:bg-brand-700"
-          >
-            Proceed to Checkout
-          </Link>
+          </aside>
         </div>
       </div>
+    </div>
+  )
+}
+
+function SummaryLine({
+  label,
+  value,
+  strong,
+}: {
+  label: string
+  value: string
+  strong?: boolean
+}) {
+  return (
+    <div className="flex justify-between gap-4">
+      <span className={strong ? "text-ink-900 font-extrabold" : "text-ink-500"}>
+        {label}
+      </span>
+      <span
+        className={
+          strong ? "text-ink-900 font-extrabold" : "text-ink-900 font-bold"
+        }
+      >
+        {value}
+      </span>
     </div>
   )
 }

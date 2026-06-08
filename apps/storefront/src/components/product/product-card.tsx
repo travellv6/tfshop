@@ -1,76 +1,71 @@
 "use client"
 
 import { Link } from "@/i18n/routing"
-import { useLocale, useTranslations } from "next-intl"
+import { useTranslations } from "next-intl"
+import { Heart, PackageCheck } from "lucide-react"
+import {
+  productCertifications,
+  productImage,
+  productMoq,
+  productPrice,
+  type StorefrontProduct,
+} from "@/lib/storefront-data"
 
 interface ProductCardProps {
-  product: {
-    id: string
-    handle: string
-    title: string
-    thumbnail?: string | null
-    metadata?: Record<string, any> | null
-  }
+  product: StorefrontProduct
+  compact?: boolean
 }
 
-export function ProductCard({ product }: ProductCardProps) {
+export function ProductCard({ product, compact = false }: ProductCardProps) {
   const t = useTranslations("product")
-  const locale = useLocale()
-
-  const metadata = product.metadata as Record<string, any> | null
-  const moq = metadata?.min_order_qty
-  const price = metadata?.price_range
+  const moq = productMoq(product)
+  const price = productPrice(product)
+  const certs = productCertifications(product)
 
   return (
     <Link
-      href="/products/${product.handle}"
-      className="group flex flex-col overflow-hidden rounded-2xl border border-surface-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-card"
+      href={`/products/${product.handle}`}
+      className="border-surface-200 hover:border-brand-200 hover:shadow-card group flex h-full flex-col overflow-hidden rounded-lg border bg-white transition-all duration-300 hover:-translate-y-0.5"
     >
-      {/* Image */}
-      <div className="relative aspect-square overflow-hidden bg-surface-100">
-        {product.thumbnail ? (
-          <img
-            src={product.thumbnail}
-            alt={product.title}
-            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-          />
-        ) : (
-          <div className="flex h-full flex-col items-center justify-center gap-2 text-ink-300">
-            <svg
-              className="h-12 w-12"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1}
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5a2.25 2.25 0 002.25-2.25V5.25a2.25 2.25 0 00-2.25-2.25H3.75a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 003.75 21z"
-              />
-            </svg>
-            <span className="font-body text-xs">Photo coming soon</span>
-          </div>
-        )}
-        {/* MOQ Badge */}
-        {moq && (
-          <span className="absolute bottom-2 left-2 badge-amber text-[10px]">
-            {t("moq", { count: moq })}
-          </span>
-        )}
+      <div className="bg-surface-100 relative aspect-square overflow-hidden">
+        <img
+          src={productImage(product)}
+          alt={product.title}
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+        <span className="border-coral-200 bg-coral-50 text-coral-600 absolute left-3 top-3 rounded border px-2 py-1 text-[11px] font-bold">
+          Best Seller
+        </span>
+        <span className="text-ink-400 shadow-soft group-hover:text-coral-500 absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 transition">
+          <Heart className="h-4 w-4" aria-hidden="true" />
+        </span>
       </div>
 
-      {/* Info */}
       <div className="flex flex-1 flex-col p-4">
-        <h3 className="font-body text-sm font-semibold leading-snug text-ink-900 transition-colors group-hover:text-brand-700 line-clamp-2">
+        <h3 className="text-ink-900 group-hover:text-brand-700 line-clamp-2 text-sm font-bold leading-snug transition-colors">
           {product.title}
         </h3>
-        <div className="mt-auto pt-3">
-          {price && (
-            <p className="font-display text-base font-bold text-brand-700">
-              {price}
-            </p>
-          )}
+        <p className="text-ink-400 mt-2 text-xs font-medium">
+          {t("moq", { count: moq })}
+        </p>
+        <p className="text-ink-900 mt-1 text-sm font-extrabold">{price}</p>
+        {!compact && (
+          <div className="mt-3 flex flex-wrap gap-1.5">
+            {certs.slice(0, 2).map((cert) => (
+              <span
+                key={cert}
+                className="bg-brand-50 text-brand-700 inline-flex items-center gap-1 rounded px-2 py-1 text-[11px] font-bold"
+              >
+                <PackageCheck className="h-3 w-3" aria-hidden="true" />
+                {cert}
+              </span>
+            ))}
+          </div>
+        )}
+        <div className="mt-auto pt-4">
+          <span className="border-brand-200 bg-brand-50 text-brand-700 group-hover:bg-brand-700 inline-flex w-full items-center justify-center rounded-lg border px-3 py-2 text-xs font-bold transition group-hover:text-white">
+            View details
+          </span>
         </div>
       </div>
     </Link>

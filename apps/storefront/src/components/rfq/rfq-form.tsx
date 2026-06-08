@@ -45,8 +45,8 @@ export function RFQForm({
 
   if (submitted) {
     return (
-      <div className="rounded-lg border border-green-200 bg-green-50 p-6 text-center">
-        <p className="text-lg font-medium text-green-800">{t("success")}</p>
+      <div className="border-brand-200 bg-brand-50 rounded-lg border p-6 text-center">
+        <p className="text-brand-800 text-lg font-bold">{t("success")}</p>
       </div>
     )
   }
@@ -54,14 +54,19 @@ export function RFQForm({
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label className="block text-sm font-medium text-gray-700">
+        <label className="text-ink-700 block text-sm font-bold">
           {t("product")}
         </label>
-        <p className="mt-1 text-sm text-gray-500">{productTitle}</p>
+        <p className="text-ink-500 mt-1 text-sm">
+          {productTitle || "General sourcing request"}
+        </p>
       </div>
 
       <div>
-        <label htmlFor="quantity" className="block text-sm font-medium text-gray-700">
+        <label
+          htmlFor="quantity"
+          className="text-ink-700 block text-sm font-bold"
+        >
           {t("quantity")}
         </label>
         <input
@@ -71,12 +76,15 @@ export function RFQForm({
           required
           value={quantity}
           onChange={(e) => setQuantity(e.target.value)}
-          className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500"
+          className="border-surface-300 focus:border-brand-500 focus:ring-brand-100 mt-1 block w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2"
         />
       </div>
 
       <div>
-        <label htmlFor="targetPrice" className="block text-sm font-medium text-gray-700">
+        <label
+          htmlFor="targetPrice"
+          className="text-ink-700 block text-sm font-bold"
+        >
           {t("targetPrice")}
         </label>
         <input
@@ -85,12 +93,15 @@ export function RFQForm({
           value={targetPrice}
           onChange={(e) => setTargetPrice(e.target.value)}
           placeholder="e.g. $5.00/pc"
-          className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500"
+          className="border-surface-300 focus:border-brand-500 focus:ring-brand-100 mt-1 block w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2"
         />
       </div>
 
       <div>
-        <label htmlFor="requirements" className="block text-sm font-medium text-gray-700">
+        <label
+          htmlFor="requirements"
+          className="text-ink-700 block text-sm font-bold"
+        >
           {t("requirements")}
         </label>
         <textarea
@@ -99,14 +110,14 @@ export function RFQForm({
           value={requirements}
           onChange={(e) => setRequirements(e.target.value)}
           placeholder={t("requirementsPlaceholder")}
-          className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500"
+          className="border-surface-300 focus:border-brand-500 focus:ring-brand-100 mt-1 block w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2"
         />
       </div>
 
       <button
         type="submit"
         disabled={createRFQ.isPending}
-        className="w-full rounded-md bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-50"
+        className="bg-brand-700 hover:bg-brand-800 w-full rounded-lg px-4 py-3 text-sm font-bold text-white disabled:opacity-50"
       >
         {createRFQ.isPending ? t("submitting") : t("submit")}
       </button>

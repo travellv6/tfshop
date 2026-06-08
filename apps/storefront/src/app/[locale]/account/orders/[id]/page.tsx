@@ -2,142 +2,173 @@
 
 import { useParams } from "next/navigation"
 import { Link } from "@/i18n/routing"
-import { useLocale } from "next-intl"
+import { ArrowLeft, MapPin, PackageCheck, ReceiptText } from "lucide-react"
 import { useOrder } from "@/hooks/use-order"
+import { StatusPill } from "@/components/ui/storefront"
+import { fallbackProductImage } from "@/lib/storefront-data"
 
 export default function OrderDetailPage() {
   const { id } = useParams()
-  const locale = useLocale()
   const { data: order, isLoading } = useOrder(id as string)
 
   if (isLoading) {
     return (
-      <p className="py-20 text-center text-gray-500">Loading...</p>
+      <div className="page-shell">
+        <p className="text-ink-500 py-20 text-center">Loading...</p>
+      </div>
     )
   }
 
   if (!order) {
     return (
-      <div className="py-20 text-center">
-        <p className="text-gray-500">Order not found</p>
-        <Link
-          href="/account/orders"
-          className="mt-4 inline-block text-sm text-brand-600 hover:underline"
-        >
-          Back to Orders
-        </Link>
+      <div className="page-shell">
+        <div className="panel p-10 text-center">
+          <p className="text-ink-500">Order not found</p>
+          <Link href="/account/orders" className="btn-primary mt-5">
+            Back to Orders
+          </Link>
+        </div>
       </div>
     )
   }
 
   return (
-    <div>
-      <div className="mb-6 flex items-center justify-between">
-        <h1 className="text-2xl font-bold">
-          Order #{order.display_id || order.id.slice(-8)}
-        </h1>
+    <div className="bg-surface-50">
+      <div className="mx-auto max-w-[980px] px-4 py-6 sm:px-6 lg:px-8">
         <Link
           href="/account/orders"
-          className="text-sm text-brand-600 hover:underline"
+          className="text-brand-700 mb-5 inline-flex items-center gap-2 text-sm font-bold"
         >
+          <ArrowLeft className="h-4 w-4" />
           Back to Orders
         </Link>
-      </div>
 
-      {/* Status */}
-      <div className="mb-6 rounded-lg border p-4">
-        <div className="flex justify-between">
-          <span className="font-medium">Status</span>
-          <span className="rounded bg-blue-50 px-2 py-0.5 text-xs text-blue-700">
-            {order.status || "Processing"}
-          </span>
-        </div>
-        <p className="mt-1 text-xs text-gray-500">
-          Placed on {new Date(order.created_at).toLocaleDateString()}
-        </p>
-      </div>
-
-      {/* Items */}
-      <div className="mb-6">
-        <h2 className="mb-3 text-lg font-semibold">Items</h2>
-        {(order.items || []).map((item: any) => (
-          <div
-            key={item.id}
-            className="flex items-center gap-4 border-b py-3"
-          >
-            {item.thumbnail && (
-              <img
-                src={item.thumbnail}
-                alt={item.title}
-                className="h-12 w-12 rounded object-cover"
-              />
-            )}
-            <div className="flex-1">
-              <p className="text-sm font-medium">{item.title}</p>
-              <p className="text-xs text-gray-500">
-                Qty: {item.quantity}
+        <section className="panel mb-5 p-6">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <p className="text-brand-700 text-xs font-bold uppercase tracking-wide">
+                Order Detail
+              </p>
+              <h1 className="font-display text-ink-900 mt-2 text-3xl font-bold">
+                Order #{order.display_id || order.id.slice(-8)}
+              </h1>
+              <p className="text-ink-500 mt-1 text-sm">
+                Placed on {new Date(order.created_at).toLocaleDateString()}
               </p>
             </div>
-            <p className="text-sm font-medium">
-              $
-              {(
-                (item.subtotal ||
-                  item.unit_price * item.quantity) / 100
-              ).toFixed(2)}
-            </p>
+            <StatusPill className="bg-brand-50 text-brand-700 ring-brand-100">
+              {order.status || "Processing"}
+            </StatusPill>
           </div>
-        ))}
-      </div>
+        </section>
 
-      {/* Shipping Address */}
-      {order.shipping_address && (
-        <div className="mb-6 rounded-lg border p-4">
-          <h2 className="mb-2 text-sm font-medium">
-            Shipping Address
-          </h2>
-          <p className="text-sm text-gray-600">
-            {order.shipping_address.first_name}{" "}
-            {order.shipping_address.last_name}
-          </p>
-          <p className="text-sm text-gray-600">
-            {order.shipping_address.address_1}
-          </p>
-          <p className="text-sm text-gray-600">
-            {order.shipping_address.city}
-            {order.shipping_address.province &&
-              `, ${order.shipping_address.province}`}{" "}
-            {order.shipping_address.postal_code}
-          </p>
-        </div>
-      )}
+        <div className="grid gap-5 lg:grid-cols-[1fr_320px]">
+          <section className="panel p-5">
+            <h2 className="text-ink-900 mb-4 flex items-center gap-2 text-lg font-extrabold">
+              <PackageCheck className="text-brand-700 h-5 w-5" />
+              Items
+            </h2>
+            <div className="divide-surface-200 divide-y">
+              {(order.items || []).map((item: any) => (
+                <div key={item.id} className="flex items-center gap-4 py-4">
+                  <img
+                    src={item.thumbnail || fallbackProductImage}
+                    alt={item.title}
+                    className="h-16 w-16 rounded-lg object-cover"
+                  />
+                  <div className="flex-1">
+                    <p className="text-ink-900 font-bold">{item.title}</p>
+                    <p className="text-ink-500 text-sm">Qty: {item.quantity}</p>
+                  </div>
+                  <p className="text-ink-900 font-extrabold">
+                    $
+                    {(
+                      (item.subtotal || item.unit_price * item.quantity) / 100
+                    ).toFixed(2)}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </section>
 
-      {/* Totals */}
-      <div className="rounded-lg border p-4">
-        <div className="space-y-1 text-sm">
-          <div className="flex justify-between">
-            <span>Subtotal</span>
-            <span>
-              ${((order.subtotal || 0) / 100).toFixed(2)}
-            </span>
-          </div>
-          <div className="flex justify-between">
-            <span>Shipping</span>
-            <span>
-              ${((order.shipping_total || 0) / 100).toFixed(2)}
-            </span>
-          </div>
-          <div className="flex justify-between">
-            <span>Tax</span>
-            <span>
-              ${((order.tax_total || 0) / 100).toFixed(2)}
-            </span>
-          </div>
-          <div className="flex justify-between border-t pt-1 font-semibold">
-            <span>Total</span>
-            <span>${((order.total || 0) / 100).toFixed(2)}</span>
-          </div>
+          <aside className="space-y-5">
+            {order.shipping_address && (
+              <div className="panel p-5">
+                <h2 className="text-ink-900 mb-3 flex items-center gap-2 text-sm font-extrabold">
+                  <MapPin className="text-brand-700 h-4 w-4" />
+                  Shipping Address
+                </h2>
+                <p className="text-ink-600 text-sm">
+                  {order.shipping_address.first_name}{" "}
+                  {order.shipping_address.last_name}
+                </p>
+                <p className="text-ink-600 text-sm">
+                  {order.shipping_address.address_1}
+                </p>
+                <p className="text-ink-600 text-sm">
+                  {order.shipping_address.city}
+                  {order.shipping_address.province &&
+                    `, ${order.shipping_address.province}`}{" "}
+                  {order.shipping_address.postal_code}
+                </p>
+              </div>
+            )}
+
+            <div className="panel p-5">
+              <h2 className="text-ink-900 mb-4 flex items-center gap-2 text-sm font-extrabold">
+                <ReceiptText className="text-brand-700 h-4 w-4" />
+                Totals
+              </h2>
+              <div className="space-y-3 text-sm">
+                <Line
+                  label="Subtotal"
+                  value={`$${((order.subtotal || 0) / 100).toFixed(2)}`}
+                />
+                <Line
+                  label="Shipping"
+                  value={`$${((order.shipping_total || 0) / 100).toFixed(2)}`}
+                />
+                <Line
+                  label="Tax"
+                  value={`$${((order.tax_total || 0) / 100).toFixed(2)}`}
+                />
+                <div className="border-surface-200 border-t pt-3">
+                  <Line
+                    label="Total"
+                    value={`$${((order.total || 0) / 100).toFixed(2)}`}
+                    strong
+                  />
+                </div>
+              </div>
+            </div>
+          </aside>
         </div>
       </div>
+    </div>
+  )
+}
+
+function Line({
+  label,
+  value,
+  strong,
+}: {
+  label: string
+  value: string
+  strong?: boolean
+}) {
+  return (
+    <div className="flex justify-between gap-4">
+      <span className={strong ? "text-ink-900 font-extrabold" : "text-ink-500"}>
+        {label}
+      </span>
+      <span
+        className={
+          strong ? "text-ink-900 font-extrabold" : "text-ink-900 font-bold"
+        }
+      >
+        {value}
+      </span>
     </div>
   )
 }

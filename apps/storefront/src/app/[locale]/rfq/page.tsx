@@ -1,137 +1,221 @@
 "use client"
 
 import { useState } from "react"
-import { useTranslations } from "next-intl"
 import { Link } from "@/i18n/routing"
-import { useParams, useSearchParams } from "next/navigation"
+import { useSearchParams } from "next/navigation"
+import { useTranslations } from "next-intl"
+import {
+  ArrowRight,
+  CheckCircle2,
+  Clock3,
+  FileText,
+  MessageSquareText,
+  PackageCheck,
+  Plus,
+  ShieldCheck,
+} from "lucide-react"
 import { useRFQs } from "@/hooks/use-rfq"
 import { RFQForm } from "@/components/rfq/rfq-form"
 import { useCustomer } from "@/hooks/use-customer"
-
-function statusColor(status: string): string {
-  switch (status) {
-    case "submitted":
-      return "bg-blue-50 text-blue-700"
-    case "reviewing":
-      return "bg-yellow-50 text-yellow-700"
-    case "quoted":
-      return "bg-green-50 text-green-700"
-    case "negotiating":
-      return "bg-orange-50 text-orange-700"
-    case "accepted":
-      return "bg-emerald-50 text-emerald-700"
-    case "rejected":
-      return "bg-red-50 text-red-700"
-    default:
-      return "bg-gray-50 text-gray-700"
-  }
-}
+import { StatusPill } from "@/components/ui/storefront"
+import { demoRfqs, statusClass } from "@/lib/storefront-data"
 
 export default function RFQListPage() {
   const t = useTranslations("rfq")
   const ct = useTranslations("common")
-  const { locale } = useParams()
   const searchParams = useSearchParams()
-  const { data: rfqs, isLoading } = useRFQs()
+  const { data: rfqsData, isLoading } = useRFQs()
   const { data: customer } = useCustomer()
 
   const [showForm, setShowForm] = useState(false)
 
-  // 从 URL 参数预填
   const prefilledProductId = searchParams.get("product_id") || undefined
   const prefilledProductTitle = searchParams.get("product_title") || undefined
   const prefilledVariantId = searchParams.get("variant_id") || undefined
   const prefilledFactoryId = searchParams.get("factory_id") || undefined
-
-  // 如果有 URL 参数且表单未显示，自动打开表单
   const hasPrefill = prefilledProductId || prefilledFactoryId
+  const rfqs = rfqsData?.length ? rfqsData : demoRfqs()
 
   return (
-    <div className="mx-auto max-w-4xl space-y-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">{t("myInquiries")}</h1>
-        <button
-          onClick={() => setShowForm(!showForm)}
-          className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700"
-        >
-          {showForm ? t("cancel") : t("submit")}
-        </button>
-      </div>
-
-      {/* RFQ 创建表单 */}
-      {showForm && (
-        <div className="rounded-lg border border-gray-200 p-6">
-          <RFQForm
-            productId={prefilledProductId}
-            productTitle={prefilledProductTitle}
-            variantId={prefilledVariantId}
-            factoryId={prefilledFactoryId}
-            customerEmail={customer?.email}
-          />
-        </div>
-      )}
-
-      {/* 自动预填提示 */}
-      {hasPrefill && !showForm && (
-        <div className="rounded-lg border border-brand-200 bg-brand-50 p-4">
-          <p className="text-sm text-brand-700">
-            {t("prefillHint")}
-          </p>
-          <button
-            onClick={() => setShowForm(true)}
-            className="mt-2 rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700"
-          >
-            {t("openForm")}
-          </button>
-        </div>
-      )}
-
-      {/* RFQ 列表 */}
-      {isLoading ? (
-        <p className="text-center text-gray-500">{ct("loading")}</p>
-      ) : rfqs && rfqs.length > 0 ? (
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm">
-            <thead className="border-b border-gray-200">
-              <tr>
-                <th className="px-4 py-3 font-medium">{t("product")}</th>
-                <th className="px-4 py-3 font-medium">{t("quantity")}</th>
-                <th className="px-4 py-3 font-medium">{t("statusLabel")}</th>
-                <th className="px-4 py-3 font-medium">{t("quotedPrice")}</th>
-                <th className="px-4 py-3 font-medium">{t("createdAt")}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {rfqs.map((rfq: any) => (
-                <tr key={rfq.id} className="border-b border-gray-100 hover:bg-gray-50">
-                  <td className="px-4 py-3">
-                    <Link
-                      href="/rfq/${rfq.id}"
-                      className="text-brand-600 hover:underline"
-                    >
-                      {rfq.product_title || t("product")}
-                    </Link>
-                  </td>
-                  <td className="px-4 py-3">{rfq.quantity}</td>
-                  <td className="px-4 py-3">
-                    <span className={`inline-block rounded px-2 py-0.5 text-xs ${statusColor(rfq.status)}`}>
-                      {t(`status.${rfq.status}`)}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3">
-                    {rfq.quoted_price ? `$${rfq.quoted_price}` : "—"}
-                  </td>
-                  <td className="px-4 py-3 text-gray-500">
-                    {new Date(rfq.created_at).toLocaleDateString()}
-                  </td>
-                </tr>
+    <div className="bg-surface-50">
+      <div className="mx-auto max-w-[1440px] px-4 py-6 sm:px-6 lg:px-8">
+        <section className="mb-5 grid gap-4 lg:grid-cols-[1fr_360px]">
+          <div className="panel p-6">
+            <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+              <div>
+                <p className="text-brand-700 text-xs font-bold uppercase tracking-wide">
+                  RFQ Center
+                </p>
+                <h1 className="font-display text-ink-900 mt-2 text-3xl font-bold">
+                  {t("myInquiries")}
+                </h1>
+                <p className="text-ink-500 mt-2 max-w-2xl text-sm">
+                  Compare quotes, message suppliers, and keep each sourcing
+                  project moving from request to accepted terms.
+                </p>
+              </div>
+              <button
+                onClick={() => setShowForm((value) => !value)}
+                className="btn-primary gap-2"
+              >
+                <Plus className="h-4 w-4" />
+                {showForm ? t("cancel") : t("submit")}
+              </button>
+            </div>
+            <div className="mt-6 grid gap-3 sm:grid-cols-4">
+              {[
+                ["Active RFQs", rfqs.length.toString(), FileText],
+                ["Unread Quotes", "3", MessageSquareText],
+                ["Avg. Response", "< 6h", Clock3],
+                ["Protected", "100%", ShieldCheck],
+              ].map(([label, value, Icon]) => (
+                <div
+                  key={label as string}
+                  className="border-surface-200 bg-surface-50 rounded-lg border p-4"
+                >
+                  <Icon className="text-brand-700 mb-3 h-5 w-5" />
+                  <p className="text-ink-900 text-2xl font-extrabold">
+                    {value as string}
+                  </p>
+                  <p className="text-ink-500 mt-1 text-xs font-semibold">
+                    {label as string}
+                  </p>
+                </div>
               ))}
-            </tbody>
-          </table>
+            </div>
+          </div>
+
+          <div className="panel bg-brand-700 p-6 text-white">
+            <PackageCheck className="text-brand-100 mb-4 h-8 w-8" />
+            <h2 className="text-xl font-extrabold">Trade Assurance</h2>
+            <p className="text-brand-100 mt-2 text-sm">
+              RFQs are only sent to selected suppliers. Payments, quality, and
+              delivery can be protected through TFShop buyer support.
+            </p>
+            <div className="mt-5 space-y-2 text-sm font-semibold">
+              {[
+                "Secure payments",
+                "Quality guaranteed",
+                "On-time delivery",
+              ].map((item) => (
+                <p key={item} className="flex items-center gap-2">
+                  <CheckCircle2 className="text-brand-100 h-4 w-4" />
+                  {item}
+                </p>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {hasPrefill && !showForm && (
+          <div className="border-brand-200 bg-brand-50 mb-5 rounded-lg border p-4">
+            <p className="text-brand-800 text-sm font-semibold">
+              {t("prefillHint")}
+            </p>
+            <button
+              onClick={() => setShowForm(true)}
+              className="bg-brand-700 hover:bg-brand-800 mt-3 inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-bold text-white"
+            >
+              {t("openForm")}
+              <ArrowRight className="h-4 w-4" />
+            </button>
+          </div>
+        )}
+
+        {showForm && (
+          <div className="panel mb-5 p-6">
+            <div className="mb-5">
+              <p className="text-brand-700 text-xs font-bold uppercase tracking-wide">
+                New sourcing request
+              </p>
+              <h2 className="text-ink-900 mt-1 text-xl font-extrabold">
+                Tell suppliers what you need
+              </h2>
+            </div>
+            <RFQForm
+              productId={prefilledProductId}
+              productTitle={prefilledProductTitle}
+              variantId={prefilledVariantId}
+              factoryId={prefilledFactoryId}
+              customerEmail={customer?.email}
+            />
+          </div>
+        )}
+
+        <div className="panel overflow-hidden">
+          <div className="border-surface-200 flex items-center justify-between border-b px-5 py-4">
+            <div>
+              <h2 className="text-ink-900 text-lg font-extrabold">
+                Inquiry Pipeline
+              </h2>
+              <p className="text-ink-500 text-sm">
+                {rfqs.length} active sourcing conversations
+              </p>
+            </div>
+            <Link
+              href="/products"
+              className="btn-outline hidden sm:inline-flex"
+            >
+              Add products
+            </Link>
+          </div>
+
+          {isLoading && !rfqs.length ? (
+            <p className="text-ink-500 p-8 text-center">{ct("loading")}</p>
+          ) : rfqs.length ? (
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[760px] text-left text-sm">
+                <thead className="bg-surface-50 text-ink-500 text-xs uppercase tracking-wide">
+                  <tr>
+                    <th className="px-5 py-3 font-bold">{t("product")}</th>
+                    <th className="px-5 py-3 font-bold">{t("quantity")}</th>
+                    <th className="px-5 py-3 font-bold">{t("statusLabel")}</th>
+                    <th className="px-5 py-3 font-bold">{t("quotedPrice")}</th>
+                    <th className="px-5 py-3 font-bold">{t("createdAt")}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {rfqs.map((rfq: any) => (
+                    <tr
+                      key={rfq.id}
+                      className="border-surface-200 hover:bg-brand-50/40 border-t bg-white transition"
+                    >
+                      <td className="px-5 py-4">
+                        <Link
+                          href={`/rfq/${rfq.id}`}
+                          className="text-ink-900 hover:text-brand-700 font-extrabold"
+                        >
+                          {rfq.product_title || t("product")}
+                        </Link>
+                      </td>
+                      <td className="text-ink-700 px-5 py-4 font-semibold">
+                        {rfq.quantity?.toLocaleString?.() ||
+                          rfq.quantity ||
+                          "-"}
+                      </td>
+                      <td className="px-5 py-4">
+                        <StatusPill className={statusClass(rfq.status)}>
+                          {t(`status.${rfq.status}`)}
+                        </StatusPill>
+                      </td>
+                      <td className="text-ink-900 px-5 py-4 font-semibold">
+                        {rfq.quoted_price || "-"}
+                      </td>
+                      <td className="text-ink-500 px-5 py-4">
+                        {new Date(rfq.created_at).toLocaleDateString()}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            <div className="text-ink-500 p-8 text-center">
+              {t("noInquiries")}
+            </div>
+          )}
         </div>
-      ) : (
-        <p className="text-center text-gray-500">{t("noInquiries")}</p>
-      )}
+      </div>
     </div>
   )
 }

@@ -1,5 +1,8 @@
 "use client"
 
+import { Minus, Plus, Trash2 } from "lucide-react"
+import { fallbackProductImage } from "@/lib/storefront-data"
+
 interface CartItemRowProps {
   item: {
     id: string
@@ -21,23 +24,17 @@ export function CartItemRow({
   isUpdating,
 }: CartItemRowProps) {
   return (
-    <div className="flex items-center gap-4 border-b py-4">
-      <div className="h-16 w-16 shrink-0 overflow-hidden rounded bg-gray-100">
-        {item.thumbnail ? (
-          <img
-            src={item.thumbnail}
-            alt={item.title}
-            className="h-full w-full object-cover"
-          />
-        ) : (
-          <div className="flex h-full w-full items-center justify-center text-xs text-gray-400">
-            No img
-          </div>
-        )}
+    <div className="border-surface-200 grid gap-4 border-b py-4 last:border-b-0 sm:grid-cols-[88px_1fr_auto_auto] sm:items-center">
+      <div className="bg-surface-100 h-20 w-20 overflow-hidden rounded-lg sm:h-24 sm:w-24">
+        <img
+          src={item.thumbnail || fallbackProductImage}
+          alt={item.title}
+          className="h-full w-full object-cover"
+        />
       </div>
-      <div className="flex-1">
-        <h3 className="text-sm font-medium">{item.title}</h3>
-        <p className="text-xs text-gray-500">
+      <div>
+        <h3 className="text-ink-900 font-bold">{item.title}</h3>
+        <p className="text-ink-500 mt-1 text-sm font-medium">
           ${(item.unit_price / 100).toFixed(2)} / pc
         </p>
       </div>
@@ -45,32 +42,36 @@ export function CartItemRow({
         <button
           onClick={() => onUpdateQuantity(item.id, item.quantity - 1)}
           disabled={isUpdating || item.quantity <= 1}
-          className="h-7 w-7 rounded border text-sm"
+          className="border-surface-300 text-ink-600 hover:bg-surface-100 flex h-8 w-8 items-center justify-center rounded-lg border disabled:opacity-40"
         >
-          −
+          <Minus className="h-4 w-4" />
         </button>
-        <span className="w-8 text-center text-sm">{item.quantity}</span>
+        <span className="text-ink-900 w-10 text-center text-sm font-bold">
+          {item.quantity}
+        </span>
         <button
           onClick={() => onUpdateQuantity(item.id, item.quantity + 1)}
           disabled={isUpdating}
-          className="h-7 w-7 rounded border text-sm"
+          className="border-surface-300 text-ink-600 hover:bg-surface-100 flex h-8 w-8 items-center justify-center rounded-lg border disabled:opacity-40"
         >
-          +
+          <Plus className="h-4 w-4" />
         </button>
       </div>
-      <p className="w-20 text-right text-sm font-medium">
-        $
-        {(
-          (item.subtotal || item.unit_price * item.quantity) / 100
-        ).toFixed(2)}
-      </p>
-      <button
-        onClick={() => onRemove(item.id)}
-        disabled={isUpdating}
-        className="text-xs text-red-500 hover:underline"
-      >
-        Remove
-      </button>
+      <div className="flex items-center justify-between gap-4 sm:justify-end">
+        <p className="text-ink-900 text-right text-sm font-extrabold">
+          $
+          {((item.subtotal || item.unit_price * item.quantity) / 100).toFixed(
+            2
+          )}
+        </p>
+        <button
+          onClick={() => onRemove(item.id)}
+          disabled={isUpdating}
+          className="text-ink-300 flex h-8 w-8 items-center justify-center rounded-lg hover:bg-red-50 hover:text-red-600"
+        >
+          <Trash2 className="h-4 w-4" />
+        </button>
+      </div>
     </div>
   )
 }

@@ -37,14 +37,12 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} dir={isRTL ? "rtl" : "ltr"}>
-      <body className="min-h-screen bg-white antialiased">
+      <body className="bg-surface-50 min-h-screen antialiased">
         <NextIntlClientProvider locale={locale} messages={messages}>
           <QueryProvider>
             <CartProvider>
               <Header />
-              <main className="mx-auto max-w-7xl px-4 py-8">
-                {children}
-              </main>
+              <main>{children}</main>
               <Footer locale={locale} />
             </CartProvider>
           </QueryProvider>

@@ -2,13 +2,23 @@
 
 import { useState } from "react"
 import { Link } from "@/i18n/routing"
-import { useParams } from "next/navigation"
 import { useTranslations } from "next-intl"
+import {
+  ArrowLeft,
+  MapPin,
+  Pencil,
+  Plus,
+  Save,
+  ShieldCheck,
+  Trash2,
+  X,
+} from "lucide-react"
+import { EmptyState, StatusPill } from "@/components/ui/storefront"
 import {
   useAddresses,
   useCreateAddress,
-  useUpdateAddress,
   useDeleteAddress,
+  useUpdateAddress,
   type Address,
   type AddressInput,
 } from "@/hooks/use-addresses"
@@ -29,7 +39,6 @@ export default function AddressesPage() {
   const t = useTranslations("address")
   const ct = useTranslations("common")
   const at = useTranslations("account")
-  const { locale } = useParams()
   const { data: addresses = [], isLoading } = useAddresses()
   const createMutation = useCreateAddress()
   const updateMutation = useUpdateAddress()
@@ -84,206 +93,296 @@ export default function AddressesPage() {
     setForm((prev) => ({ ...prev, [field]: value }))
   }
 
-  if (isLoading) {
-    return <p className="text-center text-gray-500">{ct("loading")}</p>
-  }
+  const isSubmitting = createMutation.isPending || updateMutation.isPending
 
   return (
-    <div className="mx-auto max-w-3xl space-y-6">
-      {/* 返回链接 */}
-      <Link
-        href="/account"
-        className="text-sm text-brand-600 hover:underline"
-      >
-        ← {at("title")}
-      </Link>
-
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">{t("title")}</h1>
-        <button
-          onClick={openCreate}
-          className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700"
+    <div className="bg-surface-50">
+      <div className="mx-auto max-w-[1180px] px-4 py-6 sm:px-6 lg:px-8">
+        <Link
+          href="/account"
+          className="text-brand-700 mb-5 inline-flex items-center gap-2 text-sm font-bold"
         >
-          {t("addNew")}
-        </button>
-      </div>
+          <ArrowLeft className="h-4 w-4" />
+          {at("title")}
+        </Link>
 
-      {/* 地址表单 */}
-      {showForm && (
-        <form onSubmit={handleSubmit} className="space-y-4 rounded-lg border border-gray-200 p-6">
-          <div className="grid grid-cols-2 gap-4">
+        <section className="panel mb-6 p-6">
+          <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
             <div>
-              <label className="mb-1 block text-sm font-medium text-gray-700">{t("firstName")}</label>
-              <input
-                type="text"
-                required
-                value={form.first_name}
-                onChange={(e) => updateField("first_name", e.target.value)}
-                className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-brand-500 focus:outline-none"
-              />
+              <p className="text-brand-700 text-xs font-bold uppercase tracking-wide">
+                Buyer Profile
+              </p>
+              <h1 className="font-display text-ink-900 mt-2 text-3xl font-bold">
+                {t("title")}
+              </h1>
+              <p className="text-ink-500 mt-2 max-w-2xl text-sm">
+                Keep delivery destinations ready for samples, consolidated
+                shipments, and repeat toy orders.
+              </p>
             </div>
-            <div>
-              <label className="mb-1 block text-sm font-medium text-gray-700">{t("lastName")}</label>
-              <input
-                type="text"
-                required
-                value={form.last_name}
-                onChange={(e) => updateField("last_name", e.target.value)}
-                className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-brand-500 focus:outline-none"
-              />
-            </div>
-          </div>
-
-          <div>
-            <label className="mb-1 block text-sm font-medium text-gray-700">{t("phone")}</label>
-            <input
-              type="tel"
-              value={form.phone || ""}
-              onChange={(e) => updateField("phone", e.target.value)}
-              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-brand-500 focus:outline-none"
-            />
-          </div>
-
-          <div>
-            <label className="mb-1 block text-sm font-medium text-gray-700">{t("address1")}</label>
-            <input
-              type="text"
-              required
-              value={form.address_1}
-              onChange={(e) => updateField("address_1", e.target.value)}
-              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-brand-500 focus:outline-none"
-            />
-          </div>
-
-          <div>
-            <label className="mb-1 block text-sm font-medium text-gray-700">{t("address2")}</label>
-            <input
-              type="text"
-              value={form.address_2 || ""}
-              onChange={(e) => updateField("address_2", e.target.value)}
-              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-brand-500 focus:outline-none"
-            />
-          </div>
-
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="mb-1 block text-sm font-medium text-gray-700">{t("city")}</label>
-              <input
-                type="text"
-                required
-                value={form.city}
-                onChange={(e) => updateField("city", e.target.value)}
-                className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-brand-500 focus:outline-none"
-              />
-            </div>
-            <div>
-              <label className="mb-1 block text-sm font-medium text-gray-700">{t("province")}</label>
-              <input
-                type="text"
-                value={form.province || ""}
-                onChange={(e) => updateField("province", e.target.value)}
-                className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-brand-500 focus:outline-none"
-              />
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="mb-1 block text-sm font-medium text-gray-700">{t("postalCode")}</label>
-              <input
-                type="text"
-                required
-                value={form.postal_code}
-                onChange={(e) => updateField("postal_code", e.target.value)}
-                className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-brand-500 focus:outline-none"
-              />
-            </div>
-            <div>
-              <label className="mb-1 block text-sm font-medium text-gray-700">{t("country")}</label>
-              <input
-                type="text"
-                required
-                value={form.country_code}
-                onChange={(e) => updateField("country_code", e.target.value)}
-                className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-brand-500 focus:outline-none"
-              />
-            </div>
-          </div>
-
-          <div className="flex gap-3 pt-2">
-            <button
-              type="submit"
-              disabled={createMutation.isPending || updateMutation.isPending}
-              className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-50"
-            >
-              {(createMutation.isPending || updateMutation.isPending)
-                ? ct("loading")
-                : editingId
-                  ? t("update")
-                  : t("save")}
-            </button>
-            <button
-              type="button"
-              onClick={() => setShowForm(false)}
-              className="rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-            >
-              {t("cancel")}
+            <button onClick={openCreate} className="btn-coral">
+              <Plus className="h-4 w-4" />
+              {t("addNew")}
             </button>
           </div>
-        </form>
-      )}
+        </section>
 
-      {/* 地址列表 */}
-      {addresses.length > 0 ? (
-        <div className="space-y-4">
-          {addresses.map((addr: Address) => (
-            <div
-              key={addr.id}
-              className="rounded-lg border border-gray-200 p-4"
-            >
-              <div className="flex items-start justify-between">
-                <div>
-                  <p className="font-medium">
-                    {addr.first_name} {addr.last_name}
-                    {addr.is_default_shipping && (
-                      <span className="ml-2 rounded bg-brand-50 px-2 py-0.5 text-xs text-brand-600">
-                        {t("default")}
-                      </span>
-                    )}
-                  </p>
-                  {addr.phone && <p className="text-sm text-gray-500">{addr.phone}</p>}
-                  <p className="text-sm text-gray-600">
-                    {addr.address_1}
-                    {addr.address_2 ? `, ${addr.address_2}` : ""}
-                  </p>
-                  <p className="text-sm text-gray-600">
-                    {addr.city}
-                    {addr.province ? `, ${addr.province}` : ""}{" "}
-                    {addr.postal_code}
-                  </p>
-                  <p className="text-sm text-gray-600">{addr.country_code}</p>
+        <div className="grid gap-6 lg:grid-cols-[1fr_330px]">
+          <main className="space-y-5">
+            {showForm && (
+              <form onSubmit={handleSubmit} className="panel p-6">
+                <div className="mb-5 flex items-center justify-between gap-4">
+                  <div>
+                    <h2 className="text-ink-900 text-lg font-extrabold">
+                      {editingId ? t("update") : t("addNew")}
+                    </h2>
+                    <p className="text-ink-500 mt-1 text-sm">
+                      This address can be used during checkout and RFQ sample
+                      requests.
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setShowForm(false)}
+                    className="text-ink-400 hover:bg-surface-100 hover:text-ink-700 flex h-9 w-9 items-center justify-center rounded-lg transition"
+                    aria-label={t("cancel")}
+                  >
+                    <X className="h-5 w-5" />
+                  </button>
                 </div>
-                <div className="flex gap-2">
+
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <Field
+                    label={t("firstName")}
+                    value={form.first_name}
+                    onChange={(value) => updateField("first_name", value)}
+                    required
+                  />
+                  <Field
+                    label={t("lastName")}
+                    value={form.last_name}
+                    onChange={(value) => updateField("last_name", value)}
+                    required
+                  />
+                  <Field
+                    label={t("phone")}
+                    value={form.phone || ""}
+                    onChange={(value) => updateField("phone", value)}
+                    type="tel"
+                  />
+                  <Field
+                    label={t("country")}
+                    value={form.country_code}
+                    onChange={(value) => updateField("country_code", value)}
+                    required
+                  />
+                  <Field
+                    label={t("address1")}
+                    value={form.address_1}
+                    onChange={(value) => updateField("address_1", value)}
+                    className="sm:col-span-2"
+                    required
+                  />
+                  <Field
+                    label={t("address2")}
+                    value={form.address_2 || ""}
+                    onChange={(value) => updateField("address_2", value)}
+                    className="sm:col-span-2"
+                  />
+                  <Field
+                    label={t("city")}
+                    value={form.city}
+                    onChange={(value) => updateField("city", value)}
+                    required
+                  />
+                  <Field
+                    label={t("province")}
+                    value={form.province || ""}
+                    onChange={(value) => updateField("province", value)}
+                  />
+                  <Field
+                    label={t("postalCode")}
+                    value={form.postal_code}
+                    onChange={(value) => updateField("postal_code", value)}
+                    required
+                  />
+                </div>
+
+                <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                   <button
-                    onClick={() => openEdit(addr)}
-                    className="text-sm text-brand-600 hover:underline"
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="btn-primary"
                   >
-                    {t("edit")}
+                    <Save className="h-4 w-4" />
+                    {isSubmitting
+                      ? ct("loading")
+                      : editingId
+                      ? t("update")
+                      : t("save")}
                   </button>
                   <button
-                    onClick={() => handleDelete(addr.id)}
-                    className="text-sm text-red-600 hover:underline"
+                    type="button"
+                    onClick={() => setShowForm(false)}
+                    className="btn-outline"
                   >
-                    {t("delete")}
+                    {t("cancel")}
                   </button>
+                </div>
+              </form>
+            )}
+
+            {isLoading ? (
+              <div className="panel text-ink-500 p-10 text-center">
+                {ct("loading")}
+              </div>
+            ) : addresses.length > 0 ? (
+              <div className="grid gap-4">
+                {addresses.map((addr: Address) => (
+                  <article key={addr.id} className="panel p-5">
+                    <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                      <div className="flex gap-4">
+                        <span className="bg-brand-50 text-brand-700 ring-brand-100 flex h-11 w-11 shrink-0 items-center justify-center rounded-lg ring-1">
+                          <MapPin className="h-5 w-5" />
+                        </span>
+                        <div>
+                          <div className="flex flex-wrap items-center gap-2">
+                            <h2 className="text-ink-900 font-extrabold">
+                              {addr.first_name} {addr.last_name}
+                            </h2>
+                            {addr.is_default_shipping && (
+                              <StatusPill className="bg-brand-50 text-brand-700 ring-brand-100">
+                                {t("default")}
+                              </StatusPill>
+                            )}
+                          </div>
+                          {addr.phone && (
+                            <p className="text-ink-500 mt-2 text-sm font-medium">
+                              {addr.phone}
+                            </p>
+                          )}
+                          <p className="text-ink-600 mt-2 text-sm leading-6">
+                            {addr.address_1}
+                            {addr.address_2 ? `, ${addr.address_2}` : ""}
+                            <br />
+                            {addr.city}
+                            {addr.province ? `, ${addr.province}` : ""}{" "}
+                            {addr.postal_code}
+                            <br />
+                            {addr.country_code}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="flex gap-2 sm:justify-end">
+                        <button
+                          onClick={() => openEdit(addr)}
+                          className="border-surface-200 text-ink-500 hover:border-brand-200 hover:bg-brand-50 hover:text-brand-700 flex h-9 w-9 items-center justify-center rounded-lg border transition"
+                          aria-label={t("edit")}
+                        >
+                          <Pencil className="h-4 w-4" />
+                        </button>
+                        <button
+                          onClick={() => handleDelete(addr.id)}
+                          disabled={deleteMutation.isPending}
+                          className="border-surface-200 text-ink-400 flex h-9 w-9 items-center justify-center rounded-lg border transition hover:border-red-100 hover:bg-red-50 hover:text-red-600 disabled:opacity-50"
+                          aria-label={t("delete")}
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </button>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            ) : (
+              <EmptyState
+                title={t("noAddresses")}
+                description="Add a delivery address to speed up samples, checkout, and supplier coordination."
+                action={
+                  <button onClick={openCreate} className="btn-primary">
+                    <Plus className="h-4 w-4" />
+                    {t("addNew")}
+                  </button>
+                }
+              />
+            )}
+          </main>
+
+          <aside className="space-y-5">
+            <div className="panel p-5">
+              <ShieldCheck className="text-brand-700 mb-3 h-7 w-7" />
+              <h2 className="text-ink-900 text-sm font-extrabold">
+                Trade Assurance Ready
+              </h2>
+              <p className="text-ink-500 mt-2 text-sm leading-6">
+                Saved addresses help suppliers quote freight accurately and keep
+                buyer protection tied to the right destination.
+              </p>
+            </div>
+            <div className="panel overflow-hidden">
+              <div className="border-surface-200 bg-brand-50 border-b px-5 py-4">
+                <p className="text-brand-800 text-sm font-extrabold">
+                  Address Coverage
+                </p>
+              </div>
+              <div className="divide-surface-200 grid grid-cols-2 divide-x">
+                <div className="p-5">
+                  <p className="text-ink-900 text-3xl font-black">
+                    {addresses.length}
+                  </p>
+                  <p className="text-ink-400 mt-1 text-xs font-bold uppercase tracking-wide">
+                    Saved
+                  </p>
+                </div>
+                <div className="p-5">
+                  <p className="text-ink-900 text-3xl font-black">
+                    {
+                      addresses.filter(
+                        (addr: Address) => addr.is_default_shipping
+                      ).length
+                    }
+                  </p>
+                  <p className="text-ink-400 mt-1 text-xs font-bold uppercase tracking-wide">
+                    Default
+                  </p>
                 </div>
               </div>
             </div>
-          ))}
+          </aside>
         </div>
-      ) : (
-        <p className="text-center text-gray-500">{t("noAddresses")}</p>
-      )}
+      </div>
+    </div>
+  )
+}
+
+function Field({
+  label,
+  value,
+  onChange,
+  className = "",
+  type = "text",
+  required = false,
+}: {
+  label: string
+  value: string
+  onChange: (value: string) => void
+  className?: string
+  type?: string
+  required?: boolean
+}) {
+  return (
+    <div className={className}>
+      <label className="text-ink-700 mb-1.5 block text-sm font-bold">
+        {label}
+      </label>
+      <input
+        type={type}
+        required={required}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="border-surface-300 text-ink-900 placeholder:text-ink-300 focus:border-brand-500 focus:ring-brand-100 w-full rounded-lg border bg-white px-3 py-3 text-sm outline-none transition focus:ring-2"
+      />
     </div>
   )
 }
