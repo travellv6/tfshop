@@ -3472,6 +3472,8 @@ __metadata:
   dependencies:
     "@medusajs/factory": "workspace:*"
     "@medusajs/framework": 2.15.5
+    "@medusajs/rfq": "workspace:*"
+    "@medusajs/tiered-pricing": "workspace:*"
     csv-parse: ^5.6.0
     json-2-csv: ^5.5.4
   peerDependencies:
@@ -3653,7 +3655,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@medusajs/factory@workspace:*, @medusajs/factory@workspace:packages/modules/factory":
+"@medusajs/factory@1.0.0, @medusajs/factory@workspace:*, @medusajs/factory@workspace:packages/modules/factory":
   version: 0.0.0-use.local
   resolution: "@medusajs/factory@workspace:packages/modules/factory"
   dependencies:
@@ -3813,7 +3815,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@medusajs/js-sdk@2.15.5, @medusajs/js-sdk@workspace:packages/core/js-sdk":
+"@medusajs/js-sdk@2.15.5, @medusajs/js-sdk@^2.0.0, @medusajs/js-sdk@workspace:packages/core/js-sdk":
   version: 0.0.0-use.local
   resolution: "@medusajs/js-sdk@workspace:packages/core/js-sdk"
   dependencies:
@@ -3961,6 +3963,7 @@ __metadata:
     "@medusajs/draft-order": 2.15.5
     "@medusajs/event-bus-local": 2.15.5
     "@medusajs/event-bus-redis": 2.15.5
+    "@medusajs/factory": 1.0.0
     "@medusajs/file": 2.15.5
     "@medusajs/file-local": 2.15.5
     "@medusajs/file-s3": 2.15.5
@@ -3984,12 +3987,14 @@ __metadata:
     "@medusajs/promotion": 2.15.5
     "@medusajs/rbac": 2.15.5
     "@medusajs/region": 2.15.5
+    "@medusajs/rfq": 1.0.0
     "@medusajs/sales-channel": 2.15.5
     "@medusajs/settings": 2.15.5
     "@medusajs/stock-location": 2.15.5
     "@medusajs/store": 2.15.5
     "@medusajs/tax": 2.15.5
     "@medusajs/telemetry": 2.15.5
+    "@medusajs/tiered-pricing": 1.0.0
     "@medusajs/translation": 2.15.5
     "@medusajs/user": 2.15.5
     "@medusajs/workflow-engine-inmemory": 2.15.5
@@ -4177,6 +4182,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@medusajs/rfq@1.0.0, @medusajs/rfq@workspace:*, @medusajs/rfq@workspace:packages/modules/rfq":
+  version: 0.0.0-use.local
+  resolution: "@medusajs/rfq@workspace:packages/modules/rfq"
+  dependencies:
+    "@medusajs/framework": "workspace:*"
+    "@medusajs/test-utils": "workspace:*"
+  peerDependencies:
+    "@medusajs/framework": ^2.0.0
+  languageName: unknown
+  linkType: soft
+
 "@medusajs/sales-channel@2.15.5, @medusajs/sales-channel@workspace:packages/modules/sales-channel":
   version: 0.0.0-use.local
   resolution: "@medusajs/sales-channel@workspace:packages/modules/sales-channel"
@@ -4268,6 +4284,17 @@ __metadata:
       optional: true
     "@medusajs/medusa":
       optional: true
+  languageName: unknown
+  linkType: soft
+
+"@medusajs/tiered-pricing@1.0.0, @medusajs/tiered-pricing@workspace:*, @medusajs/tiered-pricing@workspace:packages/modules/tiered-pricing":
+  version: 0.0.0-use.local
+  resolution: "@medusajs/tiered-pricing@workspace:packages/modules/tiered-pricing"
+  dependencies:
+    "@medusajs/framework": "workspace:*"
+    "@medusajs/test-utils": "workspace:*"
+  peerDependencies:
+    "@medusajs/framework": ^2.0.0
   languageName: unknown
   linkType: soft
 
@@ -11641,6 +11668,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@tfshop/storefront@workspace:apps/storefront"
   dependencies:
+    "@medusajs/js-sdk": ^2.0.0
     "@tanstack/react-query": ^5.0.0
     "@types/node": ^20.0.0
     "@types/react": ^18.3.0
