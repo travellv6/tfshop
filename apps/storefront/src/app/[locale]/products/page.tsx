@@ -239,6 +239,7 @@ export default function ProductListPage() {
                     </select>
                     <button
                       onClick={() => setView("grid")}
+                      aria-label="Grid view"
                       className={`flex h-10 w-10 items-center justify-center rounded-lg border ${
                         view === "grid"
                           ? "border-brand-300 bg-brand-50 text-brand-700"
@@ -249,6 +250,7 @@ export default function ProductListPage() {
                     </button>
                     <button
                       onClick={() => setView("list")}
+                      aria-label="List view"
                       className={`flex h-10 w-10 items-center justify-center rounded-lg border ${
                         view === "list"
                           ? "border-brand-300 bg-brand-50 text-brand-700"

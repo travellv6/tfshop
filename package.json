@@ -23,6 +23,7 @@
   "devDependencies": {
     "@atomico/rollup-plugin-sizes": "^1.1.4",
     "@faker-js/faker": "^9.2.0",
+    "@playwright/test": "1.60.0",
     "@rollup/plugin-node-resolve": "^15.1.0",
     "@rollup/plugin-replace": "^5.0.2",
     "@storybook/addon-essentials": "^8.3.5",
@@ -147,6 +148,7 @@
     "prettier": "prettier",
     "jest": "jest",
     "test": "turbo run test --no-daemon --no-cache --force",
+    "test:storefront:e2e": "playwright test -c apps/storefront/playwright.config.ts",
     "test:chunk": "./scripts/run-workspace-unit-tests-in-chunks.sh",
     "test:integration:packages:fast": "turbo run test:integration --concurrency=1 --no-daemon --no-cache --force --filter='./packages/core/*' --filter='./packages/medusa' --filter='./packages/modules/*' --filter='./packages/modules/providers/*' --filter='!./packages/modules/{workflow-engine-redis,index,product,order,cart}'",
     "test:integration:packages:slow": "turbo run test:integration --concurrency=1 --no-daemon --no-cache --force --filter='./packages/modules/{workflow-engine-redis,index,product,order,cart}'",
