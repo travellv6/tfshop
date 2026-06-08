@@ -4,6 +4,7 @@ import { Link } from "@/i18n/routing"
 import { ArrowRight, PackageCheck } from "lucide-react"
 import { useOrders } from "@/hooks/use-order"
 import { EmptyState, StatusPill } from "@/components/ui/storefront"
+import { formatStorefrontDate } from "@/lib/format"
 
 export default function OrdersPage() {
   const { data: orders, isLoading } = useOrders()
@@ -39,7 +40,7 @@ export default function OrdersPage() {
                       Order #{order.display_id || order.id.slice(-8)}
                     </p>
                     <p className="text-ink-500 text-sm">
-                      {new Date(order.created_at).toLocaleDateString()}
+                      {formatStorefrontDate(order.created_at)}
                     </p>
                   </div>
                 </div>

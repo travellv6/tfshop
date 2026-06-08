@@ -25,6 +25,7 @@ import {
   rfqBasketProducts,
   type StorefrontProduct,
 } from "@/lib/storefront-data"
+import { formatStorefrontNumber } from "@/lib/format"
 
 export default function ProductListPage() {
   const router = useRouter()
@@ -335,7 +336,7 @@ export default function ProductListPage() {
               <div className="bg-surface-50 mb-4 rounded-lg p-3 text-sm">
                 <div className="flex justify-between">
                   <span className="text-ink-500">Est. Total Qty</span>
-                  <strong>{totalQty.toLocaleString()} pcs</strong>
+                  <strong>{formatStorefrontNumber(totalQty)} pcs</strong>
                 </div>
                 <div className="mt-2 flex justify-between">
                   <span className="text-ink-500">Target Price Range</span>
@@ -407,7 +408,7 @@ export default function ProductListPage() {
                     <img
                       src={
                         factory.cover_image ||
-                        "/images/tfshop-hero-toy-catalog.png"
+                        "/images/tfshop-hero-toy-catalog.jpg"
                       }
                       alt={factory.name}
                       className="mb-3 h-20 w-full rounded-lg object-cover"

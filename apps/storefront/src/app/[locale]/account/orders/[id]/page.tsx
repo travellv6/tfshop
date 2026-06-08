@@ -6,6 +6,7 @@ import { ArrowLeft, MapPin, PackageCheck, ReceiptText } from "lucide-react"
 import { useOrder } from "@/hooks/use-order"
 import { StatusPill } from "@/components/ui/storefront"
 import { fallbackProductImage } from "@/lib/storefront-data"
+import { formatStorefrontDate } from "@/lib/format"
 
 export default function OrderDetailPage() {
   const { id } = useParams()
@@ -53,7 +54,7 @@ export default function OrderDetailPage() {
                 Order #{order.display_id || order.id.slice(-8)}
               </h1>
               <p className="text-ink-500 mt-1 text-sm">
-                Placed on {new Date(order.created_at).toLocaleDateString()}
+                Placed on {formatStorefrontDate(order.created_at)}
               </p>
             </div>
             <StatusPill className="bg-brand-50 text-brand-700 ring-brand-100">

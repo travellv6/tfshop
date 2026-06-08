@@ -16,6 +16,11 @@ import {
 import { useRFQ, useAddRFQMessage } from "@/hooks/use-rfq"
 import { StatusPill } from "@/components/ui/storefront"
 import { demoRfqs, statusClass } from "@/lib/storefront-data"
+import {
+  formatStorefrontDate,
+  formatStorefrontDateTime,
+  formatStorefrontNumber,
+} from "@/lib/format"
 
 export default function RFQDetailPage() {
   const t = useTranslations("rfq")
@@ -55,7 +60,7 @@ export default function RFQDetailPage() {
           sender_type: "seller" as const,
           content:
             "Thanks. We can support samples within 5 days and provide EN71/CPC files with the quote.",
-          created_at: new Date(Date.now() - 3600000).toISOString(),
+          created_at: "2026-01-08T07:00:00.000Z",
         },
       ],
     }
@@ -112,7 +117,9 @@ export default function RFQDetailPage() {
               icon={<PackageCheck className="h-5 w-5" />}
               label={t("quantity")}
               value={
-                rfq.quantity ? `${rfq.quantity.toLocaleString()} pcs` : "-"
+                rfq.quantity
+                  ? `${formatStorefrontNumber(rfq.quantity)} pcs`
+                  : "-"
               }
             />
             <Metric
@@ -176,7 +183,7 @@ export default function RFQDetailPage() {
                               : t("system")}
                           </span>
                           <span>
-                            {new Date(msg.created_at).toLocaleString()}
+                            {formatStorefrontDateTime(msg.created_at)}
                           </span>
                         </div>
                         <p className="text-sm leading-relaxed">{msg.content}</p>
@@ -231,7 +238,7 @@ export default function RFQDetailPage() {
                 />
                 <Info
                   label="Updated"
-                  value={new Date(rfq.updated_at).toLocaleDateString()}
+                  value={formatStorefrontDate(rfq.updated_at)}
                 />
               </div>
             </div>

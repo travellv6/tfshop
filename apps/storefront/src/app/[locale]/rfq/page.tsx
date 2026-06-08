@@ -19,6 +19,7 @@ import { RFQForm } from "@/components/rfq/rfq-form"
 import { useCustomer } from "@/hooks/use-customer"
 import { StatusPill } from "@/components/ui/storefront"
 import { demoRfqs, statusClass } from "@/lib/storefront-data"
+import { formatStorefrontDate, formatStorefrontNumber } from "@/lib/format"
 
 export default function RFQListPage() {
   const t = useTranslations("rfq")
@@ -189,9 +190,9 @@ export default function RFQListPage() {
                         </Link>
                       </td>
                       <td className="text-ink-700 px-5 py-4 font-semibold">
-                        {rfq.quantity?.toLocaleString?.() ||
-                          rfq.quantity ||
-                          "-"}
+                        {typeof rfq.quantity === "number"
+                          ? formatStorefrontNumber(rfq.quantity)
+                          : rfq.quantity || "-"}
                       </td>
                       <td className="px-5 py-4">
                         <StatusPill className={statusClass(rfq.status)}>
@@ -202,7 +203,7 @@ export default function RFQListPage() {
                         {rfq.quoted_price || "-"}
                       </td>
                       <td className="text-ink-500 px-5 py-4">
-                        {new Date(rfq.created_at).toLocaleDateString()}
+                        {formatStorefrontDate(rfq.created_at)}
                       </td>
                     </tr>
                   ))}

@@ -29,7 +29,7 @@ export default function LoginPage() {
         <section className="border-surface-200 hidden overflow-hidden rounded-l-lg border border-r-0 bg-white lg:block">
           <div className="relative h-full min-h-[560px]">
             <img
-              src="/images/tfshop-hero-toy-catalog.png"
+              src="/images/tfshop-hero-toy-catalog.jpg"
               alt="TFShop verified toy catalog"
               className="absolute inset-0 h-full w-full object-cover object-center"
             />

@@ -99,7 +99,7 @@ test("product workbench supports search, view switching, and RFQ basket flow", a
 
   await page.getByRole("button", { name: "Grid view" }).click()
   await expect(
-    page.getByRole("link", { name: /Soft Plush Teddy Bear/ })
+    page.getByRole("link", { name: /Soft Plush Teddy Bear/ }).first()
   ).toBeVisible()
 
   await page.getByRole("button", { name: "List view" }).click()

@@ -26,8 +26,8 @@ export interface StorefrontFactory {
   status?: string
 }
 
-export const heroImage = "/images/tfshop-hero-toy-catalog.png"
-export const fallbackProductImage = "/images/products/building-blocks.png"
+export const heroImage = "/images/tfshop-hero-toy-catalog.jpg"
+export const fallbackProductImage = "/images/products/building-blocks.jpg"
 
 export const categories = [
   { label: "Building Blocks", count: "1,320", icon: "blocks" },
@@ -267,7 +267,7 @@ export function demoRfqs() {
       status: "submitted",
       quantity: 500,
       quoted_price: "$1.45 - $1.85",
-      created_at: new Date().toISOString(),
+      created_at: "2026-01-08T08:00:00.000Z",
     },
     {
       id: "demo-rfq-1002",
@@ -275,7 +275,7 @@ export function demoRfqs() {
       status: "quoted",
       quantity: 300,
       quoted_price: "$2.45",
-      created_at: new Date(Date.now() - 86400000).toISOString(),
+      created_at: "2026-01-07T08:00:00.000Z",
     },
   ]
 }
