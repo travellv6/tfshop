@@ -1,8 +1,7 @@
 "use client"
 
-import Link from "next/link"
+import { Link } from "@/i18n/routing"
 import { useTranslations } from "next-intl"
-import { useParams } from "next/navigation"
 import { useCustomer } from "@/hooks/use-customer"
 
 // 功能入口配置
@@ -16,30 +15,29 @@ interface AccountEntry {
 export default function AccountPage() {
   const t = useTranslations("account")
   const ct = useTranslations("common")
-  const { locale } = useParams()
   const { data: customer, isLoading } = useCustomer()
 
   const entries: AccountEntry[] = [
     {
-      href: `/${locale}/account/orders`,
+      href: "/account/orders",
       icon: "📦",
       labelKey: "myOrders",
       descKey: "myOrdersDesc",
     },
     {
-      href: `/${locale}/rfq`,
+      href: "/rfq",
       icon: "💬",
       labelKey: "myInquiries",
       descKey: "myInquiriesDesc",
     },
     {
-      href: `/${locale}/account/addresses`,
+      href: "/account/addresses",
       icon: "📍",
       labelKey: "myAddresses",
       descKey: "myAddressesDesc",
     },
     {
-      href: `/${locale}/account/settings`,
+      href: "/account/settings",
       icon: "⚙️",
       labelKey: "accountSettings",
       descKey: "accountSettingsDesc",
@@ -61,7 +59,7 @@ export default function AccountPage() {
         <h1 className="mb-4 text-2xl font-bold">{t("title")}</h1>
         <p className="mb-6 text-gray-500">{t("loginPrompt")}</p>
         <Link
-          href={`/${locale}/auth/login`}
+          href="/auth/login"
           className="rounded-lg bg-brand-600 px-6 py-2 text-sm font-medium text-white hover:bg-brand-700"
         >
           {ct("login")}

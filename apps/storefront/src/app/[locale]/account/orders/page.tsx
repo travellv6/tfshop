@@ -1,6 +1,6 @@
 "use client"
 
-import Link from "next/link"
+import { Link } from "@/i18n/routing"
 import { useLocale } from "next-intl"
 import { useOrders } from "@/hooks/use-order"
 
@@ -18,7 +18,7 @@ export default function OrdersPage() {
           {orders.map((order: any) => (
             <Link
               key={order.id}
-              href={`/${locale}/account/orders/${order.id}`}
+              href="/account/orders/${order.id}"
               className="block rounded-lg border p-4 hover:bg-gray-50"
             >
               <div className="flex justify-between">

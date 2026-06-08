@@ -20,7 +20,9 @@
     "featuredCategories": "Featured Categories",
     "lowMoqZone": "Low MOQ Zone",
     "lowMoqSubtitle": "Minimum order as low as 20 pieces",
-    "recommendedFactories": "Recommended Factories"
+    "recommendedFactories": "Recommended Factories",
+    "browseProducts": "Browse Products",
+    "requestQuote": "Request a Quote"
   },
   "product": {
     "title": "Products",

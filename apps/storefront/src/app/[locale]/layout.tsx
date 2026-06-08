@@ -7,9 +7,8 @@ import { Header } from "@/components/layout/header"
 import { Footer } from "@/components/layout/footer"
 import "./globals.css"
 
-export function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }))
-}
+// 所有页面依赖客户端状态（购物车、用户认证），使用动态渲染
+export const dynamic = "force-dynamic"
 
 const RTL_LOCALES: Locale[] = ["ar"]
 
@@ -46,7 +45,7 @@ export default async function LocaleLayout({
               <main className="mx-auto max-w-7xl px-4 py-8">
                 {children}
               </main>
-              <Footer />
+              <Footer locale={locale} />
             </CartProvider>
           </QueryProvider>
         </NextIntlClientProvider>

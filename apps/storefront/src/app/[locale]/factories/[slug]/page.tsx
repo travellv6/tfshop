@@ -1,8 +1,9 @@
 "use client"
 
 import { useTranslations } from "next-intl"
-import Link from "next/link"
-import { useParams, useRouter } from "next/navigation"
+import { Link } from "@/i18n/routing"
+import { useParams } from "next/navigation"
+import { useRouter } from "@/i18n/routing"
 import { useFactory } from "@/hooks/use-factories"
 import { useProductsByFactory } from "@/hooks/use-products"
 import { ProductCard } from "@/components/product/product-card"
@@ -19,7 +20,7 @@ export default function FactoryDetailPage() {
     const params = new URLSearchParams()
     if (factory?.id) params.set("factory_id", factory.id)
     if (factory?.name) params.set("factory_name", factory.name)
-    router.push(`/${locale}/rfq?${params.toString()}`)
+    router.push(`/rfq?${params.toString()}`)
   }
 
   if (isLoading) {

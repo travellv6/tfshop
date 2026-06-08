@@ -20,7 +20,9 @@
     "featuredCategories": "الفئات المميزة",
     "lowMoqZone": "منطقة الحد الأدنى المنخفض",
     "lowMoqSubtitle": "الحد الأدنى للطلب من 20 قطعة",
-    "recommendedFactories": "المصانع الموصى بها"
+    "recommendedFactories": "المصانع الموصى بها",
+    "browseProducts": "تصفح المنتجات",
+    "requestQuote": "طلب عرض سعر"
   },
   "product": {
     "title": "المنتجات",

@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { useRouter } from "next/navigation"
+import { useRouter } from "@/i18n/routing"
 import { useLocale } from "next-intl"
 import { useCart } from "@/lib/cart-context"
 import { sdk } from "@/lib/medusa"
@@ -132,7 +132,7 @@ export default function CheckoutPage() {
       const order = result.order || result
       if (order?.id) {
         localStorage.removeItem("tfshop_cart_id")
-        router.push(`/${locale}/checkout/success?order_id=${order.id}`)
+        router.push(`/checkout/success?order_id=${order.id}`)
       } else {
         setError(result.error?.message || "Order completion failed")
       }

@@ -1,9 +1,9 @@
 "use client"
 
 import { useState } from "react"
-import { useRouter } from "next/navigation"
+import { useRouter } from "@/i18n/routing"
 import { useLocale } from "next-intl"
-import Link from "next/link"
+import { Link } from "@/i18n/routing"
 import { useRegister } from "@/hooks/use-customer"
 
 export default function RegisterPage() {
@@ -33,7 +33,7 @@ export default function RegisterPage() {
         first_name: form.first_name,
         last_name: form.last_name,
       })
-      router.push(`/${locale}/account`)
+      router.push("/account")
     } catch (err: any) {
       setError(err?.message || "Registration failed")
     }
@@ -110,7 +110,7 @@ export default function RegisterPage() {
       <p className="mt-4 text-center text-sm text-gray-500">
         Already have an account?{" "}
         <Link
-          href={`/${locale}/auth/login`}
+          href="/auth/login"
           className="text-brand-600 hover:underline"
         >
           Login

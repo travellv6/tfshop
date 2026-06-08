@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { useTranslations } from "next-intl"
-import Link from "next/link"
+import { Link } from "@/i18n/routing"
 import { useParams, useSearchParams } from "next/navigation"
 import { useRFQs } from "@/hooks/use-rfq"
 import { RFQForm } from "@/components/rfq/rfq-form"
@@ -106,7 +106,7 @@ export default function RFQListPage() {
                 <tr key={rfq.id} className="border-b border-gray-100 hover:bg-gray-50">
                   <td className="px-4 py-3">
                     <Link
-                      href={`/${locale}/rfq/${rfq.id}`}
+                      href="/rfq/${rfq.id}"
                       className="text-brand-600 hover:underline"
                     >
                       {rfq.product_title || t("product")}

@@ -20,7 +20,9 @@
     "featuredCategories": "热门品类",
     "lowMoqZone": "低 MOQ 专区",
     "lowMoqSubtitle": "起订量低至 20 件",
-    "recommendedFactories": "推荐工厂"
+    "recommendedFactories": "推荐工厂",
+    "browseProducts": "浏览产品",
+    "requestQuote": "发起询价"
   },
   "product": {
     "title": "产品",

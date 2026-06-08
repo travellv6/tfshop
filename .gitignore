@@ -34,4 +34,4 @@ dist/**
 /packages/**/.cache
 
 .cursorignore
-**/.medusa
+**/.medusa.superpowers/

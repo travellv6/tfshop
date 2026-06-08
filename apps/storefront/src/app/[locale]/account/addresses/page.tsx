@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import Link from "next/link"
+import { Link } from "@/i18n/routing"
 import { useParams } from "next/navigation"
 import { useTranslations } from "next-intl"
 import {
@@ -92,7 +92,7 @@ export default function AddressesPage() {
     <div className="mx-auto max-w-3xl space-y-6">
       {/* 返回链接 */}
       <Link
-        href={`/${locale}/account`}
+        href="/account"
         className="text-sm text-brand-600 hover:underline"
       >
         ← {at("title")}

@@ -1,7 +1,7 @@
 "use client"
 
 import { useSearchParams } from "next/navigation"
-import Link from "next/link"
+import { Link } from "@/i18n/routing"
 import { useLocale } from "next-intl"
 import { Suspense } from "react"
 
@@ -26,14 +26,14 @@ function SuccessContent() {
       <div className="flex justify-center gap-4">
         {orderId && (
           <Link
-            href={`/${locale}/account/orders/${orderId}`}
+            href="/account/orders/${orderId}"
             className="rounded-lg bg-brand-600 px-6 py-2 text-sm font-medium text-white hover:bg-brand-700"
           >
             View Order
           </Link>
         )}
         <Link
-          href={`/${locale}/products`}
+          href="/products"
           className="rounded-lg border px-6 py-2 text-sm font-medium hover:bg-gray-50"
         >
           Continue Shopping

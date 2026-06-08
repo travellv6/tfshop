@@ -1,7 +1,7 @@
 "use client"
 
 import { useParams } from "next/navigation"
-import Link from "next/link"
+import { Link } from "@/i18n/routing"
 import { useLocale } from "next-intl"
 import { useOrder } from "@/hooks/use-order"
 
@@ -21,7 +21,7 @@ export default function OrderDetailPage() {
       <div className="py-20 text-center">
         <p className="text-gray-500">Order not found</p>
         <Link
-          href={`/${locale}/account/orders`}
+          href="/account/orders"
           className="mt-4 inline-block text-sm text-brand-600 hover:underline"
         >
           Back to Orders
@@ -37,7 +37,7 @@ export default function OrderDetailPage() {
           Order #{order.display_id || order.id.slice(-8)}
         </h1>
         <Link
-          href={`/${locale}/account/orders`}
+          href="/account/orders"
           className="text-sm text-brand-600 hover:underline"
         >
           Back to Orders

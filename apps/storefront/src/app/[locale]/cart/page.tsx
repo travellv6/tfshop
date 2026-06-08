@@ -1,6 +1,6 @@
 "use client"
 
-import Link from "next/link"
+import { Link } from "@/i18n/routing"
 import { useLocale } from "next-intl"
 import { useCart } from "@/lib/cart-context"
 import { CartItemRow } from "@/components/cart/cart-item"
@@ -19,7 +19,7 @@ export default function CartPage() {
       <div className="flex flex-col items-center justify-center py-20">
         <p className="text-lg text-gray-500">Your cart is empty</p>
         <Link
-          href={`/${locale}/products`}
+          href="/products"
           className="mt-4 text-brand-600 hover:underline"
         >
           Browse products &rarr;
@@ -67,7 +67,7 @@ export default function CartPage() {
             </div>
           </div>
           <Link
-            href={`/${locale}/checkout`}
+            href="/checkout"
             className="mt-4 block rounded-lg bg-brand-600 py-2 text-center text-sm font-medium text-white hover:bg-brand-700"
           >
             Proceed to Checkout

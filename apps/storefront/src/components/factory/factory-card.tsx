@@ -1,6 +1,6 @@
 "use client"
 
-import Link from "next/link"
+import { Link } from "@/i18n/routing"
 import { useLocale, useTranslations } from "next-intl"
 import type { Factory } from "@/hooks/use-factories"
 
@@ -10,7 +10,7 @@ export function FactoryCard({ factory }: { factory: Factory }) {
 
   return (
     <Link
-      href={`/${locale}/factories/${factory.slug}`}
+      href="/factories/${factory.slug}"
       className="group rounded-lg border border-gray-200 p-4 transition-shadow hover:shadow-md"
     >
       <div className="mb-3 h-32 overflow-hidden rounded-md bg-gray-100">

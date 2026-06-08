@@ -1,9 +1,9 @@
 "use client"
 
 import { useState } from "react"
-import { useRouter } from "next/navigation"
+import { useRouter } from "@/i18n/routing"
 import { useLocale } from "next-intl"
-import Link from "next/link"
+import { Link } from "@/i18n/routing"
 import { useLogin } from "@/hooks/use-customer"
 
 export default function LoginPage() {
@@ -19,7 +19,7 @@ export default function LoginPage() {
     setError("")
     try {
       await login({ email, password })
-      router.push(`/${locale}/account`)
+      router.push("/account")
     } catch {
       setError("Invalid email or password")
     }
@@ -61,7 +61,7 @@ export default function LoginPage() {
       <p className="mt-4 text-center text-sm text-gray-500">
         Don&apos;t have an account?{" "}
         <Link
-          href={`/${locale}/auth/register`}
+          href="/auth/register"
           className="text-brand-600 hover:underline"
         >
           Register
