@@ -272,11 +272,15 @@ export function productPrice(product?: StorefrontProduct | null) {
   const meta = productMeta(product)
   const firstPrice = (product?.variants?.[0] as any)?.prices?.[0]
 
-  if (firstPrice?.amount) {
-    return `$${(firstPrice.amount / 100).toFixed(2)}`
+  if (meta.price_range) {
+    return meta.price_range
   }
 
-  return meta.price_range || "$1.45 - $8.90"
+  if (firstPrice?.amount != null) {
+    return `$${Number(firstPrice.amount).toFixed(2)}`
+  }
+
+  return "$1.45 - $8.90"
 }
 
 export function productMoq(product?: StorefrontProduct | null) {
@@ -293,7 +297,8 @@ export function productFactoryName(product?: StorefrontProduct | null) {
 }
 
 export function productOrigin(product?: StorefrontProduct | null) {
-  return productMeta(product).origin || "Guangdong, China"
+  const meta = productMeta(product)
+  return meta.origin || meta.origin_region || "Guangdong, China"
 }
 
 export function responseTime(product?: StorefrontProduct | null) {
