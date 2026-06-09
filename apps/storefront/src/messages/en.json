@@ -143,6 +143,7 @@
     "factory": "Factory",
     "viewFactory": "View Factory",
     "selectVariant": "Select Variant",
+    "option": "Option",
     "pleaseSelect": "Please select",
     "quantity": "Quantity",
     "addedToCart": "Added!",
@@ -210,6 +211,7 @@
     "rfqBasket": "RFQ Basket",
     "estTotalQty": "Est. Total Qty",
     "pcs": "pcs",
+    "moqLabel": "MOQ",
     "targetPriceRange": "Target Price Range",
     "submitRfq": "Submit RFQ ({count})",
     "requestSample": "Request Sample",
@@ -405,7 +407,9 @@
     "cancel": "Cancel",
     "myInquiries": "My Inquiries",
     "quantity": "Quantity",
+    "pcs": "pcs",
     "targetPrice": "Target Price",
+    "targetPricePlaceholder": "e.g. $5.00/pc",
     "requirements": "Requirements",
     "requirementsPlaceholder": "Describe your requirements, customization needs, delivery timeline, etc.",
     "product": "Product",
@@ -452,6 +456,13 @@
     "buyerProtection": "Buyer Protection",
     "buyerProtectionDesc": "Confirm samples, certificates, payment terms, and shipping before accepting the final quote.",
     "generalSourcingRequest": "General sourcing request",
+    "demo": {
+      "requirements": "Please quote EXW and FOB Shenzhen pricing for mixed color cartons with EN71/CPC documents.",
+      "leadTime": "18-25 days",
+      "terms": "30% deposit, 70% before shipment",
+      "buyerMessage": "We are looking for a first test order with sample approval before mass production.",
+      "sellerMessage": "Thanks. We can support samples within 5 days and provide EN71/CPC files with the quote."
+    },
     "status": {
       "submitted": "Submitted",
       "reviewing": "Reviewing",
@@ -463,6 +474,9 @@
   },
   "account": {
     "title": "My Account",
+    "verifiedBuyer": "Verified Buyer",
+    "protectionActive": "Buyer protection active",
+    "protectionDesc": "Orders, RFQs, and addresses are connected to your TFShop buyer profile.",
     "loginPrompt": "Please log in to manage your account",
     "myOrders": "My Orders",
     "myOrdersDesc": "View order history and tracking",
@@ -475,6 +489,8 @@
   },
   "address": {
     "title": "My Addresses",
+    "eyebrow": "Buyer Profile",
+    "description": "Keep delivery destinations ready for samples, consolidated shipments, and repeat toy orders.",
     "addNew": "Add New Address",
     "edit": "Edit",
     "delete": "Delete",
@@ -492,6 +508,85 @@
     "city": "City",
     "province": "Province / State",
     "postalCode": "Postal Code",
-    "country": "Country"
+    "country": "Country",
+    "formDesc": "This address can be used during checkout and RFQ sample requests.",
+    "noAddressesDesc": "Add a delivery address to speed up samples, checkout, and supplier coordination.",
+    "assuranceTitle": "Trade Assurance Ready",
+    "assuranceDesc": "Saved addresses help suppliers quote freight accurately and keep buyer protection tied to the right destination.",
+    "coverageTitle": "Address Coverage",
+    "saved": "Saved"
+  },
+  "orders": {
+    "eyebrow": "Buyer Account",
+    "title": "My Orders",
+    "orderNumber": "Order #{id}",
+    "processing": "Processing",
+    "noOrdersTitle": "No orders yet",
+    "noOrdersDesc": "Your completed orders will appear here after checkout.",
+    "browseProducts": "Browse products"
+  },
+  "orderDetail": {
+    "notFound": "Order not found",
+    "back": "Back to Orders",
+    "eyebrow": "Order Detail",
+    "orderNumber": "Order #{id}",
+    "placedOn": "Placed on {date}",
+    "processing": "Processing",
+    "items": "Items",
+    "qty": "Qty",
+    "shippingAddress": "Shipping Address",
+    "totals": "Totals",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "tax": "Tax",
+    "total": "Total"
+  },
+  "factoriesPage": {
+    "eyebrow": "Supplier Network",
+    "description": "Discover audited toy factories with low MOQ support, export certifications, sample service, and fast RFQ response.",
+    "supplierStat": "verified suppliers across major toy clusters",
+    "searchPlaceholder": "Search factories, category, province...",
+    "sectionEyebrow": "Verified Suppliers",
+    "sectionTitle": "Export-ready toy factories",
+    "sectionDesc": "Factory profiles include certifications, response speed, production capability, and sourcing support."
+  },
+  "factoryDetail": {
+    "verifiedSupplier": "Verified Supplier",
+    "fallbackDescription": "Verified toy manufacturer with export certification support, sample service, and responsive RFQ workflows.",
+    "metrics": {
+      "established": "Established",
+      "capacity": "Capacity",
+      "employees": "Employees",
+      "rating": "Rating"
+    },
+    "fallbackYears": "9 YRS",
+    "fallbackCapacity": "280,000 pcs",
+    "quoteTitle": "Request a factory quote",
+    "quoteDesc": "Send requirements directly to this supplier and compare quotation terms in RFQ Center.",
+    "benefits": {
+      "oem": "OEM/ODM support",
+      "sample": "Sample available",
+      "certificates": "Certificate files"
+    },
+    "catalogEyebrow": "Factory Catalog",
+    "viewAll": "View all"
+  },
+  "checkoutSuccess": {
+    "eyebrow": "Order Confirmed",
+    "title": "Your factory order is placed.",
+    "description": "The order has been recorded successfully. Supplier coordination, fulfillment status, and buyer protection details will stay tied to this order.",
+    "orderId": "Order ID",
+    "viewOrder": "View Order",
+    "continueShopping": "Continue Shopping",
+    "nextTitle": "What happens next",
+    "loading": "Loading...",
+    "steps": {
+      "supplierTitle": "Supplier receives order",
+      "supplierDesc": "We send the confirmed order details.",
+      "fulfillmentTitle": "Fulfillment starts",
+      "fulfillmentDesc": "Factory status updates appear in your account.",
+      "supportTitle": "Support stays open",
+      "supportDesc": "Buyer protection remains connected."
+    }
   }
 }

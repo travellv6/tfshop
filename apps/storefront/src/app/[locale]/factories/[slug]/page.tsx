@@ -27,6 +27,7 @@ import {
 
 export default function FactoryDetailPage() {
   const t = useTranslations("factory")
+  const dt = useTranslations("factoryDetail")
   const ct = useTranslations("common")
   const { slug } = useParams()
   const router = useRouter()
@@ -86,7 +87,7 @@ export default function FactoryDetailPage() {
             <div className="absolute bottom-0 left-0 max-w-3xl p-6 text-white">
               <span className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-xs font-bold backdrop-blur">
                 <ShieldCheck className="h-4 w-4" />
-                Verified Supplier
+                {dt("verifiedSupplier")}
               </span>
               <h1 className="font-display mt-4 text-4xl font-bold">
                 {factory.name}
@@ -102,33 +103,32 @@ export default function FactoryDetailPage() {
           <div className="grid gap-6 p-6 lg:grid-cols-[1fr_320px]">
             <div>
               <p className="text-ink-600 leading-relaxed">
-                {factory.description ||
-                  "Verified toy manufacturer with export certification support, sample service, and responsive RFQ workflows."}
+                {factory.description || dt("fallbackDescription")}
               </p>
 
               <div className="mt-6 grid gap-3 sm:grid-cols-4">
                 <FactoryMetric
                   icon={<Building2 className="h-5 w-5" />}
-                  label="Established"
+                  label={dt("metrics.established")}
                   value={
                     factory.established_year
                       ? String(factory.established_year)
-                      : "9 YRS"
+                      : dt("fallbackYears")
                   }
                 />
                 <FactoryMetric
                   icon={<PackageCheck className="h-5 w-5" />}
-                  label="Capacity"
-                  value={factory.monthly_capacity || "280,000 pcs"}
+                  label={dt("metrics.capacity")}
+                  value={factory.monthly_capacity || dt("fallbackCapacity")}
                 />
                 <FactoryMetric
                   icon={<Award className="h-5 w-5" />}
-                  label="Employees"
+                  label={dt("metrics.employees")}
                   value={factory.employee_scale || "100-300"}
                 />
                 <FactoryMetric
                   icon={<Star className="h-5 w-5" />}
-                  label="Rating"
+                  label={dt("metrics.rating")}
                   value="4.9"
                 />
               </div>
@@ -155,12 +155,9 @@ export default function FactoryDetailPage() {
             <aside className="border-brand-100 bg-brand-50 rounded-lg border p-5">
               <MessageSquareText className="text-brand-700 mb-3 h-7 w-7" />
               <h2 className="text-ink-900 text-xl font-extrabold">
-                Request a factory quote
+                {dt("quoteTitle")}
               </h2>
-              <p className="text-ink-600 mt-2 text-sm">
-                Send requirements directly to this supplier and compare
-                quotation terms in RFQ Center.
-              </p>
+              <p className="text-ink-600 mt-2 text-sm">{dt("quoteDesc")}</p>
               <button
                 onClick={handleRequestQuote}
                 className="btn-primary mt-5 w-full"
@@ -169,9 +166,9 @@ export default function FactoryDetailPage() {
               </button>
               <div className="text-ink-700 mt-5 space-y-2 text-sm font-semibold">
                 {[
-                  "OEM/ODM support",
-                  "Sample available",
-                  "Certificate files",
+                  dt("benefits.oem"),
+                  dt("benefits.sample"),
+                  dt("benefits.certificates"),
                 ].map((item) => (
                   <p key={item} className="flex items-center gap-2">
                     <CheckCircle2 className="text-brand-700 h-4 w-4" />
@@ -187,14 +184,14 @@ export default function FactoryDetailPage() {
           <div className="mb-5 flex items-end justify-between">
             <div>
               <p className="text-brand-700 text-xs font-bold uppercase tracking-wide">
-                Factory Catalog
+                {dt("catalogEyebrow")}
               </p>
               <h2 className="font-display text-ink-900 mt-1 text-2xl font-bold">
                 {t("products")}
               </h2>
             </div>
             <Link href="/products" className="text-brand-700 text-sm font-bold">
-              View all
+              {dt("viewAll")}
             </Link>
           </div>
           <div className="grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4">

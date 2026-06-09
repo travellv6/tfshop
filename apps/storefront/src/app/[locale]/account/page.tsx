@@ -95,7 +95,7 @@ export default function AccountPage() {
               </div>
               <div>
                 <p className="text-brand-700 text-xs font-bold uppercase tracking-wide">
-                  Verified Buyer
+                  {t("verifiedBuyer")}
                 </p>
                 <h1 className="font-display text-ink-900 mt-1 text-3xl font-bold">
                   {displayName}
@@ -106,12 +106,9 @@ export default function AccountPage() {
             <div className="bg-brand-50 rounded-lg p-5">
               <ShieldCheck className="text-brand-700 mb-3 h-7 w-7" />
               <p className="text-ink-900 text-sm font-extrabold">
-                Buyer protection active
+                {t("protectionActive")}
               </p>
-              <p className="text-ink-500 mt-1 text-xs">
-                Orders, RFQs, and addresses are connected to your TFShop buyer
-                profile.
-              </p>
+              <p className="text-ink-500 mt-1 text-xs">{t("protectionDesc")}</p>
             </div>
           </div>
         </section>

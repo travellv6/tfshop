@@ -1,12 +1,15 @@
 "use client"
 
 import { Link } from "@/i18n/routing"
+import { useTranslations } from "next-intl"
 import { ArrowRight, PackageCheck } from "lucide-react"
 import { useOrders } from "@/hooks/use-order"
 import { EmptyState, StatusPill } from "@/components/ui/storefront"
 import { formatStorefrontDate } from "@/lib/format"
 
 export default function OrdersPage() {
+  const t = useTranslations("orders")
+  const ct = useTranslations("common")
   const { data: orders, isLoading } = useOrders()
 
   return (
@@ -14,15 +17,15 @@ export default function OrdersPage() {
       <div className="mx-auto max-w-[980px] px-4 py-6 sm:px-6 lg:px-8">
         <div className="mb-6">
           <p className="text-brand-700 text-xs font-bold uppercase tracking-wide">
-            Buyer Account
+            {t("eyebrow")}
           </p>
           <h1 className="font-display text-ink-900 mt-2 text-3xl font-bold">
-            My Orders
+            {t("title")}
           </h1>
         </div>
 
         {isLoading ? (
-          <p className="text-ink-500 py-10 text-center">Loading...</p>
+          <p className="text-ink-500 py-10 text-center">{ct("loading")}</p>
         ) : orders && orders.length > 0 ? (
           <div className="panel divide-surface-200 divide-y overflow-hidden">
             {orders.map((order: any) => (
@@ -37,7 +40,9 @@ export default function OrdersPage() {
                   </span>
                   <div>
                     <p className="text-ink-900 font-extrabold">
-                      Order #{order.display_id || order.id.slice(-8)}
+                      {t("orderNumber", {
+                        id: order.display_id || order.id.slice(-8),
+                      })}
                     </p>
                     <p className="text-ink-500 text-sm">
                       {formatStorefrontDate(order.created_at)}
@@ -45,7 +50,7 @@ export default function OrdersPage() {
                   </div>
                 </div>
                 <StatusPill className="bg-brand-50 text-brand-700 ring-brand-100">
-                  {order.status || "Processing"}
+                  {order.status || t("processing")}
                 </StatusPill>
                 <div className="flex items-center justify-between gap-4 sm:justify-end">
                   <p className="text-ink-900 font-extrabold">
@@ -58,11 +63,11 @@ export default function OrdersPage() {
           </div>
         ) : (
           <EmptyState
-            title="No orders yet"
-            description="Your completed orders will appear here after checkout."
+            title={t("noOrdersTitle")}
+            description={t("noOrdersDesc")}
             action={
               <Link href="/products" className="btn-primary">
-                Browse products
+                {t("browseProducts")}
               </Link>
             }
           />

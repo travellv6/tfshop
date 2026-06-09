@@ -65,7 +65,7 @@ export default function ProductDetailPage() {
     const map: Record<string, Record<string, string[]>> = {}
     variants.forEach((v: any) => {
       v.options?.forEach((opt: any) => {
-        const optTitle = opt.option?.title || "Option"
+        const optTitle = opt.option?.title || t("option")
         if (!map[optTitle]) map[optTitle] = {}
         if (!map[optTitle][opt.value]) map[optTitle][opt.value] = []
         map[optTitle][opt.value].push(v.id)

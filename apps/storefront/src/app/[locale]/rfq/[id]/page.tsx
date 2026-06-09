@@ -40,31 +40,28 @@ export default function RFQDetailPage() {
       factory_id: null,
       customer_email: "buyer@example.com",
       target_price: "$1.45 - $1.85",
-      requirements:
-        "Please quote EXW and FOB Shenzhen pricing for mixed color cartons with EN71/CPC documents.",
-      quoted_lead_time: "18-25 days",
-      quoted_terms: "30% deposit, 70% before shipment",
+      requirements: t("demo.requirements"),
+      quoted_lead_time: t("demo.leadTime"),
+      quoted_terms: t("demo.terms"),
       updated_at: listItem.created_at,
       messages: [
         {
           id: "m1",
           rfq_id: listItem.id,
           sender_type: "buyer" as const,
-          content:
-            "We are looking for a first test order with sample approval before mass production.",
+          content: t("demo.buyerMessage"),
           created_at: listItem.created_at,
         },
         {
           id: "m2",
           rfq_id: listItem.id,
           sender_type: "seller" as const,
-          content:
-            "Thanks. We can support samples within 5 days and provide EN71/CPC files with the quote.",
+          content: t("demo.sellerMessage"),
           created_at: "2026-01-08T07:00:00.000Z",
         },
       ],
     }
-  }, [id])
+  }, [id, t])
 
   const rfq = rfqData || fallback
 
@@ -118,7 +115,7 @@ export default function RFQDetailPage() {
               label={t("quantity")}
               value={
                 rfq.quantity
-                  ? `${formatStorefrontNumber(rfq.quantity)} pcs`
+                  ? `${formatStorefrontNumber(rfq.quantity)} ${t("pcs")}`
                   : "-"
               }
             />

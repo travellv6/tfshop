@@ -143,6 +143,7 @@
     "factory": "工厂",
     "viewFactory": "查看工厂",
     "selectVariant": "选择规格",
+    "option": "选项",
     "pleaseSelect": "请选择",
     "quantity": "数量",
     "addedToCart": "已添加！",
@@ -210,6 +211,7 @@
     "rfqBasket": "询价篮",
     "estTotalQty": "预计总数量",
     "pcs": "件",
+    "moqLabel": "MOQ",
     "targetPriceRange": "目标价格区间",
     "submitRfq": "提交询价（{count}）",
     "requestSample": "申请样品",
@@ -402,10 +404,12 @@
     "title": "询价",
     "submit": "提交询价",
     "submitting": "提交中...",
-    "cancel": "Cancel",
+    "cancel": "取消",
     "myInquiries": "我的询价",
     "quantity": "数量",
+    "pcs": "件",
     "targetPrice": "目标价格",
+    "targetPricePlaceholder": "例如 $5.00/件",
     "requirements": "需求说明",
     "requirementsPlaceholder": "描述您的需求、定制要求、交货时间等",
     "product": "产品",
@@ -452,6 +456,13 @@
     "buyerProtection": "买家保障",
     "buyerProtectionDesc": "接受最终报价前，请确认样品、认证、付款条款和运输安排。",
     "generalSourcingRequest": "通用采购需求",
+    "demo": {
+      "requirements": "请分别报价 EXW 和 FOB 深圳价格，混色外箱，并提供 EN71/CPC 文件。",
+      "leadTime": "18-25 天",
+      "terms": "30% 定金，70% 发货前付清",
+      "buyerMessage": "我们计划先做首批测试订单，量产前需要先确认样品。",
+      "sellerMessage": "谢谢。我们可在 5 天内提供样品，并随报价提供 EN71/CPC 文件。"
+    },
     "status": {
       "submitted": "已提交",
       "reviewing": "审核中",
@@ -463,6 +474,9 @@
   },
   "account": {
     "title": "我的账户",
+    "verifiedBuyer": "认证买家",
+    "protectionActive": "买家保障已启用",
+    "protectionDesc": "订单、询价和地址都会关联到你的 TFShop 买家资料。",
     "loginPrompt": "请登录以管理您的账户",
     "myOrders": "我的订单",
     "myOrdersDesc": "查看订单历史和物流追踪",
@@ -475,6 +489,8 @@
   },
   "address": {
     "title": "我的地址",
+    "eyebrow": "买家资料",
+    "description": "提前保存样品、拼柜发货和复购订单的交付地址。",
     "addNew": "新增地址",
     "edit": "编辑",
     "delete": "删除",
@@ -492,6 +508,85 @@
     "city": "城市",
     "province": "省份 / 州",
     "postalCode": "邮编",
-    "country": "国家"
+    "country": "国家",
+    "formDesc": "该地址可用于结账和 RFQ 样品申请。",
+    "noAddressesDesc": "添加交付地址，加快样品、结账和供应商协同。",
+    "assuranceTitle": "已适配贸易保障",
+    "assuranceDesc": "保存地址有助于供应商准确报价运费，并让买家保障绑定到正确目的地。",
+    "coverageTitle": "地址覆盖",
+    "saved": "已保存"
+  },
+  "orders": {
+    "eyebrow": "买家账户",
+    "title": "我的订单",
+    "orderNumber": "订单 #{id}",
+    "processing": "处理中",
+    "noOrdersTitle": "暂无订单",
+    "noOrdersDesc": "完成结账后，你的订单会显示在这里。",
+    "browseProducts": "浏览产品"
+  },
+  "orderDetail": {
+    "notFound": "未找到订单",
+    "back": "返回订单",
+    "eyebrow": "订单详情",
+    "orderNumber": "订单 #{id}",
+    "placedOn": "下单时间 {date}",
+    "processing": "处理中",
+    "items": "商品",
+    "qty": "数量",
+    "shippingAddress": "收货地址",
+    "totals": "金额汇总",
+    "subtotal": "小计",
+    "shipping": "运费",
+    "tax": "税费",
+    "total": "合计"
+  },
+  "factoriesPage": {
+    "eyebrow": "供应商网络",
+    "description": "发现已审核玩具工厂，支持低 MOQ、出口认证、样品服务和快速 RFQ 响应。",
+    "supplierStat": "覆盖主要玩具产业集群的认证供应商",
+    "searchPlaceholder": "搜索工厂、品类、省份...",
+    "sectionEyebrow": "认证供应商",
+    "sectionTitle": "面向出口订单的玩具工厂",
+    "sectionDesc": "工厂档案包含认证、响应速度、产能和采购支持信息。"
+  },
+  "factoryDetail": {
+    "verifiedSupplier": "认证供应商",
+    "fallbackDescription": "已认证玩具制造商，支持出口认证、样品服务和快速 RFQ 流程。",
+    "metrics": {
+      "established": "成立时间",
+      "capacity": "产能",
+      "employees": "员工规模",
+      "rating": "评分"
+    },
+    "fallbackYears": "9 年",
+    "fallbackCapacity": "280,000 件",
+    "quoteTitle": "申请工厂报价",
+    "quoteDesc": "将需求直接发送给该供应商，并在 RFQ 中心比较报价条款。",
+    "benefits": {
+      "oem": "OEM/ODM 支持",
+      "sample": "可提供样品",
+      "certificates": "认证文件"
+    },
+    "catalogEyebrow": "工厂产品目录",
+    "viewAll": "查看全部"
+  },
+  "checkoutSuccess": {
+    "eyebrow": "订单已确认",
+    "title": "你的工厂订单已提交。",
+    "description": "订单已成功记录。供应商协同、履约状态和买家保障信息都会持续关联到该订单。",
+    "orderId": "订单 ID",
+    "viewOrder": "查看订单",
+    "continueShopping": "继续采购",
+    "nextTitle": "接下来会发生什么",
+    "loading": "加载中...",
+    "steps": {
+      "supplierTitle": "供应商接收订单",
+      "supplierDesc": "我们会发送已确认的订单详情。",
+      "fulfillmentTitle": "履约开始",
+      "fulfillmentDesc": "工厂状态更新会显示在你的账户中。",
+      "supportTitle": "支持保持开启",
+      "supportDesc": "买家保障将继续关联。"
+    }
   }
 }

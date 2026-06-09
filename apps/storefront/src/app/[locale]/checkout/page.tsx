@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { Link, useRouter } from "@/i18n/routing"
+import { useTranslations } from "next-intl"
 import {
   CheckCircle2,
   CreditCard,
@@ -31,9 +32,8 @@ interface AddressForm {
   phone: string
 }
 
-const STEP_LABELS = ["Address", "Shipping", "Payment", "Review"] as const
-
 export default function CheckoutPage() {
+  const t = useTranslations("checkout")
   const { cart, cartId, refreshCart } = useCart()
   const router = useRouter()
   const [step, setStep] = useState(1)
@@ -57,6 +57,23 @@ export default function CheckoutPage() {
   const [paymentMethod, setPaymentMethod] = useState<
     "stripe" | "bank_transfer"
   >("stripe")
+
+  const stepLabels = [
+    t("steps.address"),
+    t("steps.shipping"),
+    t("steps.payment"),
+    t("steps.review"),
+  ]
+
+  const countryOptions = [
+    ["US", t("countries.US")],
+    ["CA", t("countries.CA")],
+    ["GB", t("countries.GB")],
+    ["DE", t("countries.DE")],
+    ["FR", t("countries.FR")],
+    ["JP", t("countries.JP")],
+    ["CN", t("countries.CN")],
+  ] as const
 
   const updateAddress = (field: keyof AddressForm, value: string) => {
     setAddress((prev) => ({ ...prev, [field]: value }))
@@ -88,7 +105,7 @@ export default function CheckoutPage() {
       setShippingOptions(result.shipping_options || [])
       setStep(2)
     } catch (err: any) {
-      setError(err?.message || "Failed to save address")
+      setError(err?.message || t("errors.saveAddress"))
     } finally {
       setIsLoading(false)
     }
@@ -108,7 +125,7 @@ export default function CheckoutPage() {
       await refreshCart()
       setStep(3)
     } catch (err: any) {
-      setError(err?.message || "Failed to add shipping method")
+      setError(err?.message || t("errors.shipping"))
     } finally {
       setIsLoading(false)
     }
@@ -143,10 +160,10 @@ export default function CheckoutPage() {
         localStorage.removeItem("tfshop_cart_id")
         router.push(`/checkout/success?order_id=${order.id}`)
       } else {
-        setError(result.error?.message || "Order completion failed")
+        setError(result.error?.message || t("errors.completion"))
       }
     } catch (err: any) {
-      setError(err?.message || "Failed to complete order")
+      setError(err?.message || t("errors.completeOrder"))
     } finally {
       setIsLoading(false)
     }
@@ -157,11 +174,11 @@ export default function CheckoutPage() {
       <div className="bg-surface-50">
         <div className="mx-auto max-w-[760px] px-4 py-16 sm:px-6 lg:px-8">
           <EmptyState
-            title="Your cart is empty"
-            description="Add products to the cart or send an RFQ when you need supplier pricing first."
+            title={t("emptyTitle")}
+            description={t("emptyDesc")}
             action={
               <Link href="/products" className="btn-primary">
-                Browse products
+                {t("browseProducts")}
               </Link>
             }
           />
@@ -177,18 +194,17 @@ export default function CheckoutPage() {
           <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
             <div>
               <p className="text-brand-700 text-xs font-bold uppercase tracking-wide">
-                Secure Checkout
+                {t("eyebrow")}
               </p>
               <h1 className="font-display text-ink-900 mt-2 text-3xl font-bold">
-                Complete Your Factory Order
+                {t("title")}
               </h1>
               <p className="text-ink-500 mt-2 max-w-2xl text-sm">
-                Confirm address, shipping, payment, and final order details
-                before the supplier receives your purchase.
+                {t("description")}
               </p>
             </div>
             <div className="flex flex-wrap gap-2">
-              {STEP_LABELS.map((label, i) => (
+              {stepLabels.map((label, i) => (
                 <StepPill
                   key={label}
                   label={label}
@@ -212,52 +228,52 @@ export default function CheckoutPage() {
               <section>
                 <SectionTitle
                   icon={<MapPin className="h-5 w-5" />}
-                  title="Shipping Address"
-                  description="Use the delivery destination that should appear on supplier documents."
+                  title={t("shippingAddress")}
+                  description={t("shippingAddressDesc")}
                 />
                 <div className="grid gap-4 sm:grid-cols-2">
                   <FormField
-                    label="Email"
+                    label={t("email")}
                     type="email"
                     value={address.email}
                     onChange={(value) => updateAddress("email", value)}
-                    placeholder="you@example.com"
+                    placeholder={t("emailPlaceholder")}
                     className="sm:col-span-2"
                   />
                   <FormField
-                    label="First Name"
+                    label={t("firstName")}
                     value={address.first_name}
                     onChange={(value) => updateAddress("first_name", value)}
                   />
                   <FormField
-                    label="Last Name"
+                    label={t("lastName")}
                     value={address.last_name}
                     onChange={(value) => updateAddress("last_name", value)}
                   />
                   <FormField
-                    label="Address"
+                    label={t("address")}
                     value={address.address_1}
                     onChange={(value) => updateAddress("address_1", value)}
                     className="sm:col-span-2"
                   />
                   <FormField
-                    label="City"
+                    label={t("city")}
                     value={address.city}
                     onChange={(value) => updateAddress("city", value)}
                   />
                   <FormField
-                    label="State / Province"
+                    label={t("province")}
                     value={address.province}
                     onChange={(value) => updateAddress("province", value)}
                   />
                   <FormField
-                    label="Postal Code"
+                    label={t("postalCode")}
                     value={address.postal_code}
                     onChange={(value) => updateAddress("postal_code", value)}
                   />
                   <div>
                     <label className="text-ink-700 mb-1.5 block text-sm font-bold">
-                      Country
+                      {t("country")}
                     </label>
                     <select
                       value={address.country_code}
@@ -266,17 +282,15 @@ export default function CheckoutPage() {
                       }
                       className="border-surface-300 text-ink-900 focus:border-brand-500 focus:ring-brand-100 w-full rounded-lg border bg-white px-3 py-3 text-sm outline-none transition focus:ring-2"
                     >
-                      <option value="US">United States</option>
-                      <option value="CA">Canada</option>
-                      <option value="GB">United Kingdom</option>
-                      <option value="DE">Germany</option>
-                      <option value="FR">France</option>
-                      <option value="JP">Japan</option>
-                      <option value="CN">China</option>
+                      {countryOptions.map(([value, label]) => (
+                        <option key={value} value={value}>
+                          {label}
+                        </option>
+                      ))}
                     </select>
                   </div>
                   <FormField
-                    label="Phone"
+                    label={t("phone")}
                     type="tel"
                     value={address.phone}
                     onChange={(value) => updateAddress("phone", value)}
@@ -284,9 +298,7 @@ export default function CheckoutPage() {
                   />
                 </div>
                 <ActionBar
-                  primaryLabel={
-                    isLoading ? "Saving..." : "Continue to Shipping"
-                  }
+                  primaryLabel={isLoading ? t("saving") : t("continueShipping")}
                   onPrimary={saveAddress}
                   primaryDisabled={isLoading}
                 />
@@ -297,12 +309,12 @@ export default function CheckoutPage() {
               <section>
                 <SectionTitle
                   icon={<Truck className="h-5 w-5" />}
-                  title="Shipping Method"
-                  description="Choose the freight option available for this cart and region."
+                  title={t("shippingMethod")}
+                  description={t("shippingMethodDesc")}
                 />
                 {shippingOptions.length === 0 ? (
                   <div className="border-surface-300 bg-surface-50 text-ink-500 rounded-lg border border-dashed p-8 text-center text-sm">
-                    No shipping options available for your region.
+                    {t("noShippingOptions")}
                   </div>
                 ) : (
                   <div className="space-y-3">
@@ -329,24 +341,24 @@ export default function CheckoutPage() {
                               {option.name || option.id}
                             </span>
                             <span className="text-ink-500 text-xs">
-                              Trackable factory shipment
+                              {t("trackableShipment")}
                             </span>
                           </span>
                         </span>
                         <span className="text-ink-900 text-sm font-extrabold">
                           {option.amount
                             ? formatCurrency(option.amount)
-                            : "Free"}
+                            : t("free")}
                         </span>
                       </label>
                     ))}
                   </div>
                 )}
                 <ActionBar
-                  primaryLabel={isLoading ? "Saving..." : "Continue to Payment"}
+                  primaryLabel={isLoading ? t("saving") : t("continuePayment")}
                   onPrimary={saveShipping}
                   primaryDisabled={isLoading || !selectedShipping}
-                  secondaryLabel="Back"
+                  secondaryLabel={t("back")}
                   onSecondary={() => setStep(1)}
                 />
               </section>
@@ -356,29 +368,29 @@ export default function CheckoutPage() {
               <section>
                 <SectionTitle
                   icon={<Lock className="h-5 w-5" />}
-                  title="Payment Method"
-                  description="Select how this order should be settled."
+                  title={t("paymentMethod")}
+                  description={t("paymentMethodDesc")}
                 />
                 <div className="grid gap-3">
                   <PaymentOption
                     active={paymentMethod === "stripe"}
                     icon={<CreditCard className="h-5 w-5" />}
-                    title="Credit Card"
-                    description="Pay securely with Stripe."
+                    title={t("creditCard")}
+                    description={t("creditCardDesc")}
                     onClick={() => setPaymentMethod("stripe")}
                   />
                   <PaymentOption
                     active={paymentMethod === "bank_transfer"}
                     icon={<Landmark className="h-5 w-5" />}
-                    title="Bank Transfer"
-                    description="Use a manual bank transfer for larger factory orders."
+                    title={t("bankTransfer")}
+                    description={t("bankTransferDesc")}
                     onClick={() => setPaymentMethod("bank_transfer")}
                   />
                 </div>
                 <ActionBar
-                  primaryLabel="Review Order"
+                  primaryLabel={t("reviewOrder")}
                   onPrimary={savePayment}
-                  secondaryLabel="Back"
+                  secondaryLabel={t("back")}
                   onSecondary={() => setStep(2)}
                 />
               </section>
@@ -388,14 +400,14 @@ export default function CheckoutPage() {
               <section>
                 <SectionTitle
                   icon={<PackageCheck className="h-5 w-5" />}
-                  title="Review Your Order"
-                  description="Make one last check before the order is confirmed."
+                  title={t("reviewTitle")}
+                  description={t("reviewDesc")}
                 />
 
                 <div className="border-surface-200 overflow-hidden rounded-lg border">
                   <div className="border-surface-200 bg-surface-50 border-b px-4 py-3">
                     <h3 className="text-ink-900 text-sm font-extrabold">
-                      Items
+                      {t("items")}
                     </h3>
                   </div>
                   {(cart?.items || []).map((item: any) => (
@@ -413,7 +425,7 @@ export default function CheckoutPage() {
                           {item.title}
                         </p>
                         <p className="text-ink-500 text-xs">
-                          Qty: {item.quantity}
+                          {t("qty")}: {item.quantity}
                         </p>
                       </div>
                       <p className="text-ink-900 text-sm font-extrabold">
@@ -426,7 +438,7 @@ export default function CheckoutPage() {
                 <div className="mt-5 grid gap-4 md:grid-cols-2">
                   <div className="border-surface-200 rounded-lg border bg-white p-4">
                     <h3 className="text-ink-900 mb-3 text-sm font-extrabold">
-                      Shipping Address
+                      {t("shippingAddress")}
                     </h3>
                     <p className="text-ink-600 text-sm leading-6">
                       {address.first_name} {address.last_name}
@@ -438,23 +450,23 @@ export default function CheckoutPage() {
                   </div>
                   <div className="border-surface-200 rounded-lg border bg-white p-4">
                     <h3 className="text-ink-900 mb-3 text-sm font-extrabold">
-                      Payment
+                      {t("payment")}
                     </h3>
                     <p className="text-ink-600 text-sm leading-6">
                       {paymentMethod === "stripe"
-                        ? "Credit Card via Stripe"
-                        : "Manual Bank Transfer"}
+                        ? t("creditCardViaStripe")
+                        : t("manualBankTransfer")}
                       <br />
-                      Buyer protection and order records stay active.
+                      {t("protectionActive")}
                     </p>
                   </div>
                 </div>
 
                 <ActionBar
-                  primaryLabel={isLoading ? "Placing Order..." : "Place Order"}
+                  primaryLabel={isLoading ? t("placingOrder") : t("placeOrder")}
                   onPrimary={completeOrder}
                   primaryDisabled={isLoading}
-                  secondaryLabel="Back"
+                  secondaryLabel={t("back")}
                   onSecondary={() => setStep(3)}
                 />
               </section>
@@ -634,13 +646,22 @@ function ActionBar({
 }
 
 function OrderSummary({ cart }: { cart: any }) {
+  const t = useTranslations("checkout")
+  const protectionItems = [
+    t("protectionItems.payment"),
+    t("protectionItems.supplier"),
+    t("protectionItems.support"),
+  ]
+
   return (
     <aside className="space-y-5">
       <div className="panel p-5">
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-ink-900 text-lg font-extrabold">Order Summary</h2>
+          <h2 className="text-ink-900 text-lg font-extrabold">
+            {t("summary")}
+          </h2>
           <span className="bg-brand-50 text-brand-700 ring-brand-100 rounded-full px-2.5 py-1 text-xs font-bold ring-1">
-            {(cart?.items || []).length} items
+            {t("itemsCount", { count: (cart?.items || []).length })}
           </span>
         </div>
         <div className="max-h-[360px] space-y-4 overflow-auto pr-1">
@@ -655,7 +676,9 @@ function OrderSummary({ cart }: { cart: any }) {
                 <p className="text-ink-900 line-clamp-2 text-sm font-bold">
                   {item.title}
                 </p>
-                <p className="text-ink-500 mt-1 text-xs">Qty {item.quantity}</p>
+                <p className="text-ink-500 mt-1 text-xs">
+                  {t("qty")} {item.quantity}
+                </p>
               </div>
               <p className="text-ink-900 text-sm font-extrabold">
                 {formatCurrency(item.subtotal || 0)}
@@ -665,17 +688,20 @@ function OrderSummary({ cart }: { cart: any }) {
         </div>
         <div className="border-surface-200 mt-5 space-y-3 border-t pt-4 text-sm">
           <TotalLine
-            label="Subtotal"
+            label={t("subtotal")}
             value={formatCurrency(cart?.subtotal || 0)}
           />
           <TotalLine
-            label="Shipping"
+            label={t("shipping")}
             value={formatCurrency(cart?.shipping_total || 0)}
           />
-          <TotalLine label="Tax" value={formatCurrency(cart?.tax_total || 0)} />
+          <TotalLine
+            label={t("tax")}
+            value={formatCurrency(cart?.tax_total || 0)}
+          />
           <div className="border-surface-200 border-t pt-3">
             <TotalLine
-              label="Total"
+              label={t("total")}
               value={formatCurrency(cart?.total || 0)}
               strong
             />
@@ -686,14 +712,10 @@ function OrderSummary({ cart }: { cart: any }) {
       <div className="panel p-5">
         <ShieldCheck className="text-brand-700 mb-3 h-7 w-7" />
         <h3 className="text-ink-900 text-sm font-extrabold">
-          Buyer Protection
+          {t("buyerProtection")}
         </h3>
         <ul className="text-ink-600 mt-3 space-y-2 text-sm">
-          {[
-            "Secure payment record",
-            "Verified supplier order trail",
-            "After-sales support routing",
-          ].map((item) => (
+          {protectionItems.map((item) => (
             <li key={item} className="flex items-center gap-2">
               <CheckCircle2 className="text-brand-700 h-4 w-4" />
               {item}

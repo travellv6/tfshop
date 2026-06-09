@@ -143,6 +143,7 @@
     "factory": "المصنع",
     "viewFactory": "عرض المصنع",
     "selectVariant": "اختر المتغير",
+    "option": "خيار",
     "pleaseSelect": "يرجى الاختيار",
     "quantity": "الكمية",
     "addedToCart": "تمت الإضافة!",
@@ -210,6 +211,7 @@
     "rfqBasket": "سلة RFQ",
     "estTotalQty": "إجمالي الكمية التقديري",
     "pcs": "قطعة",
+    "moqLabel": "MOQ",
     "targetPriceRange": "نطاق السعر المستهدف",
     "submitRfq": "إرسال RFQ ({count})",
     "requestSample": "طلب عينة",
@@ -402,10 +404,12 @@
     "title": "طلب عرض سعر",
     "submit": "إرسال الاستفسار",
     "submitting": "جاري الإرسال...",
-    "cancel": "Cancel",
+    "cancel": "إلغاء",
     "myInquiries": "استفساراتي",
     "quantity": "الكمية",
+    "pcs": "قطعة",
     "targetPrice": "السعر المستهدف",
+    "targetPricePlaceholder": "مثال: $5.00/قطعة",
     "requirements": "المتطلبات",
     "requirementsPlaceholder": "صف متطلباتك، احتياجات التخصيص، الجدول الزمني للتسليم، إلخ.",
     "product": "المنتج",
@@ -452,6 +456,13 @@
     "buyerProtection": "حماية المشتري",
     "buyerProtectionDesc": "أكد العينات والشهادات وشروط الدفع والشحن قبل قبول العرض النهائي.",
     "generalSourcingRequest": "طلب توريد عام",
+    "demo": {
+      "requirements": "يرجى تسعير EXW وFOB Shenzhen لكرتون ألوان مختلطة مع مستندات EN71/CPC.",
+      "leadTime": "18-25 يوماً",
+      "terms": "دفعة مقدمة 30% و70% قبل الشحن",
+      "buyerMessage": "نبحث عن طلب اختباري أول مع اعتماد عينة قبل الإنتاج الكمي.",
+      "sellerMessage": "شكراً. يمكننا توفير عينات خلال 5 أيام وتقديم ملفات EN71/CPC مع العرض."
+    },
     "status": {
       "submitted": "تم الإرسال",
       "reviewing": "قيد المراجعة",
@@ -463,6 +474,9 @@
   },
   "account": {
     "title": "حسابي",
+    "verifiedBuyer": "مشتري موثق",
+    "protectionActive": "حماية المشتري نشطة",
+    "protectionDesc": "ترتبط الطلبات وطلبات RFQ والعناوين بملف مشتري TFShop الخاص بك.",
     "loginPrompt": "يرجى تسجيل الدخول لإدارة حسابك",
     "myOrders": "طلباتي",
     "myOrdersDesc": "عرض سجل الطلبات والتتبع",
@@ -475,6 +489,8 @@
   },
   "address": {
     "title": "عناويني",
+    "eyebrow": "ملف المشتري",
+    "description": "احتفظ بوجهات التسليم جاهزة للعينات والشحنات المجمعة وطلبات الألعاب المتكررة.",
     "addNew": "إضافة عنوان جديد",
     "edit": "تعديل",
     "delete": "حذف",
@@ -492,6 +508,85 @@
     "city": "المدينة",
     "province": "المنطقة / المحافظة",
     "postalCode": "الرمز البريدي",
-    "country": "البلد"
+    "country": "البلد",
+    "formDesc": "يمكن استخدام هذا العنوان أثناء الدفع وطلبات عينات RFQ.",
+    "noAddressesDesc": "أضف عنوان تسليم لتسريع العينات والدفع والتنسيق مع الموردين.",
+    "assuranceTitle": "جاهز لضمان التجارة",
+    "assuranceDesc": "تساعد العناوين المحفوظة الموردين على تسعير الشحن بدقة وربط حماية المشتري بالوجهة الصحيحة.",
+    "coverageTitle": "تغطية العناوين",
+    "saved": "محفوظ"
+  },
+  "orders": {
+    "eyebrow": "حساب المشتري",
+    "title": "طلباتي",
+    "orderNumber": "طلب #{id}",
+    "processing": "قيد المعالجة",
+    "noOrdersTitle": "لا توجد طلبات بعد",
+    "noOrdersDesc": "ستظهر طلباتك المكتملة هنا بعد الدفع.",
+    "browseProducts": "تصفح المنتجات"
+  },
+  "orderDetail": {
+    "notFound": "لم يتم العثور على الطلب",
+    "back": "العودة إلى الطلبات",
+    "eyebrow": "تفاصيل الطلب",
+    "orderNumber": "طلب #{id}",
+    "placedOn": "تم الطلب في {date}",
+    "processing": "قيد المعالجة",
+    "items": "العناصر",
+    "qty": "الكمية",
+    "shippingAddress": "عنوان الشحن",
+    "totals": "الإجماليات",
+    "subtotal": "المجموع الفرعي",
+    "shipping": "الشحن",
+    "tax": "الضريبة",
+    "total": "الإجمالي"
+  },
+  "factoriesPage": {
+    "eyebrow": "شبكة الموردين",
+    "description": "اكتشف مصانع ألعاب مدققة مع حد أدنى منخفض للطلب وشهادات تصدير وخدمة عينات واستجابة RFQ سريعة.",
+    "supplierStat": "موردون موثقون عبر مراكز الألعاب الرئيسية",
+    "searchPlaceholder": "ابحث عن مصانع أو فئات أو مقاطعات...",
+    "sectionEyebrow": "موردون موثقون",
+    "sectionTitle": "مصانع ألعاب جاهزة للتصدير",
+    "sectionDesc": "تتضمن ملفات المصنع الشهادات وسرعة الاستجابة والقدرة الإنتاجية ودعم التوريد."
+  },
+  "factoryDetail": {
+    "verifiedSupplier": "مورد موثق",
+    "fallbackDescription": "مصنع ألعاب موثق يدعم شهادات التصدير وخدمة العينات وتدفقات RFQ سريعة.",
+    "metrics": {
+      "established": "تأسس",
+      "capacity": "القدرة",
+      "employees": "الموظفون",
+      "rating": "التقييم"
+    },
+    "fallbackYears": "9 سنوات",
+    "fallbackCapacity": "280,000 قطعة",
+    "quoteTitle": "اطلب عرض سعر من المصنع",
+    "quoteDesc": "أرسل المتطلبات مباشرة إلى هذا المورد وقارن شروط العرض في مركز RFQ.",
+    "benefits": {
+      "oem": "دعم OEM/ODM",
+      "sample": "عينة متاحة",
+      "certificates": "ملفات الشهادات"
+    },
+    "catalogEyebrow": "كتالوج المصنع",
+    "viewAll": "عرض الكل"
+  },
+  "checkoutSuccess": {
+    "eyebrow": "تم تأكيد الطلب",
+    "title": "تم إرسال طلب المصنع الخاص بك.",
+    "description": "تم تسجيل الطلب بنجاح. سيبقى تنسيق المورد وحالة التنفيذ وتفاصيل حماية المشتري مرتبطة بهذا الطلب.",
+    "orderId": "معرّف الطلب",
+    "viewOrder": "عرض الطلب",
+    "continueShopping": "متابعة التسوق",
+    "nextTitle": "ما الذي يحدث بعد ذلك",
+    "loading": "جاري التحميل...",
+    "steps": {
+      "supplierTitle": "يتلقى المورد الطلب",
+      "supplierDesc": "نرسل تفاصيل الطلب المؤكدة.",
+      "fulfillmentTitle": "يبدأ التنفيذ",
+      "fulfillmentDesc": "تظهر تحديثات المصنع في حسابك.",
+      "supportTitle": "يبقى الدعم متاحاً",
+      "supportDesc": "تظل حماية المشتري مرتبطة."
+    }
   }
 }

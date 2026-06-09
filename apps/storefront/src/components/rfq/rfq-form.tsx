@@ -92,7 +92,7 @@ export function RFQForm({
           type="text"
           value={targetPrice}
           onChange={(e) => setTargetPrice(e.target.value)}
-          placeholder="e.g. $5.00/pc"
+          placeholder={t("targetPricePlaceholder")}
           className="border-surface-300 focus:border-brand-500 focus:ring-brand-100 mt-1 block w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2"
         />
       </div>

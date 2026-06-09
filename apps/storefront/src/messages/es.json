@@ -143,6 +143,7 @@
     "factory": "Fábrica",
     "viewFactory": "Ver fábrica",
     "selectVariant": "Seleccionar variante",
+    "option": "Opción",
     "pleaseSelect": "Por favor seleccione",
     "quantity": "Cantidad",
     "addedToCart": "¡Añadido!",
@@ -210,6 +211,7 @@
     "rfqBasket": "Cesta RFQ",
     "estTotalQty": "Cantidad total estimada",
     "pcs": "uds",
+    "moqLabel": "MOQ",
     "targetPriceRange": "Rango de precio objetivo",
     "submitRfq": "Enviar RFQ ({count})",
     "requestSample": "Solicitar muestra",
@@ -402,10 +404,12 @@
     "title": "Solicitud de cotización",
     "submit": "Enviar consulta",
     "submitting": "Enviando...",
-    "cancel": "Cancel",
+    "cancel": "Cancelar",
     "myInquiries": "Mis consultas",
     "quantity": "Cantidad",
+    "pcs": "uds",
     "targetPrice": "Precio objetivo",
+    "targetPricePlaceholder": "p. ej. $5.00/ud",
     "requirements": "Requisitos",
     "requirementsPlaceholder": "Describa sus requisitos, necesidades de personalización, plazo de entrega, etc.",
     "product": "Producto",
@@ -452,6 +456,13 @@
     "buyerProtection": "Protección del comprador",
     "buyerProtectionDesc": "Confirme muestras, certificados, términos de pago y envío antes de aceptar la cotización final.",
     "generalSourcingRequest": "Solicitud general de abastecimiento",
+    "demo": {
+      "requirements": "Cotice precios EXW y FOB Shenzhen para cajas de colores mixtos con documentos EN71/CPC.",
+      "leadTime": "18-25 días",
+      "terms": "30% de depósito, 70% antes del envío",
+      "buyerMessage": "Buscamos un primer pedido de prueba con aprobación de muestra antes de la producción en masa.",
+      "sellerMessage": "Gracias. Podemos preparar muestras en 5 días y proporcionar archivos EN71/CPC con la cotización."
+    },
     "status": {
       "submitted": "Enviada",
       "reviewing": "En revisión",
@@ -463,6 +474,9 @@
   },
   "account": {
     "title": "Mi cuenta",
+    "verifiedBuyer": "Comprador verificado",
+    "protectionActive": "Protección del comprador activa",
+    "protectionDesc": "Pedidos, RFQs y direcciones están conectados a su perfil de comprador de TFShop.",
     "loginPrompt": "Inicie sesión para gestionar su cuenta",
     "myOrders": "Mis pedidos",
     "myOrdersDesc": "Ver historial de pedidos y seguimiento",
@@ -475,6 +489,8 @@
   },
   "address": {
     "title": "Mis direcciones",
+    "eyebrow": "Perfil de comprador",
+    "description": "Mantenga destinos de entrega listos para muestras, envíos consolidados y pedidos repetidos de juguetes.",
     "addNew": "Agregar nueva dirección",
     "edit": "Editar",
     "delete": "Eliminar",
@@ -492,6 +508,85 @@
     "city": "Ciudad",
     "province": "Provincia / Estado",
     "postalCode": "Código postal",
-    "country": "País"
+    "country": "País",
+    "formDesc": "Esta dirección puede usarse durante el checkout y solicitudes de muestras RFQ.",
+    "noAddressesDesc": "Agregue una dirección de entrega para acelerar muestras, checkout y coordinación con proveedores.",
+    "assuranceTitle": "Lista para garantía comercial",
+    "assuranceDesc": "Las direcciones guardadas ayudan a los proveedores a cotizar fletes con precisión y mantener la protección del comprador vinculada al destino correcto.",
+    "coverageTitle": "Cobertura de direcciones",
+    "saved": "Guardadas"
+  },
+  "orders": {
+    "eyebrow": "Cuenta de comprador",
+    "title": "Mis pedidos",
+    "orderNumber": "Pedido #{id}",
+    "processing": "En proceso",
+    "noOrdersTitle": "Aún no hay pedidos",
+    "noOrdersDesc": "Sus pedidos completados aparecerán aquí después del checkout.",
+    "browseProducts": "Explorar productos"
+  },
+  "orderDetail": {
+    "notFound": "Pedido no encontrado",
+    "back": "Volver a pedidos",
+    "eyebrow": "Detalle del pedido",
+    "orderNumber": "Pedido #{id}",
+    "placedOn": "Realizado el {date}",
+    "processing": "En proceso",
+    "items": "Artículos",
+    "qty": "Cant.",
+    "shippingAddress": "Dirección de envío",
+    "totals": "Totales",
+    "subtotal": "Subtotal",
+    "shipping": "Envío",
+    "tax": "Impuesto",
+    "total": "Total"
+  },
+  "factoriesPage": {
+    "eyebrow": "Red de proveedores",
+    "description": "Descubra fábricas de juguetes auditadas con MOQ bajo, certificaciones de exportación, servicio de muestras y respuesta RFQ rápida.",
+    "supplierStat": "proveedores verificados en los principales clústeres jugueteros",
+    "searchPlaceholder": "Buscar fábricas, categoría, provincia...",
+    "sectionEyebrow": "Proveedores verificados",
+    "sectionTitle": "Fábricas de juguetes listas para exportar",
+    "sectionDesc": "Los perfiles de fábrica incluyen certificaciones, velocidad de respuesta, capacidad de producción y soporte de abastecimiento."
+  },
+  "factoryDetail": {
+    "verifiedSupplier": "Proveedor verificado",
+    "fallbackDescription": "Fabricante de juguetes verificado con soporte de certificación de exportación, servicio de muestras y flujos RFQ ágiles.",
+    "metrics": {
+      "established": "Fundación",
+      "capacity": "Capacidad",
+      "employees": "Empleados",
+      "rating": "Valoración"
+    },
+    "fallbackYears": "9 años",
+    "fallbackCapacity": "280.000 uds",
+    "quoteTitle": "Solicitar cotización a la fábrica",
+    "quoteDesc": "Envíe requisitos directamente a este proveedor y compare términos de cotización en el Centro RFQ.",
+    "benefits": {
+      "oem": "Soporte OEM/ODM",
+      "sample": "Muestra disponible",
+      "certificates": "Archivos de certificación"
+    },
+    "catalogEyebrow": "Catálogo de fábrica",
+    "viewAll": "Ver todo"
+  },
+  "checkoutSuccess": {
+    "eyebrow": "Pedido confirmado",
+    "title": "Su pedido de fábrica se realizó.",
+    "description": "El pedido se registró correctamente. La coordinación con el proveedor, el estado de cumplimiento y la protección del comprador permanecerán vinculados a este pedido.",
+    "orderId": "ID del pedido",
+    "viewOrder": "Ver pedido",
+    "continueShopping": "Continuar comprando",
+    "nextTitle": "Qué sucede después",
+    "loading": "Cargando...",
+    "steps": {
+      "supplierTitle": "El proveedor recibe el pedido",
+      "supplierDesc": "Enviamos los detalles confirmados del pedido.",
+      "fulfillmentTitle": "Comienza el cumplimiento",
+      "fulfillmentDesc": "Las actualizaciones de fábrica aparecen en su cuenta.",
+      "supportTitle": "El soporte sigue abierto",
+      "supportDesc": "La protección del comprador permanece conectada."
+    }
   }
 }

@@ -9,6 +9,7 @@ import { demoFactories, type StorefrontFactory } from "@/lib/storefront-data"
 
 export default function FactoryListPage() {
   const t = useTranslations()
+  const ft = useTranslations("factoriesPage")
   const { data, isLoading } = useFactories({ limit: 20 })
   const factories: StorefrontFactory[] = data?.factories?.length
     ? data.factories
@@ -21,21 +22,20 @@ export default function FactoryListPage() {
           <div className="grid gap-6 bg-white p-6 lg:grid-cols-[1fr_340px] lg:items-center">
             <div>
               <p className="text-brand-700 text-xs font-bold uppercase tracking-wide">
-                Supplier Network
+                {ft("eyebrow")}
               </p>
               <h1 className="font-display text-ink-900 mt-2 text-4xl font-bold">
                 {t("factory.title")}
               </h1>
               <p className="text-ink-500 mt-3 max-w-2xl text-sm leading-relaxed">
-                Discover audited toy factories with low MOQ support, export
-                certifications, sample service, and fast RFQ response.
+                {ft("description")}
               </p>
             </div>
             <div className="bg-brand-50 rounded-lg p-5">
               <ShieldCheck className="text-brand-700 mb-3 h-8 w-8" />
               <p className="text-ink-900 text-2xl font-extrabold">2,000+</p>
               <p className="text-ink-600 text-sm font-semibold">
-                verified suppliers across major toy clusters
+                {ft("supplierStat")}
               </p>
             </div>
           </div>
@@ -44,16 +44,16 @@ export default function FactoryListPage() {
               <Search className="text-ink-400 absolute left-3 top-3 h-5 w-5" />
               <input
                 className="input-field h-11 pl-10"
-                placeholder="Search factories, category, province..."
+                placeholder={ft("searchPlaceholder")}
               />
             </div>
           </div>
         </section>
 
         <SectionHeader
-          eyebrow="Verified Suppliers"
-          title="Export-ready toy factories"
-          description="Factory profiles include certifications, response speed, production capability, and sourcing support."
+          eyebrow={ft("sectionEyebrow")}
+          title={ft("sectionTitle")}
+          description={ft("sectionDesc")}
         />
 
         {isLoading && !factories.length ? (

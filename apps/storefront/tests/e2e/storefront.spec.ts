@@ -73,6 +73,43 @@ const localizedProductRoutes: Array<{
   },
 ]
 
+const localizedWorkflowRoutes: Array<{
+  path: string
+  expected: string | RegExp
+  englishFallback: string
+}> = [
+  {
+    path: "/zh/account/orders",
+    expected: "暂无订单",
+    englishFallback: "No orders yet",
+  },
+  {
+    path: "/zh/account/addresses",
+    expected: "地址覆盖",
+    englishFallback: "Address Coverage",
+  },
+  {
+    path: "/zh/factories",
+    expected: "面向出口订单的玩具工厂",
+    englishFallback: "Export-ready toy factories",
+  },
+  {
+    path: "/zh/factories/shantou-chenghai-yaxing",
+    expected: "申请工厂报价",
+    englishFallback: "Request a factory quote",
+  },
+  {
+    path: "/zh/rfq/demo-rfq-1001",
+    expected: "请分别报价 EXW 和 FOB 深圳价格",
+    englishFallback: "Please quote EXW and FOB Shenzhen pricing",
+  },
+  {
+    path: "/zh/checkout/success?order_id=test_order",
+    expected: "订单已确认",
+    englishFallback: "Order Confirmed",
+  },
+]
+
 test.beforeEach(async ({ page }) => {
   const clientErrors: string[] = []
 
@@ -130,6 +167,15 @@ for (const route of localizedHomeRoutes) {
 
 for (const route of localizedProductRoutes) {
   test(`localizes buyer products ${route.path}`, async ({ page }) => {
+    await page.goto(route.path)
+
+    await expect(page.locator("body")).toContainText(route.expected)
+    await expect(page.locator("body")).not.toContainText(route.englishFallback)
+  })
+}
+
+for (const route of localizedWorkflowRoutes) {
+  test(`localizes buyer workflow ${route.path}`, async ({ page }) => {
     await page.goto(route.path)
 
     await expect(page.locator("body")).toContainText(route.expected)
@@ -254,6 +300,10 @@ async function mockStoreApi(page: Page) {
     const url = new URL(route.request().url())
     const path = url.pathname
     const method = route.request().method()
+    const localeSource = `${
+      route.request().headers().referer || ""
+    } ${page.url()}`
+    const locale = localeSource.match(/\/(zh|es|ar)(?:\/|$)/)?.[1] || "en"
 
     if (path.startsWith("/store/products")) {
       return fulfillJson(route, {
@@ -296,6 +346,22 @@ async function mockStoreApi(page: Page) {
 
     if (path.startsWith("/store/rfq/")) {
       const id = path.split("/").pop() || "demo-rfq-1001"
+      const rfqCopy =
+        locale === "zh"
+          ? {
+              requirements:
+                "请分别报价 EXW 和 FOB 深圳价格，混色外箱，并提供 EN71/CPC 文件。",
+              leadTime: "18-25 天",
+              terms: "30% 定金，70% 发货前付清",
+              message: "我们计划先做首批测试订单，量产前需要先确认样品。",
+            }
+          : {
+              requirements:
+                "Please quote EXW and FOB Shenzhen pricing with EN71/CPC files.",
+              leadTime: "18-25 days",
+              terms: "30% deposit, 70% before shipment",
+              message: "We need a first test order after sample approval.",
+            }
 
       return fulfillJson(route, {
         rfq: {
@@ -305,17 +371,16 @@ async function mockStoreApi(page: Page) {
           quantity: 500,
           quoted_price: "$1.45 - $1.85",
           target_price: "$1.45 - $1.85",
-          requirements:
-            "Please quote EXW and FOB Shenzhen pricing with EN71/CPC files.",
-          quoted_lead_time: "18-25 days",
-          quoted_terms: "30% deposit, 70% before shipment",
+          requirements: rfqCopy.requirements,
+          quoted_lead_time: rfqCopy.leadTime,
+          quoted_terms: rfqCopy.terms,
           created_at: new Date("2026-01-01T00:00:00Z").toISOString(),
           updated_at: new Date("2026-01-02T00:00:00Z").toISOString(),
           messages: [
             {
               id: "mock-message-1",
               sender_type: "buyer",
-              content: "We need a first test order after sample approval.",
+              content: rfqCopy.message,
               created_at: new Date("2026-01-01T00:00:00Z").toISOString(),
             },
           ],

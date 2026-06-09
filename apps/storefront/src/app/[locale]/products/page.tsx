@@ -383,7 +383,7 @@ export default function ProductListPage() {
                         {product.title}
                       </p>
                       <p className="text-ink-500 mt-1 text-xs">
-                        MOQ: {productMoq(product)} {t("pcs")}
+                        {t("moqLabel")}: {productMoq(product)} {t("pcs")}
                       </p>
                       <p className="text-brand-700 text-xs font-bold">
                         {productPrice(product)}

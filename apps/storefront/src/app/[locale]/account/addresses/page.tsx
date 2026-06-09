@@ -110,14 +110,13 @@ export default function AddressesPage() {
           <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
             <div>
               <p className="text-brand-700 text-xs font-bold uppercase tracking-wide">
-                Buyer Profile
+                {t("eyebrow")}
               </p>
               <h1 className="font-display text-ink-900 mt-2 text-3xl font-bold">
                 {t("title")}
               </h1>
               <p className="text-ink-500 mt-2 max-w-2xl text-sm">
-                Keep delivery destinations ready for samples, consolidated
-                shipments, and repeat toy orders.
+                {t("description")}
               </p>
             </div>
             <button onClick={openCreate} className="btn-coral">
@@ -136,10 +135,7 @@ export default function AddressesPage() {
                     <h2 className="text-ink-900 text-lg font-extrabold">
                       {editingId ? t("update") : t("addNew")}
                     </h2>
-                    <p className="text-ink-500 mt-1 text-sm">
-                      This address can be used during checkout and RFQ sample
-                      requests.
-                    </p>
+                    <p className="text-ink-500 mt-1 text-sm">{t("formDesc")}</p>
                   </div>
                   <button
                     type="button"
@@ -298,7 +294,7 @@ export default function AddressesPage() {
             ) : (
               <EmptyState
                 title={t("noAddresses")}
-                description="Add a delivery address to speed up samples, checkout, and supplier coordination."
+                description={t("noAddressesDesc")}
                 action={
                   <button onClick={openCreate} className="btn-primary">
                     <Plus className="h-4 w-4" />
@@ -313,17 +309,16 @@ export default function AddressesPage() {
             <div className="panel p-5">
               <ShieldCheck className="text-brand-700 mb-3 h-7 w-7" />
               <h2 className="text-ink-900 text-sm font-extrabold">
-                Trade Assurance Ready
+                {t("assuranceTitle")}
               </h2>
               <p className="text-ink-500 mt-2 text-sm leading-6">
-                Saved addresses help suppliers quote freight accurately and keep
-                buyer protection tied to the right destination.
+                {t("assuranceDesc")}
               </p>
             </div>
             <div className="panel overflow-hidden">
               <div className="border-surface-200 bg-brand-50 border-b px-5 py-4">
                 <p className="text-brand-800 text-sm font-extrabold">
-                  Address Coverage
+                  {t("coverageTitle")}
                 </p>
               </div>
               <div className="divide-surface-200 grid grid-cols-2 divide-x">
@@ -332,7 +327,7 @@ export default function AddressesPage() {
                     {addresses.length}
                   </p>
                   <p className="text-ink-400 mt-1 text-xs font-bold uppercase tracking-wide">
-                    Saved
+                    {t("saved")}
                   </p>
                 </div>
                 <div className="p-5">
@@ -344,7 +339,7 @@ export default function AddressesPage() {
                     }
                   </p>
                   <p className="text-ink-400 mt-1 text-xs font-bold uppercase tracking-wide">
-                    Default
+                    {t("default")}
                   </p>
                 </div>
               </div>

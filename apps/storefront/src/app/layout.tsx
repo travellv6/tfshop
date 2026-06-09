@@ -1,9 +1,8 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "TFShop — China Toy Factory Direct",
-  description:
-    "Direct from Chinese toy factories. Low MOQ, factory prices, global shipping.",
+  title: "TFShop",
+  description: "TFShop",
 }
 
 export default function RootLayout({
