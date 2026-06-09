@@ -1,11 +1,13 @@
 "use client"
 
 import { useState } from "react"
+import { useTranslations } from "next-intl"
 import { Link, useRouter } from "@/i18n/routing"
 import { ArrowRight, LockKeyhole, ShieldCheck, UserRound } from "lucide-react"
 import { useLogin } from "@/hooks/use-customer"
 
 export default function LoginPage() {
+  const t = useTranslations("auth")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
@@ -19,9 +21,11 @@ export default function LoginPage() {
       await login({ email, password })
       router.push("/account")
     } catch {
-      setError("Invalid email or password")
+      setError(t("loginInvalid"))
     }
   }
+
+  const benefits = ["pricing", "history", "delivery"] as const
 
   return (
     <div className="bg-surface-50">
@@ -30,34 +34,29 @@ export default function LoginPage() {
           <div className="relative h-full min-h-[560px]">
             <img
               src="/images/tfshop-hero-toy-catalog.jpg"
-              alt="TFShop verified toy catalog"
+              alt={t("loginAlt")}
               className="absolute inset-0 h-full w-full object-cover object-center"
             />
             <div className="via-white/78 absolute inset-0 bg-gradient-to-r from-white to-transparent" />
             <div className="relative flex h-full max-w-lg flex-col justify-between p-10">
               <div>
                 <p className="text-brand-700 text-xs font-bold uppercase tracking-wide">
-                  Buyer Workspace
+                  {t("loginEyebrow")}
                 </p>
                 <h1 className="font-display text-ink-900 mt-4 text-5xl font-bold leading-tight">
-                  Source toys directly from verified factories.
+                  {t("loginHeroTitle")}
                 </h1>
                 <p className="text-ink-600 mt-4 max-w-sm text-sm leading-6">
-                  Continue RFQs, monitor orders, and keep supplier quotes in one
-                  secure buying account.
+                  {t("loginHeroDesc")}
                 </p>
               </div>
               <div className="text-ink-700 grid gap-3 text-sm font-semibold">
-                {[
-                  "Factory-direct pricing",
-                  "Secure RFQ history",
-                  "Global delivery support",
-                ].map((item) => (
+                {benefits.map((item) => (
                   <div key={item} className="flex items-center gap-3">
                     <span className="bg-brand-50 text-brand-700 flex h-8 w-8 items-center justify-center rounded-lg">
                       <ShieldCheck className="h-4 w-4" />
                     </span>
-                    {item}
+                    {t(`loginBenefits.${item}`)}
                   </div>
                 ))}
               </div>
@@ -72,15 +71,12 @@ export default function LoginPage() {
                 <UserRound className="h-6 w-6" />
               </span>
               <p className="text-brand-700 text-xs font-bold uppercase tracking-wide">
-                Welcome Back
+                {t("welcomeBack")}
               </p>
               <h2 className="font-display text-ink-900 mt-2 text-3xl font-bold">
-                Login
+                {t("loginTitle")}
               </h2>
-              <p className="text-ink-500 mt-2 text-sm">
-                Access your RFQ center, orders, saved suppliers, and buyer
-                protection tools.
-              </p>
+              <p className="text-ink-500 mt-2 text-sm">{t("loginDesc")}</p>
             </div>
 
             {error && (
@@ -95,7 +91,7 @@ export default function LoginPage() {
                   htmlFor="login-email"
                   className="text-ink-700 mb-1.5 block text-sm font-bold"
                 >
-                  Email
+                  {t("email")}
                 </label>
                 <input
                   id="login-email"
@@ -104,7 +100,7 @@ export default function LoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="border-surface-300 text-ink-900 focus:border-brand-500 focus:ring-brand-100 w-full rounded-lg border bg-white px-3 py-3 text-sm outline-none transition focus:ring-2"
-                  placeholder="buyer@company.com"
+                  placeholder={t("emailPlaceholder")}
                 />
               </div>
               <div>
@@ -112,7 +108,7 @@ export default function LoginPage() {
                   htmlFor="login-password"
                   className="text-ink-700 mb-1.5 block text-sm font-bold"
                 >
-                  Password
+                  {t("password")}
                 </label>
                 <input
                   id="login-password"
@@ -121,7 +117,7 @@ export default function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="border-surface-300 text-ink-900 focus:border-brand-500 focus:ring-brand-100 w-full rounded-lg border bg-white px-3 py-3 text-sm outline-none transition focus:ring-2"
-                  placeholder="Enter your password"
+                  placeholder={t("passwordPlaceholder")}
                 />
               </div>
               <button
@@ -130,17 +126,17 @@ export default function LoginPage() {
                 className="btn-primary w-full"
               >
                 <LockKeyhole className="h-4 w-4" />
-                {isPending ? "Logging in..." : "Login"}
+                {isPending ? t("loggingIn") : t("loginTitle")}
               </button>
             </form>
 
             <div className="bg-brand-50 text-ink-600 mt-6 rounded-lg p-4 text-sm">
-              New to TFShop?{" "}
+              {t("newToTfshop")}{" "}
               <Link
                 href="/auth/register"
                 className="text-brand-700 inline-flex items-center gap-1 font-extrabold"
               >
-                Create a buyer account
+                {t("createBuyerAccount")}
                 <ArrowRight className="h-3.5 w-3.5" />
               </Link>
             </div>

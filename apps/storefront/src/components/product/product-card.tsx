@@ -34,7 +34,7 @@ export function ProductCard({ product, compact = false }: ProductCardProps) {
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
         <span className="border-coral-200 bg-coral-50 text-coral-600 absolute left-3 top-3 rounded border px-2 py-1 text-[11px] font-bold">
-          Best Seller
+          {t("bestSeller")}
         </span>
         <span className="text-ink-400 shadow-soft group-hover:text-coral-500 absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 transition">
           <Heart className="h-4 w-4" aria-hidden="true" />
@@ -64,7 +64,7 @@ export function ProductCard({ product, compact = false }: ProductCardProps) {
         )}
         <div className="mt-auto pt-4">
           <span className="border-brand-200 bg-brand-50 text-brand-700 group-hover:bg-brand-700 inline-flex w-full items-center justify-center rounded-lg border px-3 py-2 text-xs font-bold transition group-hover:text-white">
-            View details
+            {t("viewDetails")}
           </span>
         </div>
       </div>

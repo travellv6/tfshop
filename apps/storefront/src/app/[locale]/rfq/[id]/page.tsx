@@ -91,20 +91,20 @@ export default function RFQDetailPage() {
           className="text-brand-700 mb-5 inline-flex items-center gap-2 text-sm font-bold"
         >
           <ArrowLeft className="h-4 w-4" />
-          RFQ Center
+          {t("center")}
         </Link>
 
         <section className="panel mb-5 p-6">
           <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
             <div>
               <p className="text-brand-700 text-xs font-bold uppercase tracking-wide">
-                Inquiry #{rfq.id.slice(-8)}
+                {t("inquiryNumber", { id: rfq.id.slice(-8) })}
               </p>
               <h1 className="font-display text-ink-900 mt-2 text-3xl font-bold">
                 {rfq.product_title || t("title")}
               </h1>
               <p className="text-ink-500 mt-2 max-w-2xl text-sm">
-                {rfq.requirements || "No detailed requirements provided yet."}
+                {rfq.requirements || t("noRequirementsProvided")}
               </p>
             </div>
             <StatusPill className={statusClass(rfq.status)}>
@@ -134,8 +134,8 @@ export default function RFQDetailPage() {
             />
             <Metric
               icon={<ShieldCheck className="h-5 w-5" />}
-              label="Terms"
-              value={rfq.quoted_terms || "Pending"}
+              label={t("terms")}
+              value={rfq.quoted_terms || t("pending")}
             />
           </div>
         </section>
@@ -147,9 +147,7 @@ export default function RFQDetailPage() {
                 <h2 className="text-ink-900 text-lg font-extrabold">
                   {t("messages")}
                 </h2>
-                <p className="text-ink-500 text-sm">
-                  Buyer and supplier conversation
-                </p>
+                <p className="text-ink-500 text-sm">{t("conversationDesc")}</p>
               </div>
               <MessageSquareText className="text-brand-700 h-5 w-5" />
             </div>
@@ -221,7 +219,7 @@ export default function RFQDetailPage() {
           <aside className="space-y-4">
             <div className="panel p-5">
               <h3 className="text-ink-900 text-lg font-extrabold">
-                Quote Snapshot
+                {t("quoteSnapshot")}
               </h3>
               <div className="mt-4 space-y-3 text-sm">
                 <Info
@@ -237,17 +235,18 @@ export default function RFQDetailPage() {
                   value={rfq.quoted_lead_time || "-"}
                 />
                 <Info
-                  label="Updated"
+                  label={t("updated")}
                   value={formatStorefrontDate(rfq.updated_at)}
                 />
               </div>
             </div>
             <div className="border-brand-100 bg-brand-50 rounded-lg border p-5">
               <ShieldCheck className="text-brand-700 mb-3 h-6 w-6" />
-              <h3 className="text-ink-900 font-extrabold">Buyer Protection</h3>
+              <h3 className="text-ink-900 font-extrabold">
+                {t("buyerProtection")}
+              </h3>
               <p className="text-ink-600 mt-2 text-sm">
-                Confirm samples, certificates, payment terms, and shipping
-                before accepting the final quote.
+                {t("buyerProtectionDesc")}
               </p>
             </div>
           </aside>

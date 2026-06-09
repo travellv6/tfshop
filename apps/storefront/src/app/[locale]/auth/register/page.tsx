@@ -1,11 +1,13 @@
 "use client"
 
 import { useState } from "react"
+import { useTranslations } from "next-intl"
 import { Link, useRouter } from "@/i18n/routing"
 import { ArrowRight, Building2, ShieldCheck, UserPlus } from "lucide-react"
 import { useRegister } from "@/hooks/use-customer"
 
 export default function RegisterPage() {
+  const t = useTranslations("auth")
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -21,7 +23,7 @@ export default function RegisterPage() {
     e.preventDefault()
     setError("")
     if (form.password !== form.confirmPassword) {
-      setError("Passwords do not match")
+      setError(t("passwordMismatch"))
       return
     }
     try {
@@ -33,12 +35,13 @@ export default function RegisterPage() {
       })
       router.push("/account")
     } catch (err: any) {
-      setError(err?.message || "Registration failed")
+      setError(err?.message || t("registrationFailed"))
     }
   }
 
   const update = (field: string, value: string) =>
     setForm((prev) => ({ ...prev, [field]: value }))
+  const benefits = ["lowMoq", "verification", "protection"] as const
 
   return (
     <div className="bg-surface-50">
@@ -47,34 +50,29 @@ export default function RegisterPage() {
           <div className="relative h-full min-h-[600px]">
             <img
               src="/images/tfshop-hero-toy-catalog.jpg"
-              alt="TFShop toy sourcing workspace"
+              alt={t("registerAlt")}
               className="absolute inset-0 h-full w-full object-cover object-center"
             />
             <div className="via-white/82 absolute inset-0 bg-gradient-to-r from-white to-transparent" />
             <div className="relative flex h-full max-w-lg flex-col justify-between p-10">
               <div>
                 <p className="text-brand-700 text-xs font-bold uppercase tracking-wide">
-                  Verified Buyer Program
+                  {t("registerEyebrow")}
                 </p>
                 <h1 className="font-display text-ink-900 mt-4 text-5xl font-bold leading-tight">
-                  Build a sourcing desk for your toy business.
+                  {t("registerHeroTitle")}
                 </h1>
                 <p className="text-ink-600 mt-4 max-w-sm text-sm leading-6">
-                  Create an account to request samples, organize quotes, and
-                  purchase from audited toy factories.
+                  {t("registerHeroDesc")}
                 </p>
               </div>
               <div className="text-ink-700 grid gap-3 text-sm font-semibold">
-                {[
-                  "Low MOQ from 50 pcs",
-                  "Factory verification included",
-                  "RFQ and order protection",
-                ].map((item) => (
+                {benefits.map((item) => (
                   <div key={item} className="flex items-center gap-3">
                     <span className="bg-brand-50 text-brand-700 flex h-8 w-8 items-center justify-center rounded-lg">
                       <ShieldCheck className="h-4 w-4" />
                     </span>
-                    {item}
+                    {t(`registerBenefits.${item}`)}
                   </div>
                 ))}
               </div>
@@ -89,15 +87,12 @@ export default function RegisterPage() {
                 <Building2 className="h-6 w-6" />
               </span>
               <p className="text-brand-700 text-xs font-bold uppercase tracking-wide">
-                Buyer Onboarding
+                {t("buyerOnboarding")}
               </p>
               <h2 className="font-display text-ink-900 mt-2 text-3xl font-bold">
-                Register
+                {t("registerTitle")}
               </h2>
-              <p className="text-ink-500 mt-2 text-sm">
-                Start with a buyer profile and unlock supplier quotes, samples,
-                and factory-direct checkout.
-              </p>
+              <p className="text-ink-500 mt-2 text-sm">{t("registerDesc")}</p>
             </div>
 
             {error && (
@@ -113,7 +108,7 @@ export default function RegisterPage() {
                     htmlFor="register-first-name"
                     className="text-ink-700 mb-1.5 block text-sm font-bold"
                   >
-                    First Name
+                    {t("firstName")}
                   </label>
                   <input
                     id="register-first-name"
@@ -128,7 +123,7 @@ export default function RegisterPage() {
                     htmlFor="register-last-name"
                     className="text-ink-700 mb-1.5 block text-sm font-bold"
                   >
-                    Last Name
+                    {t("lastName")}
                   </label>
                   <input
                     id="register-last-name"
@@ -144,7 +139,7 @@ export default function RegisterPage() {
                   htmlFor="register-email"
                   className="text-ink-700 mb-1.5 block text-sm font-bold"
                 >
-                  Email
+                  {t("email")}
                 </label>
                 <input
                   id="register-email"
@@ -153,7 +148,7 @@ export default function RegisterPage() {
                   value={form.email}
                   onChange={(e) => update("email", e.target.value)}
                   className="border-surface-300 text-ink-900 focus:border-brand-500 focus:ring-brand-100 w-full rounded-lg border bg-white px-3 py-3 text-sm outline-none transition focus:ring-2"
-                  placeholder="buyer@company.com"
+                  placeholder={t("emailPlaceholder")}
                 />
               </div>
               <div>
@@ -161,7 +156,7 @@ export default function RegisterPage() {
                   htmlFor="register-password"
                   className="text-ink-700 mb-1.5 block text-sm font-bold"
                 >
-                  Password
+                  {t("password")}
                 </label>
                 <input
                   id="register-password"
@@ -177,7 +172,7 @@ export default function RegisterPage() {
                   htmlFor="register-confirm-password"
                   className="text-ink-700 mb-1.5 block text-sm font-bold"
                 >
-                  Confirm Password
+                  {t("confirmPassword")}
                 </label>
                 <input
                   id="register-confirm-password"
@@ -194,17 +189,17 @@ export default function RegisterPage() {
                 className="btn-primary w-full"
               >
                 <UserPlus className="h-4 w-4" />
-                {isPending ? "Creating account..." : "Register"}
+                {isPending ? t("creatingAccount") : t("registerTitle")}
               </button>
             </form>
 
             <div className="bg-brand-50 text-ink-600 mt-6 rounded-lg p-4 text-sm">
-              Already have an account?{" "}
+              {t("alreadyHaveAccount")}{" "}
               <Link
                 href="/auth/login"
                 className="text-brand-700 inline-flex items-center gap-1 font-extrabold"
               >
-                Login
+                {t("loginTitle")}
                 <ArrowRight className="h-3.5 w-3.5" />
               </Link>
             </div>

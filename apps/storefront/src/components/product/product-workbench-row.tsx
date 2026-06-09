@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { useTranslations } from "next-intl"
 import { Link } from "@/i18n/routing"
 import { CheckCircle2, Heart, MapPin, PackagePlus, Star } from "lucide-react"
 import {
@@ -21,6 +22,8 @@ export function ProductWorkbenchRow({
   product: StorefrontProduct
   onAdd: (product: StorefrontProduct) => void
 }) {
+  const t = useTranslations("product")
+  const wt = useTranslations("productWorkbench")
   const [selected, setSelected] = useState(false)
   const certs = productCertifications(product)
   const moq = productMoq(product)
@@ -55,11 +58,11 @@ export function ProductWorkbenchRow({
       <div className="min-w-0">
         <div className="mb-2 flex flex-wrap items-center gap-2">
           <span className="bg-brand-50 text-brand-700 rounded-full px-2.5 py-1 text-xs font-bold">
-            In Stock
+            {t("inStock")}
           </span>
           {product.metadata?.sample_available && (
             <span className="bg-coral-50 text-coral-700 rounded-full px-2.5 py-1 text-xs font-bold">
-              Sample Available
+              {t("sampleAvailable")}
             </span>
           )}
         </div>
@@ -70,7 +73,7 @@ export function ProductWorkbenchRow({
           {product.title}
         </Link>
         <p className="text-ink-400 mt-1 text-xs font-medium">
-          SKU: TF-{product.id.slice(-6).toUpperCase()}
+          {wt("sku", { code: product.id.slice(-6).toUpperCase() })}
         </p>
         <div className="mt-3 flex flex-wrap gap-1.5">
           {certs.map((cert) => (
@@ -82,7 +85,7 @@ export function ProductWorkbenchRow({
             </span>
           ))}
           <span className="bg-surface-100 text-ink-600 rounded px-2 py-1 text-[11px] font-semibold">
-            {product.metadata?.material || "ABS Plastic"}
+            {product.metadata?.material || wt("materialFallback")}
           </span>
           <span className="bg-surface-100 text-ink-600 rounded px-2 py-1 text-[11px] font-semibold">
             {product.metadata?.size || "12cm"}
@@ -95,9 +98,9 @@ export function ProductWorkbenchRow({
               key={tier}
               className="border-surface-200 border-r p-3 last:border-r-0"
             >
-              <p className="text-ink-400">MOQ (pcs)</p>
+              <p className="text-ink-400">{wt("moqPcs")}</p>
               <p className="text-ink-900 font-bold">{tier}</p>
-              <p className="text-ink-400 mt-2">Unit Price</p>
+              <p className="text-ink-400 mt-2">{wt("unitPrice")}</p>
               <p className="text-ink-900 font-extrabold">
                 {i === 0
                   ? productPrice(product).split(" - ")[0]
@@ -122,9 +125,9 @@ export function ProductWorkbenchRow({
           </p>
           <p className="text-ink-600 flex items-center gap-1.5">
             <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
-            {product.metadata?.rating || "4.9"} rating
+            {product.metadata?.rating || "4.9"} {wt("rating")}
             <span className="text-ink-300">|</span>
-            Response {responseTime(product)}
+            {wt("response", { time: responseTime(product) })}
           </p>
         </div>
 
@@ -134,7 +137,7 @@ export function ProductWorkbenchRow({
               type="checkbox"
               className="border-surface-300 text-brand-700 h-4 w-4 rounded"
             />
-            Compare
+            {wt("compare")}
           </label>
           <button
             type="button"
@@ -142,9 +145,11 @@ export function ProductWorkbenchRow({
             className="bg-brand-700 shadow-soft hover:bg-brand-800 inline-flex w-full items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-bold text-white"
           >
             <PackagePlus className="h-4 w-4" />
-            Add to RFQ
+            {wt("addToRfq")}
           </button>
-          <p className="text-ink-400 text-center text-xs">MOQ {moq} pcs</p>
+          <p className="text-ink-400 text-center text-xs">
+            {wt("moqValue", { count: moq })}
+          </p>
         </div>
       </div>
     </article>

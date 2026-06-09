@@ -1,4 +1,7 @@
+"use client"
+
 import Link from "next/link"
+import { useTranslations } from "next-intl"
 import { Factory, Headphones, Mail, MapPin, ShieldCheck } from "lucide-react"
 
 interface FooterProps {
@@ -6,6 +9,9 @@ interface FooterProps {
 }
 
 export function Footer({ locale }: FooterProps) {
+  const t = useTranslations("footer")
+  const ct = useTranslations("common")
+
   return (
     <footer className="border-surface-200 border-t bg-white">
       <div className="mx-auto max-w-[1440px] px-4 py-12 sm:px-6 lg:px-8">
@@ -13,26 +19,28 @@ export function Footer({ locale }: FooterProps) {
           <div className="flex items-center gap-3">
             <ShieldCheck className="text-brand-700 h-5 w-5" />
             <div>
-              <p className="text-ink-900 text-sm font-bold">Trade Assurance</p>
-              <p className="text-ink-500 text-xs">
-                Secure payments and QC support
+              <p className="text-ink-900 text-sm font-bold">
+                {t("tradeAssurance")}
               </p>
+              <p className="text-ink-500 text-xs">{t("tradeAssuranceDesc")}</p>
             </div>
           </div>
           <div className="flex items-center gap-3">
             <Factory className="text-brand-700 h-5 w-5" />
             <div>
-              <p className="text-ink-900 text-sm font-bold">Factory Direct</p>
-              <p className="text-ink-500 text-xs">Verified toy manufacturers</p>
+              <p className="text-ink-900 text-sm font-bold">
+                {t("factoryDirect")}
+              </p>
+              <p className="text-ink-500 text-xs">{t("factoryDirectDesc")}</p>
             </div>
           </div>
           <div className="flex items-center gap-3">
             <Headphones className="text-brand-700 h-5 w-5" />
             <div>
-              <p className="text-ink-900 text-sm font-bold">Sourcing Support</p>
-              <p className="text-ink-500 text-xs">
-                RFQ response within 24 hours
+              <p className="text-ink-900 text-sm font-bold">
+                {t("sourcingSupport")}
               </p>
+              <p className="text-ink-500 text-xs">{t("sourcingSupportDesc")}</p>
             </div>
           </div>
         </div>
@@ -45,38 +53,37 @@ export function Footer({ locale }: FooterProps) {
                 TFShop
               </span>
               <span className="text-brand-700 text-[11px] font-semibold">
-                China Toy Factory Direct
+                {ct("brandTagline")}
               </span>
             </Link>
             <p className="font-body text-ink-400 mt-4 text-sm leading-relaxed">
-              China Toy Factory Direct Supply Platform. Connecting global buyers
-              with verified manufacturers.
+              {t("brandDescription")}
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
             <h4 className="text-ink-900 text-sm font-bold uppercase tracking-wider">
-              Marketplace
+              {t("marketplace")}
             </h4>
             <nav className="mt-4 flex flex-col gap-2">
               <Link
                 href={`/${locale}/products`}
                 className="font-body text-ink-500 hover:text-brand-700 text-sm transition-colors"
               >
-                Browse Products
+                {t("browseProducts")}
               </Link>
               <Link
                 href={`/${locale}/factories`}
                 className="font-body text-ink-500 hover:text-brand-700 text-sm transition-colors"
               >
-                Find Factories
+                {t("findFactories")}
               </Link>
               <Link
                 href={`/${locale}/rfq`}
                 className="font-body text-ink-500 hover:text-brand-700 text-sm transition-colors"
               >
-                Request Quote
+                {t("requestQuote")}
               </Link>
             </nav>
           </div>
@@ -84,26 +91,26 @@ export function Footer({ locale }: FooterProps) {
           {/* Account */}
           <div>
             <h4 className="text-ink-900 text-sm font-bold uppercase tracking-wider">
-              Account
+              {t("account")}
             </h4>
             <nav className="mt-4 flex flex-col gap-2">
               <Link
                 href={`/${locale}/auth/login`}
                 className="font-body text-ink-500 hover:text-brand-700 text-sm transition-colors"
               >
-                Login
+                {ct("login")}
               </Link>
               <Link
                 href={`/${locale}/auth/register`}
                 className="font-body text-ink-500 hover:text-brand-700 text-sm transition-colors"
               >
-                Register
+                {ct("register")}
               </Link>
               <Link
                 href={`/${locale}/account`}
                 className="font-body text-ink-500 hover:text-brand-700 text-sm transition-colors"
               >
-                My Account
+                {t("myAccount")}
               </Link>
             </nav>
           </div>
@@ -111,7 +118,7 @@ export function Footer({ locale }: FooterProps) {
           {/* Contact */}
           <div>
             <h4 className="text-ink-900 text-sm font-bold uppercase tracking-wider">
-              Contact
+              {t("contact")}
             </h4>
             <div className="mt-4 space-y-2">
               <p className="font-body text-ink-500 flex items-center gap-2 text-sm">
@@ -119,12 +126,10 @@ export function Footer({ locale }: FooterProps) {
                 support@toyfactory.cc
               </p>
               <p className="font-body text-ink-500 flex items-center gap-2 text-sm">
-                <MapPin className="text-brand-700 h-4 w-4" /> Shantou,
-                Guangdong, China
+                <MapPin className="text-brand-700 h-4 w-4" /> {t("location")}
               </p>
               <p className="font-body text-ink-500 flex items-center gap-2 text-sm">
-                <Headphones className="text-brand-700 h-4 w-4" /> Mon-Sat
-                9:00-18:00 CST
+                <Headphones className="text-brand-700 h-4 w-4" /> {t("hours")}
               </p>
             </div>
           </div>
@@ -133,14 +138,14 @@ export function Footer({ locale }: FooterProps) {
         {/* Bottom Bar */}
         <div className="border-surface-200 mt-10 flex flex-col items-center justify-between gap-4 border-t pt-6 sm:flex-row">
           <p className="font-body text-ink-500 text-xs">
-            © {new Date().getFullYear()} TFShop. All rights reserved.
+            © {new Date().getFullYear()} TFShop. {t("rights")}
           </p>
           <div className="flex gap-6">
             <span className="font-body text-ink-500 hover:text-brand-700 cursor-pointer text-xs transition-colors">
-              Privacy Policy
+              {t("privacy")}
             </span>
             <span className="font-body text-ink-500 hover:text-brand-700 cursor-pointer text-xs transition-colors">
-              Terms of Service
+              {t("terms")}
             </span>
           </div>
         </div>

@@ -110,7 +110,7 @@ export default function ProductDetailPage() {
         <div className="panel p-10 text-center">
           <p className="font-body text-ink-500">{ct("noResults")}</p>
           <Link href="/products" className="btn-primary mt-5">
-            Back to Products
+            {t("backToProducts")}
           </Link>
         </div>
       </div>
@@ -143,16 +143,20 @@ export default function ProductDetailPage() {
                   <Heart className="h-5 w-5" />
                 </button>
                 <span className="bg-coral-50 text-coral-600 ring-coral-100 absolute left-4 top-4 rounded px-3 py-1 text-xs font-extrabold ring-1">
-                  Hot Opportunity
+                  {t("hotOpportunity")}
                 </span>
               </div>
             </div>
 
             <div className="grid gap-4 sm:grid-cols-3">
               {[
-                ["Factory Direct", "Best price guaranteed", Factory],
-                ["Trade Assurance", "Secure sourcing flow", ShieldCheck],
-                ["Global Delivery", "Export-ready shipping", Truck],
+                [t("factoryDirectTitle"), t("factoryDirectDesc"), Factory],
+                [
+                  t("tradeAssuranceTitle"),
+                  t("tradeAssuranceDesc"),
+                  ShieldCheck,
+                ],
+                [t("globalDeliveryTitle"), t("globalDeliveryDesc"), Truck],
               ].map(([title, desc, Icon]) => (
                 <div key={title as string} className="panel p-4">
                   <Icon className="text-brand-700 mb-3 h-5 w-5" />
@@ -167,11 +171,11 @@ export default function ProductDetailPage() {
             <section className="panel p-6">
               <div className="mb-4 flex flex-wrap gap-2">
                 <span className="bg-brand-50 text-brand-700 rounded-full px-3 py-1 text-xs font-bold">
-                  In Stock
+                  {t("inStock")}
                 </span>
                 {metadata?.sample_available && (
                   <span className="bg-coral-50 text-coral-700 rounded-full px-3 py-1 text-xs font-bold">
-                    Sample Available
+                    {t("sampleAvailable")}
                   </span>
                 )}
               </div>
@@ -181,18 +185,18 @@ export default function ProductDetailPage() {
               <div className="mt-3 flex flex-wrap items-center gap-3 text-sm">
                 <span className="text-ink-700 flex items-center gap-1 font-bold">
                   <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
-                  {metadata?.rating || "4.9"} rating
+                  {metadata?.rating || "4.9"} {t("rating")}
                 </span>
                 <span className="text-ink-300">|</span>
                 <span className="text-ink-500 font-semibold">
-                  Response {responseTime(product)}
+                  {t("response", { time: responseTime(product) })}
                 </span>
               </div>
               <p className="text-ink-900 mt-5 text-3xl font-extrabold">
                 {priceDisplay}
               </p>
               <p className="text-ink-500 mt-1 text-sm font-semibold">
-                MOQ {productMoq(product)} pcs
+                {t("moqValue", { count: productMoq(product) })}
               </p>
 
               {product.description && (
@@ -330,10 +334,10 @@ export default function ProductDetailPage() {
               </p>
               <div className="mt-4 grid grid-cols-2 gap-2 text-xs">
                 <span className="bg-surface-100 text-ink-700 rounded px-2 py-2 font-bold">
-                  Verified
+                  {t("verified")}
                 </span>
                 <span className="bg-surface-100 text-ink-700 rounded px-2 py-2 font-bold">
-                  OEM/ODM
+                  {t("oemOdm")}
                 </span>
               </div>
               {factorySlug && (

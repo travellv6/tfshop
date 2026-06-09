@@ -45,14 +45,13 @@ export default function RFQListPage() {
             <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
               <div>
                 <p className="text-brand-700 text-xs font-bold uppercase tracking-wide">
-                  RFQ Center
+                  {t("center")}
                 </p>
                 <h1 className="font-display text-ink-900 mt-2 text-3xl font-bold">
                   {t("myInquiries")}
                 </h1>
                 <p className="text-ink-500 mt-2 max-w-2xl text-sm">
-                  Compare quotes, message suppliers, and keep each sourcing
-                  project moving from request to accepted terms.
+                  {t("listDesc")}
                 </p>
               </div>
               <button
@@ -65,10 +64,10 @@ export default function RFQListPage() {
             </div>
             <div className="mt-6 grid gap-3 sm:grid-cols-4">
               {[
-                ["Active RFQs", rfqs.length.toString(), FileText],
-                ["Unread Quotes", "3", MessageSquareText],
-                ["Avg. Response", "< 6h", Clock3],
-                ["Protected", "100%", ShieldCheck],
+                [t("activeRfqs"), rfqs.length.toString(), FileText],
+                [t("unreadQuotes"), "3", MessageSquareText],
+                [t("avgResponse"), "< 6h", Clock3],
+                [t("protected"), "100%", ShieldCheck],
               ].map(([label, value, Icon]) => (
                 <div
                   key={label as string}
@@ -88,16 +87,15 @@ export default function RFQListPage() {
 
           <div className="panel bg-brand-700 p-6 text-white">
             <PackageCheck className="text-brand-100 mb-4 h-8 w-8" />
-            <h2 className="text-xl font-extrabold">Trade Assurance</h2>
+            <h2 className="text-xl font-extrabold">{t("tradeAssurance")}</h2>
             <p className="text-brand-100 mt-2 text-sm">
-              RFQs are only sent to selected suppliers. Payments, quality, and
-              delivery can be protected through TFShop buyer support.
+              {t("tradeAssuranceDesc")}
             </p>
             <div className="mt-5 space-y-2 text-sm font-semibold">
               {[
-                "Secure payments",
-                "Quality guaranteed",
-                "On-time delivery",
+                t("securePayments"),
+                t("qualityGuaranteed"),
+                t("onTimeDelivery"),
               ].map((item) => (
                 <p key={item} className="flex items-center gap-2">
                   <CheckCircle2 className="text-brand-100 h-4 w-4" />
@@ -127,10 +125,10 @@ export default function RFQListPage() {
           <div className="panel mb-5 p-6">
             <div className="mb-5">
               <p className="text-brand-700 text-xs font-bold uppercase tracking-wide">
-                New sourcing request
+                {t("newRequest")}
               </p>
               <h2 className="text-ink-900 mt-1 text-xl font-extrabold">
-                Tell suppliers what you need
+                {t("requestHeading")}
               </h2>
             </div>
             <RFQForm
@@ -147,17 +145,17 @@ export default function RFQListPage() {
           <div className="border-surface-200 flex items-center justify-between border-b px-5 py-4">
             <div>
               <h2 className="text-ink-900 text-lg font-extrabold">
-                Inquiry Pipeline
+                {t("pipeline")}
               </h2>
               <p className="text-ink-500 text-sm">
-                {rfqs.length} active sourcing conversations
+                {t("activeConversations", { count: rfqs.length })}
               </p>
             </div>
             <Link
               href="/products"
               className="btn-outline hidden sm:inline-flex"
             >
-              Add products
+              {t("addProducts")}
             </Link>
           </div>
 

@@ -1,5 +1,6 @@
 "use client"
 
+import { useTranslations } from "next-intl"
 import { Minus, Plus, Trash2 } from "lucide-react"
 import { fallbackProductImage } from "@/lib/storefront-data"
 
@@ -23,6 +24,8 @@ export function CartItemRow({
   onRemove,
   isUpdating,
 }: CartItemRowProps) {
+  const t = useTranslations("product")
+
   return (
     <div className="border-surface-200 grid gap-4 border-b py-4 last:border-b-0 sm:grid-cols-[88px_1fr_auto_auto] sm:items-center">
       <div className="bg-surface-100 h-20 w-20 overflow-hidden rounded-lg sm:h-24 sm:w-24">
@@ -35,7 +38,7 @@ export function CartItemRow({
       <div>
         <h3 className="text-ink-900 font-bold">{item.title}</h3>
         <p className="text-ink-500 mt-1 text-sm font-medium">
-          ${(item.unit_price / 100).toFixed(2)} / pc
+          ${(item.unit_price / 100).toFixed(2)} {t("perPiece")}
         </p>
       </div>
       <div className="flex items-center gap-2">

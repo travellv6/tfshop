@@ -22,7 +22,7 @@ export function FactoryCard({ factory }: { factory: Factory }) {
         />
         <span className="text-brand-700 shadow-soft absolute left-3 top-3 inline-flex items-center gap-1 rounded bg-white/90 px-2 py-1 text-[11px] font-bold">
           <ShieldCheck className="h-3 w-3" />
-          Verified
+          {t("verified")}
         </span>
       </div>
       <div className="flex flex-1 flex-col p-4">
@@ -38,10 +38,10 @@ export function FactoryCard({ factory }: { factory: Factory }) {
           <span className="bg-surface-100 text-ink-600 rounded px-2 py-1">
             {factory.established_year
               ? t("established", { year: factory.established_year })
-              : "9 YRS"}
+              : t("fallbackYears")}
           </span>
           <span className="bg-surface-100 text-ink-600 rounded px-2 py-1">
-            Factory
+            {t("factoryLabel")}
           </span>
         </div>
         {factory.certifications && factory.certifications.length > 0 && (
@@ -63,7 +63,7 @@ export function FactoryCard({ factory }: { factory: Factory }) {
           </span>
           <span className="text-ink-500 inline-flex items-center gap-1">
             <FactoryIcon className="h-3.5 w-3.5" />
-            View profile
+            {t("viewProfile")}
           </span>
         </div>
       </div>

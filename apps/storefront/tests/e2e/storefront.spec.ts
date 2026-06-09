@@ -8,9 +8,9 @@ type SmokeRoute = {
 const smokeRoutes: SmokeRoute[] = [
   { path: "/", text: "Sourcing Toys" },
   { path: "/en", text: "Sourcing Toys" },
-  { path: "/zh", text: "Sourcing Toys" },
-  { path: "/es", text: "Sourcing Toys" },
-  { path: "/ar", text: "Sourcing Toys" },
+  { path: "/zh", text: "玩具采购" },
+  { path: "/es", text: "Abastecimiento de juguetes" },
+  { path: "/ar", text: "توريد الألعاب" },
   { path: "/en/products", text: "Product Finder" },
   {
     path: "/en/products/marble-run-building-blocks",
@@ -34,6 +34,42 @@ const smokeRoutes: SmokeRoute[] = [
   {
     path: "/en/checkout/success?order_id=test_order",
     text: "Order Confirmed",
+  },
+]
+
+const localizedHomeRoutes: Array<{
+  path: string
+  expected: string | RegExp
+  englishFallback: string
+}> = [
+  { path: "/zh", expected: "玩具采购", englishFallback: "Sourcing Toys" },
+  {
+    path: "/es",
+    expected: "Abastecimiento de juguetes",
+    englishFallback: "Sourcing Toys",
+  },
+  { path: "/ar", expected: "توريد الألعاب", englishFallback: "Sourcing Toys" },
+]
+
+const localizedProductRoutes: Array<{
+  path: string
+  expected: string | RegExp
+  englishFallback: string
+}> = [
+  {
+    path: "/zh/products",
+    expected: "产品筛选器",
+    englishFallback: "Product Finder",
+  },
+  {
+    path: "/es/products",
+    expected: "Buscador de productos",
+    englishFallback: "Product Finder",
+  },
+  {
+    path: "/ar/products",
+    expected: "باحث المنتجات",
+    englishFallback: "Product Finder",
   },
 ]
 
@@ -80,6 +116,24 @@ for (const route of smokeRoutes) {
     await expect(page.getByText("TFShop").first()).toBeVisible()
     await expectVisibleImagesToLoad(page)
     await expectNoHorizontalOverflow(page)
+  })
+}
+
+for (const route of localizedHomeRoutes) {
+  test(`localizes buyer home ${route.path}`, async ({ page }) => {
+    await page.goto(route.path)
+
+    await expect(page.locator("body")).toContainText(route.expected)
+    await expect(page.locator("body")).not.toContainText(route.englishFallback)
+  })
+}
+
+for (const route of localizedProductRoutes) {
+  test(`localizes buyer products ${route.path}`, async ({ page }) => {
+    await page.goto(route.path)
+
+    await expect(page.locator("body")).toContainText(route.expected)
+    await expect(page.locator("body")).not.toContainText(route.englishFallback)
   })
 }
 

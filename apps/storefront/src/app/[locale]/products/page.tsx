@@ -1,6 +1,7 @@
 "use client"
 
 import { useMemo, useState } from "react"
+import { useTranslations } from "next-intl"
 import { Link, useRouter } from "@/i18n/routing"
 import {
   ArrowRight,
@@ -28,6 +29,8 @@ import {
 import { formatStorefrontNumber } from "@/lib/format"
 
 export default function ProductListPage() {
+  const t = useTranslations("productsPage")
+  const categoryT = useTranslations("catalog.categories")
   const router = useRouter()
   const [search, setSearch] = useState("")
   const [view, setView] = useState<"list" | "grid">("list")
@@ -80,17 +83,19 @@ export default function ProductListPage() {
       <div className="mx-auto max-w-[1440px] px-4 py-5 sm:px-6 lg:px-8">
         <section className="mb-5 grid gap-4 lg:grid-cols-[320px_1fr_260px]">
           <div className="panel p-4">
-            <p className="text-ink-500 text-xs font-semibold">Welcome back,</p>
+            <p className="text-ink-500 text-xs font-semibold">
+              {t("welcomeBack")}
+            </p>
             <h1 className="text-ink-900 mt-1 text-xl font-extrabold">
               Global Imports LLC
             </h1>
             <span className="bg-brand-50 text-brand-700 mt-3 inline-flex rounded-full px-2.5 py-1 text-xs font-bold">
-              Verified Buyer
+              {t("verifiedBuyer")}
             </span>
             <div className="mt-5">
               <div className="text-ink-500 mb-2 flex justify-between text-xs font-medium">
-                <span>Credit Line: USD 50,000</span>
-                <span>Used: USD 12,350</span>
+                <span>{t("creditLine")}</span>
+                <span>{t("usedCredit")}</span>
               </div>
               <div className="bg-surface-200 h-2 overflow-hidden rounded-full">
                 <div className="bg-brand-700 h-full w-2/5 rounded-full" />
@@ -100,10 +105,10 @@ export default function ProductListPage() {
 
           <div className="panel divide-surface-200 grid grid-cols-2 divide-x p-4 md:grid-cols-4">
             {[
-              ["Active Inquiries", "8"],
-              ["Unread Quotes", "3"],
-              ["Saved Searches", "12"],
-              ["Watchlist", "24"],
+              [t("activeInquiries"), "8"],
+              [t("unreadQuotes"), "3"],
+              [t("savedSearches"), "12"],
+              [t("watchlist"), "24"],
             ].map(([label, value]) => (
               <div key={label} className="px-4 py-2">
                 <p className="text-ink-500 text-xs font-semibold">{label}</p>
@@ -114,19 +119,23 @@ export default function ProductListPage() {
                   href="/rfq"
                   className="text-brand-700 mt-3 inline-flex items-center gap-1 text-xs font-bold"
                 >
-                  View all <ArrowRight className="h-3.5 w-3.5" />
+                  {t("viewAll")} <ArrowRight className="h-3.5 w-3.5" />
                 </Link>
               </div>
             ))}
           </div>
 
           <div className="panel p-4">
-            <p className="text-ink-500 text-xs font-semibold">Market Insight</p>
+            <p className="text-ink-500 text-xs font-semibold">
+              {t("marketInsight")}
+            </p>
             <p className="text-ink-900 mt-2 text-sm font-extrabold">
-              Trending: Building Blocks
+              {t("trendingBlocks")}
             </p>
             <div className="from-brand-50 to-brand-100 mt-5 h-16 rounded-lg bg-gradient-to-r via-white" />
-            <p className="text-brand-700 mt-3 text-xs font-bold">+24% demand</p>
+            <p className="text-brand-700 mt-3 text-xs font-bold">
+              {t("demand")}
+            </p>
           </div>
         </section>
 
@@ -135,34 +144,34 @@ export default function ProductListPage() {
             <div className="panel p-4">
               <div className="mb-4 flex items-center justify-between">
                 <h2 className="text-ink-900 text-lg font-extrabold">
-                  Product Finder
+                  {t("finder")}
                 </h2>
                 <SlidersHorizontal className="text-brand-700 h-5 w-5" />
               </div>
               <div className="mb-5 grid grid-cols-2 gap-2">
                 <button className="border-surface-300 text-ink-700 rounded-lg border px-3 py-2 text-xs font-bold">
-                  Clear
+                  {t("clear")}
                 </button>
                 <button className="border-brand-300 text-brand-700 rounded-lg border px-3 py-2 text-xs font-bold">
-                  Save Search
+                  {t("saveSearch")}
                 </button>
               </div>
               <div className="space-y-5">
-                <FilterBlock title="My Saved Searches">
+                <FilterBlock title={t("savedSearchesTitle")}>
                   <button className="text-ink-700 block text-left text-xs font-semibold">
-                    Low MOQ Action Figures
+                    {t("savedSearchLowMoq")}
                     <span className="text-ink-400 block font-normal">
-                      312 results
+                      {t("resultsCount", { count: 312 })}
                     </span>
                   </button>
                   <button className="text-ink-700 block text-left text-xs font-semibold">
-                    Eco-friendly Wooden Toys
+                    {t("savedSearchEco")}
                     <span className="text-ink-400 block font-normal">
-                      180 results
+                      {t("resultsCount", { count: 180 })}
                     </span>
                   </button>
                 </FilterBlock>
-                <FilterBlock title="Category">
+                <FilterBlock title={t("category")}>
                   {categories.slice(0, 6).map((category, i) => (
                     <label
                       key={category.label}
@@ -174,13 +183,13 @@ export default function ProductListPage() {
                           defaultChecked={i === 0}
                           className="border-surface-300 text-brand-700 h-4 w-4 rounded"
                         />
-                        {category.label}
+                        {categoryT(category.key)}
                       </span>
                       <span className="text-ink-400">{category.count}</span>
                     </label>
                   ))}
                 </FilterBlock>
-                <FilterBlock title="MOQ (pcs)">
+                <FilterBlock title={t("moqPcs")}>
                   <div className="grid grid-cols-2 gap-2">
                     <input
                       className="input-field px-3 py-2"
@@ -195,7 +204,7 @@ export default function ProductListPage() {
                     <div className="bg-brand-700 h-2 w-3/4 rounded-full" />
                   </div>
                 </FilterBlock>
-                <FilterBlock title="Certification">
+                <FilterBlock title={t("certification")}>
                   {["EN71", "CPC", "ASTM F963", "CE"].map((cert) => (
                     <label
                       key={cert}
@@ -226,21 +235,21 @@ export default function ProductListPage() {
                       value={search}
                       onChange={(event) => setSearch(event.target.value)}
                       className="input-field h-11 pl-10"
-                      placeholder="Search toys, SKU, material, or factory..."
+                      placeholder={t("searchPlaceholder")}
                     />
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="text-ink-700 text-sm font-bold">
-                      {filteredProducts.length || 0} results
+                      {filteredProducts.length || 0} {t("results")}
                     </span>
                     <select className="border-surface-300 text-ink-700 h-10 rounded-lg border bg-white px-3 text-sm font-semibold">
-                      <option>Best Match</option>
-                      <option>Lowest MOQ</option>
-                      <option>Fastest Response</option>
+                      <option>{t("bestMatch")}</option>
+                      <option>{t("lowestMoq")}</option>
+                      <option>{t("fastestResponse")}</option>
                     </select>
                     <button
                       onClick={() => setView("grid")}
-                      aria-label="Grid view"
+                      aria-label={t("gridView")}
                       className={`flex h-10 w-10 items-center justify-center rounded-lg border ${
                         view === "grid"
                           ? "border-brand-300 bg-brand-50 text-brand-700"
@@ -251,7 +260,7 @@ export default function ProductListPage() {
                     </button>
                     <button
                       onClick={() => setView("list")}
-                      aria-label="List view"
+                      aria-label={t("listView")}
                       className={`flex h-10 w-10 items-center justify-center rounded-lg border ${
                         view === "list"
                           ? "border-brand-300 bg-brand-50 text-brand-700"
@@ -263,18 +272,21 @@ export default function ProductListPage() {
                   </div>
                 </div>
                 <div className="mt-4 flex flex-wrap gap-2">
-                  {["Action Figures", "MOQ <= 5000", "EN71", "In Stock"].map(
-                    (tag) => (
-                      <span
-                        key={tag}
-                        className="bg-surface-100 text-ink-600 rounded-lg px-3 py-1.5 text-xs font-bold"
-                      >
-                        {tag}
-                      </span>
-                    )
-                  )}
+                  {[
+                    t("tagActionFigures"),
+                    t("tagMoq"),
+                    "EN71",
+                    t("tagInStock"),
+                  ].map((tag) => (
+                    <span
+                      key={tag}
+                      className="bg-surface-100 text-ink-600 rounded-lg px-3 py-1.5 text-xs font-bold"
+                    >
+                      {tag}
+                    </span>
+                  ))}
                   <button className="text-brand-700 text-xs font-bold">
-                    Clear all
+                    {t("clearAll")}
                   </button>
                 </div>
               </div>
@@ -309,8 +321,8 @@ export default function ProductListPage() {
               ) : (
                 <div className="p-6">
                   <EmptyState
-                    title="No matching products"
-                    description="Try removing a filter or searching another toy category."
+                    title={t("noMatchingProducts")}
+                    description={t("noMatchingDesc")}
                   />
                 </div>
               )}
@@ -321,7 +333,7 @@ export default function ProductListPage() {
             <div className="panel p-4">
               <div className="mb-4 flex items-center justify-between">
                 <h2 className="text-ink-900 text-lg font-extrabold">
-                  RFQ Basket
+                  {t("rfqBasket")}
                   <span className="bg-brand-700 ml-2 rounded-full px-2 py-0.5 text-xs text-white">
                     {basket.length}
                   </span>
@@ -330,16 +342,18 @@ export default function ProductListPage() {
                   onClick={() => setBasket([])}
                   className="text-ink-400 hover:text-coral-600 text-xs font-bold"
                 >
-                  Clear
+                  {t("clear")}
                 </button>
               </div>
               <div className="bg-surface-50 mb-4 rounded-lg p-3 text-sm">
                 <div className="flex justify-between">
-                  <span className="text-ink-500">Est. Total Qty</span>
-                  <strong>{formatStorefrontNumber(totalQty)} pcs</strong>
+                  <span className="text-ink-500">{t("estTotalQty")}</span>
+                  <strong>
+                    {formatStorefrontNumber(totalQty)} {t("pcs")}
+                  </strong>
                 </div>
                 <div className="mt-2 flex justify-between">
-                  <span className="text-ink-500">Target Price Range</span>
+                  <span className="text-ink-500">{t("targetPriceRange")}</span>
                   <strong>$1.45 - $8.90</strong>
                 </div>
               </div>
@@ -348,10 +362,10 @@ export default function ProductListPage() {
                 disabled={!basket.length}
                 className="btn-coral w-full"
               >
-                Submit RFQ ({basket.length})
+                {t("submitRfq", { count: basket.length })}
               </button>
               <button className="btn-outline mt-2 w-full">
-                Request Sample
+                {t("requestSample")}
               </button>
               <div className="mt-4 space-y-3">
                 {basket.map((product) => (
@@ -369,7 +383,7 @@ export default function ProductListPage() {
                         {product.title}
                       </p>
                       <p className="text-ink-500 mt-1 text-xs">
-                        MOQ: {productMoq(product)} pcs
+                        MOQ: {productMoq(product)} {t("pcs")}
                       </p>
                       <p className="text-brand-700 text-xs font-bold">
                         {productPrice(product)}
@@ -389,13 +403,13 @@ export default function ProductListPage() {
             <div className="panel p-4">
               <div className="mb-3 flex items-center justify-between">
                 <h2 className="text-brand-800 text-sm font-extrabold">
-                  Verified Suppliers
+                  {t("verifiedSuppliers")}
                 </h2>
                 <Link
                   href="/factories"
                   className="text-brand-700 text-xs font-bold"
                 >
-                  View all
+                  {t("viewAll")}
                 </Link>
               </div>
               <div className="space-y-4">
@@ -419,22 +433,21 @@ export default function ProductListPage() {
                     <div className="mt-2 flex items-center justify-between text-xs">
                       <Rating value="4.9" count="128" />
                       <span className="bg-brand-50 text-brand-700 rounded px-2 py-1 font-bold">
-                        Verified
+                        {t("verified")}
                       </span>
                     </div>
                     <div className="text-ink-600 mt-3 grid grid-cols-2 gap-2 text-xs">
-                      <span>98% On-time</span>
-                      <span>&lt;2h Response</span>
+                      <span>{t("onTime")}</span>
+                      <span>{t("response")}</span>
                     </div>
                   </Link>
                 ))}
               </div>
               <div className="bg-brand-50 text-ink-600 mt-4 rounded-lg p-3 text-xs">
                 <p className="text-brand-800 mb-2 flex items-center gap-2 font-extrabold">
-                  <Check className="h-4 w-4" /> Trade Assurance
+                  <Check className="h-4 w-4" /> {t("tradeAssurance")}
                 </p>
-                Secure payments, quality guaranteed, on-time delivery, and
-                after-sales support.
+                {t("tradeAssuranceDesc")}
               </div>
             </div>
           </aside>

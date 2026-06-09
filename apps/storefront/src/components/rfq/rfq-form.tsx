@@ -58,7 +58,7 @@ export function RFQForm({
           {t("product")}
         </label>
         <p className="text-ink-500 mt-1 text-sm">
-          {productTitle || "General sourcing request"}
+          {productTitle || t("generalSourcingRequest")}
         </p>
       </div>
 

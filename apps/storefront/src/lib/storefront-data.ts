@@ -30,23 +30,83 @@ export const heroImage = "/images/tfshop-hero-toy-catalog.jpg"
 export const fallbackProductImage = "/images/products/building-blocks.jpg"
 
 export const categories = [
-  { label: "Building Blocks", count: "1,320", icon: "blocks" },
-  { label: "Action Figures & Playsets", count: "2,450", icon: "bot" },
-  { label: "Dolls & Accessories", count: "980", icon: "sparkles" },
-  { label: "RC Toys & Vehicles", count: "540", icon: "truck" },
-  { label: "Educational Toys", count: "1,120", icon: "book" },
-  { label: "Outdoor & Sports", count: "760", icon: "trophy" },
-  { label: "Baby & Preschool", count: "680", icon: "baby" },
-  { label: "Arts & Crafts", count: "890", icon: "palette" },
+  {
+    key: "buildingBlocks",
+    label: "Building Blocks",
+    count: "1,320",
+    icon: "blocks",
+  },
+  {
+    key: "actionFigures",
+    label: "Action Figures & Playsets",
+    count: "2,450",
+    icon: "bot",
+  },
+  {
+    key: "dolls",
+    label: "Dolls & Accessories",
+    count: "980",
+    icon: "sparkles",
+  },
+  { key: "rcToys", label: "RC Toys & Vehicles", count: "540", icon: "truck" },
+  {
+    key: "educational",
+    label: "Educational Toys",
+    count: "1,120",
+    icon: "book",
+  },
+  {
+    key: "outdoor",
+    label: "Outdoor & Sports",
+    count: "760",
+    icon: "trophy",
+  },
+  {
+    key: "baby",
+    label: "Baby & Preschool",
+    count: "680",
+    icon: "baby",
+  },
+  { key: "arts", label: "Arts & Crafts", count: "890", icon: "palette" },
 ]
 
 export const trustFeatures = [
-  { title: "Factory Direct", desc: "Best prices guaranteed", icon: "tag" },
-  { title: "Verified Factories", desc: "Audited & certified", icon: "shield" },
-  { title: "Quality Assurance", desc: "Strict QC process", icon: "award" },
-  { title: "On-time Delivery", desc: "Reliable & trackable", icon: "truck" },
-  { title: "Secure Payments", desc: "Multiple safe options", icon: "lock" },
-  { title: "24/7 Support", desc: "Sourcing experts", icon: "headphones" },
+  {
+    key: "factoryDirect",
+    title: "Factory Direct",
+    desc: "Best prices guaranteed",
+    icon: "tag",
+  },
+  {
+    key: "verifiedFactories",
+    title: "Verified Factories",
+    desc: "Audited & certified",
+    icon: "shield",
+  },
+  {
+    key: "qualityAssurance",
+    title: "Quality Assurance",
+    desc: "Strict QC process",
+    icon: "award",
+  },
+  {
+    key: "onTimeDelivery",
+    title: "On-time Delivery",
+    desc: "Reliable & trackable",
+    icon: "truck",
+  },
+  {
+    key: "securePayments",
+    title: "Secure Payments",
+    desc: "Multiple safe options",
+    icon: "lock",
+  },
+  {
+    key: "support",
+    title: "24/7 Support",
+    desc: "Sourcing experts",
+    icon: "headphones",
+  },
 ]
 
 export const marketplaceStats = [
